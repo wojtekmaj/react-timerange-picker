@@ -210,4 +210,116 @@ describe('TimeRangePicker', () => {
 
     expect(component.state('isOpen')).toBe(true);
   });
+
+  describe('onChangeFrom', () => {
+    it('calls onChange properly given no initial value', () => {
+      const component = mount(
+        <TimeRangePicker />
+      );
+
+      const componentInstance = component.instance();
+
+      const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
+
+      const nextValueFrom = new Date();
+      componentInstance.onChangeFrom(nextValueFrom);
+
+      expect(onChangeSpy).toHaveBeenCalled();
+      expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, undefined], true);
+    });
+
+    it('calls onChange properly given single initial value', () => {
+      const value = '10:00:00';
+
+      const component = mount(
+        <TimeRangePicker value={value} />
+      );
+
+      const componentInstance = component.instance();
+
+      const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
+
+      const nextValueFrom = new Date();
+      componentInstance.onChangeFrom(nextValueFrom);
+
+      expect(onChangeSpy).toHaveBeenCalled();
+      expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, undefined], true);
+    });
+
+    it('calls onChange properly given initial value as an array', () => {
+      const valueFrom = '10:00:00';
+      const valueTo = '11:00:00';
+      const value = [valueFrom, valueTo];
+
+      const component = mount(
+        <TimeRangePicker value={value} />
+      );
+
+      const componentInstance = component.instance();
+
+      const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
+
+      const nextValueFrom = '16:00:00';
+      componentInstance.onChangeFrom(nextValueFrom);
+
+      expect(onChangeSpy).toHaveBeenCalled();
+      expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, valueTo], true);
+    });
+  });
+
+  describe('onChangeTo', () => {
+    it('calls onChange properly given no initial value', () => {
+      const component = mount(
+        <TimeRangePicker />
+      );
+
+      const componentInstance = component.instance();
+
+      const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
+
+      const nextValueTo = '16:00:00';
+      componentInstance.onChangeTo(nextValueTo);
+
+      expect(onChangeSpy).toHaveBeenCalled();
+      expect(onChangeSpy).toHaveBeenCalledWith([undefined, nextValueTo], true);
+    });
+
+    it('calls onChange properly given single initial value', () => {
+      const value = '10:00:00';
+
+      const component = mount(
+        <TimeRangePicker value={value} />
+      );
+
+      const componentInstance = component.instance();
+
+      const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
+
+      const nextValueTo = '16:00:00';
+      componentInstance.onChangeTo(nextValueTo);
+
+      expect(onChangeSpy).toHaveBeenCalled();
+      expect(onChangeSpy).toHaveBeenCalledWith([value, nextValueTo], true);
+    });
+
+    it('calls onChange properly given initial value as an array', () => {
+      const valueFrom = '10:00:00';
+      const valueTo = '11:00:00';
+      const value = [valueFrom, valueTo];
+
+      const component = mount(
+        <TimeRangePicker value={value} />
+      );
+
+      const componentInstance = component.instance();
+
+      const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
+
+      const nextValueTo = '16:00:00';
+      componentInstance.onChangeTo(nextValueTo);
+
+      expect(onChangeSpy).toHaveBeenCalled();
+      expect(onChangeSpy).toHaveBeenCalledWith([valueFrom, nextValueTo], true);
+    });
+  });
 });

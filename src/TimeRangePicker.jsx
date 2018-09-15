@@ -5,7 +5,10 @@ import mergeClassNames from 'merge-class-names';
 import detectElementOverflow from 'detect-element-overflow';
 
 import Clock from 'react-clock/dist/entry.nostyle';
+
 import TimeInput from 'react-time-picker/dist/TimeInput';
+
+import { isTime } from './shared/propTypes';
 
 const allViews = ['hour', 'minute', 'second'];
 
@@ -273,6 +276,14 @@ TimeRangePicker.propTypes = {
   name: PropTypes.string,
   required: PropTypes.bool,
   showLeadingZeros: PropTypes.bool,
+  value: PropTypes.oneOfType([
+    isTime,
+    PropTypes.instanceOf(Date),
+    PropTypes.arrayOf(PropTypes.oneOfType([
+      isTime,
+      PropTypes.instanceOf(Date),
+    ])),
+  ]),
 };
 
 polyfill(TimeRangePicker);
