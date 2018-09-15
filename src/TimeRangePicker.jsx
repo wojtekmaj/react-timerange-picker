@@ -251,6 +251,7 @@ TimeRangePicker.defaultProps = {
   clearIcon: ClearIcon,
   isOpen: null,
   maxDetail: 'minute',
+  name: 'timerange',
 };
 
 TimeRangePicker.propTypes = {

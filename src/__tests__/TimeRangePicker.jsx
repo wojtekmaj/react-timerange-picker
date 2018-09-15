@@ -22,7 +22,18 @@ const mockDocumentListeners = () => {
 };
 
 describe('TimeRangePicker', () => {
-  it('passes name to TimeInput', () => {
+  it('passes default name to TimeInput', () => {
+    const component = mount(
+      <TimeRangePicker />
+    );
+
+    const timeInput = component.find('TimeInput');
+
+    expect(timeInput.at(0).prop('name')).toBe('timerange_from');
+    expect(timeInput.at(1).prop('name')).toBe('timerange_to');
+  });
+
+  it('passes custom name to TimeInput', () => {
     const name = 'testName';
 
     const component = mount(
