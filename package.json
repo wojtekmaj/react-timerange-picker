@@ -1,0 +1,87 @@
+{
+  "name": "@wojtekmaj/react-timerange-picker",
+  "version": "1.0.0",
+  "description": "A time range picker for your React app.",
+  "main": "dist/entry.js",
+  "es6": "src/entry.js",
+  "scripts": {
+    "build": "yarn run build-js && yarn run copy-styles && yarn run build-styles",
+    "build-js": "babel src -d dist --ignore __tests__",
+    "build-styles": "lessc ./dist/TimeRangePicker.less ./dist/TimeRangePicker.css",
+    "clean": "rimraf dist",
+    "copy-styles": "node ./copy-styles.js",
+    "prepublishOnly": "yarn run clean && yarn run build",
+    "test": "yarn run test-eslint && yarn run test-jest",
+    "test-eslint": "eslint src/ test/ --ext .jsx,.js",
+    "test-jest": "jest",
+    "test-jest-coverage": "jest --coverage"
+  },
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/jest.setup.js"
+    ],
+    "collectCoverageFrom": [
+      "**/src/**.{js,jsx}",
+      "!**/src/entry.js",
+      "!**/src/entry.nostyle.js"
+    ]
+  },
+  "keywords": [
+    "react",
+    "time",
+    "time-picker",
+    "time-range",
+    "time-range-picker"
+  ],
+  "author": {
+    "name": "Wojciech Maj",
+    "email": "kontakt@wojtekmaj.pl"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "detect-element-overflow": "^1.1.1",
+    "merge-class-names": "^1.1.1",
+    "prop-types": "^15.6.0",
+    "react-calendar": "^2.17.3",
+    "react-clock": "^2.3.0",
+    "react-time-picker": "^2.7.2",
+    "react-lifecycles-compat": "^3.0.4"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^9.0.0",
+    "babel-jest": "^23.6.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-16": "^1.5.0",
+    "eslint": "^5.5.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "jest": "^23.6.0",
+    "jest-cli": "^23.6.0",
+    "less": "^3.8.1",
+    "react": "^16.5.0",
+    "react-dom": "^16.5.0",
+    "rimraf": "^2.6.2"
+  },
+  "peerDependencies": {
+    "react": ">=15.5",
+    "react-dom": ">=15.5"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "dist/",
+    "src/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wojtekmaj/react-timerange-picker.git"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "name": "react-timerange-picker-test-page",
+  "version": "2.7.2",
+  "description": "A test page for React-TimeRange-Picker.",
+  "private": true,
+  "scripts": {
+    "build": "parcel build index.html --public-url ./",
+    "start": "parcel index.html"
+  },
+  "author": {
+    "name": "Wojciech Maj",
+    "email": "kontakt@wojtekmaj.pl"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "prop-types": "^15.6.2",
+    "react": "^16.5.0",
+    "@wojtekmaj/react-timerange-picker": "latest",
+    "react-dom": "^16.5.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^9.0.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "eslint": "^5.5.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "parcel-bundler": "1.5.1"
+  }
+}
