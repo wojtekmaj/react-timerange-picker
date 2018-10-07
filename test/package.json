@@ -1,6 +1,6 @@
 {
   "name": "react-timerange-picker-test-page",
-  "version": "2.7.2",
+  "version": "1.0.0",
   "description": "A test page for React-TimeRange-Picker.",
   "private": true,
   "scripts": {
