@@ -1,4 +1,3 @@
-import 'react-calendar/dist/Calendar.css';
 import 'react-clock/dist/Clock.css';
 import 'react-time-picker/dist/TimePicker.css';
 
