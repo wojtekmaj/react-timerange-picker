@@ -44,7 +44,7 @@
     "merge-class-names": "^1.1.1",
     "prop-types": "^15.6.0",
     "react-clock": "^2.3.0",
-    "react-time-picker": "^2.8.0",
+    "react-time-picker": "^3.0.0",
     "react-lifecycles-compat": "^3.0.4"
   },
   "devDependencies": {

@@ -4400,10 +4400,10 @@ react-test-renderer@^16.0.0-0:
     react-is "^16.5.1"
     schedule "^0.4.0"
 
-react-time-picker@^2.8.0:
-  version "2.8.0"
-  resolved "https://registry.yarnpkg.com/react-time-picker/-/react-time-picker-2.8.0.tgz#a9ebe58ca1a6b6325268f65e513fc9482091833a"
-  integrity sha512-rXoXNQOGzaWt9vxFvXGlgT1Sqp7jkxvjfeyRVS7DsnidornJnpOKbDRawG0ClYxIGmtDTRpwR7x09MluDdZvCg==
+react-time-picker@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-time-picker/-/react-time-picker-3.0.0.tgz#93dfb885f31c75f1019d4ca226fce5b9e2b9bd2f"
+  integrity sha512-sJkvn92G0UipIZic/AOnWtt2DY4nB8/4LpAxXb7km3A/sFrI2VU0UkV2QkNu6Jh/eSqg2KVcRG7WdfnXQOE8vA==
   dependencies:
     detect-element-overflow "^1.1.1"
     get-user-locale "^1.1.1"

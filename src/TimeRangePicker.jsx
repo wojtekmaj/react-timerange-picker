@@ -12,6 +12,7 @@ import TimeInput from 'react-time-picker/dist/TimeInput';
 import { isTime } from './shared/propTypes';
 
 const allViews = ['hour', 'minute', 'second'];
+const baseClassName = 'react-timerange-picker';
 
 export default class TimeRangePicker extends PureComponent {
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -125,6 +126,7 @@ export default class TimeRangePicker extends PureComponent {
     const [valueFrom, valueTo] = [].concat(value);
 
     const commonProps = {
+      className: `${baseClassName}__inputGroup`,
       disabled,
       isOpen,
       locale,
@@ -136,7 +138,7 @@ export default class TimeRangePicker extends PureComponent {
     };
 
     return (
-      <div className="react-timerange-picker__button">
+      <div className={`${baseClassName}__wrapper`}>
         <TimeInput
           {...commonProps}
           name={`${name}_from`}
@@ -154,7 +156,7 @@ export default class TimeRangePicker extends PureComponent {
         />
         {clearIcon !== null && (
           <button
-            className="react-timerange-picker__clear-button react-timerange-picker__button__icon"
+            className={`${baseClassName}__clear-button ${baseClassName}__button`}
             disabled={disabled}
             onClick={this.clear}
             onFocus={this.stopPropagation}
@@ -165,7 +167,7 @@ export default class TimeRangePicker extends PureComponent {
         )}
         {clockIcon !== null && !disableClock && (
           <button
-            className="react-timerange-picker__clock-button react-timerange-picker__button__icon"
+            className={`${baseClassName}__clock-button ${baseClassName}__button`}
             disabled={disabled}
             onClick={this.toggleClock}
             onFocus={this.stopPropagation}
@@ -196,7 +198,7 @@ export default class TimeRangePicker extends PureComponent {
       ...clockProps
     } = this.props;
 
-    const className = 'react-timerange-picker__clock';
+    const className = `${baseClassName}__clock`;
 
     const maxDetailIndex = allViews.indexOf(maxDetail);
 
@@ -236,8 +238,6 @@ export default class TimeRangePicker extends PureComponent {
   render() {
     const { className, disabled } = this.props;
     const { isOpen } = this.state;
-
-    const baseClassName = 'react-timerange-picker';
 
     return (
       <div

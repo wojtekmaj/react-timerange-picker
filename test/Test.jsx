@@ -6,8 +6,6 @@ import '@wojtekmaj/react-timerange-picker/src/TimeRangePicker.less';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import 'react-clock/dist/Clock.css';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import 'react-time-picker/dist/TimePicker.css';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { getHoursMinutesSeconds } from 'react-time-picker/dist/shared/dates';
 
 import ValidityOptions from './ValidityOptions';
