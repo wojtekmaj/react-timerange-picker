@@ -77,7 +77,13 @@ export default class TimeRangePicker extends PureComponent {
       onBlur(event);
     }
 
-    this.closeClock();
+    requestAnimationFrame(() => {
+      const stillHasFocus = this.wrapper.querySelector(':focus');
+
+      if (!stillHasFocus) {
+        this.closeClock();
+      }
+    });
   }
 
   openClock = () => {
