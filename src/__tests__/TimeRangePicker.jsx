@@ -166,14 +166,34 @@ describe('TimeRangePicker', () => {
   });
 
   it('closes Clock component when clicked outside', () => {
+    const root = document.createElement('div');
+    document.body.appendChild(root);
+
     const component = mount(
-      <TimeRangePicker isOpen />
+      <TimeRangePicker isOpen />,
+      { attachTo: root }
     );
 
-    const customInputs = component.find('input[type="number"]');
-    const hourInput = customInputs.at(0);
+    const event = document.createEvent('MouseEvent');
+    event.initEvent('mousedown', true, true);
+    document.body.dispatchEvent(event);
+    component.update();
 
-    hourInput.simulate('blur');
+    expect(component.state('isOpen')).toBe(false);
+  });
+
+  it('closes Clock component when focused outside', () => {
+    const root = document.createElement('div');
+    document.body.appendChild(root);
+
+    const component = mount(
+      <TimeRangePicker isOpen />,
+      { attachTo: root }
+    );
+
+    const event = document.createEvent('FocusEvent');
+    event.initEvent('focusin', true, true);
+    document.body.dispatchEvent(event);
     component.update();
 
     expect(component.state('isOpen')).toBe(false);

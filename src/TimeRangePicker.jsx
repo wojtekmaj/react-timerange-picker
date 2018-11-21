@@ -32,6 +32,22 @@ export default class TimeRangePicker extends PureComponent {
     return makeEventProps(this.props);
   }
 
+  componentDidMount() {
+    document.addEventListener('mousedown', this.onOutsideAction);
+    document.addEventListener('focusin', this.onOutsideAction);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.onOutsideAction);
+    document.removeEventListener('focusin', this.onOutsideAction);
+  }
+
+  onOutsideAction = (event) => {
+    if (this.wrapper && !this.wrapper.contains(event.target)) {
+      this.closeClock();
+    }
+  }
+
   onChange = (value, closeClock = true) => {
     this.setState({
       isOpen: !closeClock,
@@ -68,22 +84,6 @@ export default class TimeRangePicker extends PureComponent {
     }
 
     this.openClock();
-  }
-
-  onBlur = () => {
-    const { onBlur } = this.props;
-
-    if (onBlur) {
-      onBlur(event);
-    }
-
-    requestAnimationFrame(() => {
-      const stillHasFocus = this.wrapper.querySelector(':focus');
-
-      if (!stillHasFocus) {
-        this.closeClock();
-      }
-    });
   }
 
   openClock = () => {
@@ -258,7 +258,6 @@ export default class TimeRangePicker extends PureComponent {
         )}
         {...this.eventProps}
         onFocus={this.onFocus}
-        onBlur={this.onBlur}
         ref={(ref) => {
           if (!ref) {
             return;
