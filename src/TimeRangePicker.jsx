@@ -32,20 +32,6 @@ export default class TimeRangePicker extends PureComponent {
     return makeEventProps(this.props);
   }
 
-  componentDidMount() {
-    document.addEventListener('mousedown', this.onClick);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('mousedown', this.onClick);
-  }
-
-  onClick = (event) => {
-    if (this.wrapper && !this.wrapper.contains(event.target)) {
-      this.closeClock();
-    }
-  }
-
   onChange = (value, closeClock = true) => {
     this.setState({
       isOpen: !closeClock,
@@ -82,6 +68,16 @@ export default class TimeRangePicker extends PureComponent {
     }
 
     this.openClock();
+  }
+
+  onBlur = () => {
+    const { onBlur } = this.props;
+
+    if (onBlur) {
+      onBlur(event);
+    }
+
+    this.closeClock();
   }
 
   openClock = () => {
@@ -256,6 +252,7 @@ export default class TimeRangePicker extends PureComponent {
         )}
         {...this.eventProps}
         onFocus={this.onFocus}
+        onBlur={this.onBlur}
         ref={(ref) => {
           if (!ref) {
             return;
