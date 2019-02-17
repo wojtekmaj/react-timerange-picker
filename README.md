@@ -1,4 +1,4 @@
-![downloads](https://img.shields.io/npm/dt/react-timerange-picker.svg) ![build](https://img.shields.io/travis/wojtekmaj/react-timerange-picker/master.svg) ![dependencies](https://img.shields.io/david/wojtekmaj/react-timerange-picker.svg
+![downloads](https://img.shields.io/npm/dt/@wojtekmaj/react-timerange-picker.svg) ![build](https://img.shields.io/travis/wojtekmaj/react-timerange-picker/master.svg) ![dependencies](https://img.shields.io/david/wojtekmaj/react-timerange-picker.svg
 ) ![dev dependencies](https://img.shields.io/david/dev/wojtekmaj/react-timerange-picker.svg
 ) [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
 
