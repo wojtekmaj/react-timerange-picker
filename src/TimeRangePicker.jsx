@@ -10,6 +10,7 @@ import Clock from 'react-clock/dist/entry.nostyle';
 import TimeInput from 'react-time-picker/dist/TimeInput';
 
 import { isTime } from './shared/propTypes';
+import { callIfDefined } from './shared/utils';
 
 const allViews = ['hour', 'minute', 'second'];
 const baseClassName = 'react-timerange-picker';
@@ -35,6 +36,15 @@ export default class TimeRangePicker extends PureComponent {
   componentDidMount() {
     document.addEventListener('mousedown', this.onOutsideAction);
     document.addEventListener('focusin', this.onOutsideAction);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { isOpen } = this.state;
+    const { onClockClose, onClockOpen } = this.props;
+
+    if (isOpen !== prevState.isOpen) {
+      callIfDefined(isOpen ? onClockOpen : onClockClose);
+    }
   }
 
   componentWillUnmount() {
