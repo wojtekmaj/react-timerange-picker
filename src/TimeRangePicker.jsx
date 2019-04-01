@@ -292,6 +292,7 @@ TimeRangePicker.propTypes = {
   clockIcon: PropTypes.node,
   disableClock: PropTypes.bool,
   disabled: PropTypes.bool,
+  format: PropTypes.string,
   isOpen: PropTypes.bool,
   maxDetail: PropTypes.oneOf(allViews),
   name: PropTypes.string,
