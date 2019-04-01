@@ -30,6 +30,19 @@ describe('TimeRangePicker', () => {
     expect(timeInput.at(1).prop('name')).toBe(`${name}_to`);
   });
 
+  it('passes format to DateInput', () => {
+    const format = 'H:mm:ss';
+
+    const component = mount(
+      <TimeRangePicker format={format} />
+    );
+
+    const timeInput = component.find('TimeInput');
+
+    expect(timeInput.at(0).prop('format')).toBe(format);
+    expect(timeInput.at(1).prop('format')).toBe(format);
+  });
+
   it('applies className to its wrapper when given a string', () => {
     const className = 'testClassName';
 

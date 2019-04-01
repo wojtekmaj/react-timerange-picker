@@ -4190,10 +4190,10 @@ react-test-renderer@^16.0.0-0:
     react-is "^16.7.0"
     scheduler "^0.12.0"
 
-react-time-picker@^3.4.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/react-time-picker/-/react-time-picker-3.4.0.tgz#9de21b34366a392b07dcdc9077023f8423419d30"
-  integrity sha512-98NQAczudSmJQ1+wHHEqe+tJ/SZTVWsSpKMzov5rD4Ye/ZqWDIp1tUoQ59Ijp8IApWmXvBqkPPM/a2+UwRWlgQ==
+react-time-picker@^3.5.1:
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/react-time-picker/-/react-time-picker-3.5.1.tgz#69e395f5626c377306d464580f6b83dc660365f7"
+  integrity sha512-IgvtKQSAsulesEZueLZseiSjL8Rxy+zeLVFS4tof/dvCUQvVGWZlN4Q/6PdhP1jv29WCMpvkKphCwuUEkHWduw==
   dependencies:
     get-user-locale "^1.1.1"
     make-event-props "^1.1.0"

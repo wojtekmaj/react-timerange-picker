@@ -124,6 +124,7 @@ export default class TimeRangePicker extends PureComponent {
       clockIcon,
       disableClock,
       disabled,
+      format,
       isOpen,
       locale,
       maxDetail,
@@ -140,6 +141,7 @@ export default class TimeRangePicker extends PureComponent {
     const commonProps = {
       className: `${baseClassName}__inputGroup`,
       disabled,
+      format,
       isOpen,
       locale,
       maxDetail,
