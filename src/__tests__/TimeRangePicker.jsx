@@ -228,6 +228,24 @@ describe('TimeRangePicker', () => {
     expect(component.state('isOpen')).toBe(true);
   });
 
+  it('clears the value when clicking on a button', () => {
+    const onChange = jest.fn();
+
+    const component = mount(
+      <TimeRangePicker onChange={onChange} />
+    );
+
+    const calendar = component.find('Calendar');
+    const button = component.find('button.react-timerange-picker__clear-button');
+
+    expect(calendar).toHaveLength(0);
+
+    button.simulate('click');
+    component.update();
+
+    expect(onChange).toHaveBeenCalledWith(null);
+  });
+
   describe('onChangeFrom', () => {
     it('calls onChange properly given no initial value', () => {
       const component = mount(
