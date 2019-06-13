@@ -160,7 +160,9 @@ export default class TimeRangePicker extends PureComponent {
           returnValue="start"
           value={valueFrom}
         />
-        –
+        <span className={`${baseClassName}__range-divider`}>
+          –
+        </span>
         <TimeInput
           {...commonProps}
           name={`${name}_to`}
