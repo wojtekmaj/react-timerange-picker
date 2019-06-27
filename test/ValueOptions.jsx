@@ -1,124 +1,110 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class ValueOptions extends PureComponent {
-  get startTime() {
-    const { value } = this.props;
+export default function ValueOptions({
+  setState,
+  value,
+}) {
+  const startTime = [].concat(value)[0];
+  const endTime = [].concat(value)[1];
 
-    return [].concat(value)[0];
+  function setValue(nextValue) {
+    setState({ value: nextValue });
   }
 
-  get endTime() {
-    const { value } = this.props;
-
-    return [].concat(value)[1];
-  }
-
-  setValue = (value) => {
-    const { setState } = this.props;
-
-    setState({ value });
-  }
-
-  setStartValue = (startValue) => {
-    const { value } = this.props;
-
+  function setStartValue(startValue) {
     if (!startValue) {
-      this.setValue(value[1] || startValue);
+      setValue(value[1] || startValue);
       return;
     }
 
     if (Array.isArray(value)) {
-      this.setValue([startValue, value[1]]);
+      setValue([startValue, value[1]]);
     } else {
-      this.setValue(startValue);
+      setValue(startValue);
     }
   }
 
-  setEndValue = (endValue) => {
-    const { value } = this.props;
-
+  function setEndValue(endValue) {
     if (!endValue) {
-      this.setValue(value[0]);
+      setValue(value[0]);
       return;
     }
 
     if (Array.isArray(value)) {
-      this.setValue([value[0], endValue]);
+      setValue([value[0], endValue]);
     } else {
-      this.setValue([value, endValue]);
+      setValue([value, endValue]);
     }
   }
 
-  onStartChange = (event) => {
-    const { value } = event.target;
-    this.setStartValue(value);
+  function onStartChange(event) {
+    const { value: nextValue } = event.target;
+    setStartValue(nextValue);
   }
 
-  onEndChange = (event) => {
-    const { value } = event.target;
-    this.setEndValue(value);
+  function onEndChange(event) {
+    const { value: nextValue } = event.target;
+    setEndValue(nextValue);
   }
 
-  render() {
-    return (
-      <fieldset id="valueOptions">
-        <legend htmlFor="valueOptions">
-          Set time externally
-        </legend>
+  return (
+    <fieldset id="valueOptions">
+      <legend htmlFor="valueOptions">
+        Set time externally
+      </legend>
 
-        <div>
-          <label htmlFor="startTime">
-            Start time
-          </label>
-          <input
-            id="startTime"
-            onChange={this.onStartChange}
-            type="time"
-            value={this.startTime || ''}
-          />
-          &nbsp;
-          <button
-            type="button"
-            onClick={() => this.setStartValue(null)}
-          >
-            Clear to null
-          </button>
-          <button
-            type="button"
-            onClick={() => this.setStartValue('')}
-          >
-            Clear to empty string
-          </button>
-        </div>
+      <div>
+        <label htmlFor="startTime">
+          Start time
+        </label>
+        <input
+          id="startTime"
+          onChange={onStartChange}
+          type="time"
+          value={startTime || ''}
+        />
+        &nbsp;
+        <button
+          type="button"
+          onClick={() => setStartValue(null)}
+        >
+          Clear to null
+        </button>
+        <button
+          type="button"
+          onClick={() => setStartValue('')}
+        >
+          Clear to empty string
+        </button>
+      </div>
 
-        <div>
-          <label htmlFor="endTime">
-            End time
-          </label>
-          <input
-            id="endTime"
-            onChange={this.onEndChange}
-            type="time"
-            value={this.endTime || ''}
-          />
-          &nbsp;
-          <button
-            type="button"
-            onClick={() => this.setEndValue(null)}
-          >
-            Clear to null
-          </button>
-          <button
-            type="button"
-            onClick={() => this.setEndValue('')}
-          >
-            Clear to empty string
-          </button>
-        </div>
-      </fieldset>
-    );
-  }
+      <div>
+        <label htmlFor="endTime">
+          End time
+        </label>
+        <input
+          id="endTime"
+          onChange={onEndChange}
+          type="time"
+          value={endTime || ''}
+        />
+        &nbsp;
+        <button
+          type="button"
+          onClick={() => setEndValue(null)}
+        >
+          Clear to null
+        </button>
+        <button
+          type="button"
+          onClick={() => setEndValue('')}
+        >
+          Clear to empty string
+        </button>
+      </div>
+    </fieldset>
+  );
 }
 
 ValueOptions.propTypes = {
