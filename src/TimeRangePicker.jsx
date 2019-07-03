@@ -272,6 +272,15 @@ export default class TimeRangePicker extends PureComponent {
   }
 }
 
+const ClockIcon = (
+  <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19">
+    <g stroke="black" strokeWidth="2" fill="none">
+      <circle cx="9.5" cy="9.5" r="7.5" />
+      <path d="M9.5 4.5 v5 h4" />
+    </g>
+  </svg>
+);
+
 const ClearIcon = (
   <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19">
     <g stroke="black" strokeWidth="2">
@@ -283,6 +292,7 @@ const ClearIcon = (
 
 TimeRangePicker.defaultProps = {
   clearIcon: ClearIcon,
+  clockIcon: ClockIcon,
   isOpen: null,
   maxDetail: 'minute',
   name: 'timerange',
