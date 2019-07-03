@@ -88,7 +88,7 @@ export default class Test extends PureComponent {
               <TimeRangePicker
                 className="myCustomTimeRangePickerClassName"
                 clockClassName="myCustomClockClassName"
-                disabled={false}
+                disabled={disabled}
                 locale={locale}
                 maxDetail={maxDetail}
                 maxTime={maxTime}
