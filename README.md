@@ -83,26 +83,26 @@ Displays an input field complete with custom inputs, native input and a clock.
 
 #### Props
 
-|Prop name|Description|Example values|
-|----|----|----|
-|clockClassName|Defines class name(s) that will be added along with "react-clock" to the main React-Clock `<time>` element.|<ul><li>String: `"class1 class2"`</li><li>Array of strings: `["class1", "class2 class3"]`</li></ul>|
-|clockIcon|Defines the content of the clock button. Setting the value explicitly to `null` will hide the icon.|<ul><li>String: `"Clock"`</li><li>React element: `<ClockIcon />`</li></ul>|
-|className|Defines class name(s) that will be added along with "react-timerange-picker" to the main React-TimeRange-Picker `<div>` element.|<ul><li>String: `"class1 class2"`</li><li>Array of strings: `["class1", "class2 class3"]`</li></ul>|
-|clearIcon|Defines the content of the clear button. Setting the value explicitly to `null` will hide the icon.|<ul><li>String: `"Clear"`</li><li>React element: `<ClearIcon />`</li></ul>|
-|disabled|Defines whether the time range picker should be disabled. Defaults to false.|`true`|
-|disableClock|Defines whether the clock should be disabled. Defaults to false.|`true`|
-|format|Defines input format based on [Unicode Technical Standard #35](https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table). Supported values are: `H`, `HH`, `h`, `hh`, `m`, `mm`, `s`, `ss`, `a`.|`"h:m:s a"`|
-|isOpen|Defines whether the clock should be opened. Defaults to false.|`true`|
-|locale|Defines which locale should be used by the time range picker and the clock. Can be any [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag). Defaults to user's browser settings.|`"hu-HU"`|
-|maxDetail|Defines how detailed time picking shall be. Can be "hour", "minute" or "second". Defaults to "minute".|`"second"`|
-|maxTime|Defines maximum time that the user can select.|<ul><li>Date: `new Date()`</li><li>String: `"22:15:00"`</li></ul>|
-|minTime|Defines minimum date that the user can select.|<ul><li>Date: `new Date()`</li><li>String: `"22:15:00"`</li></ul>|
-|name|Defines input name prefix. Date from/Date to fields will be named "yourprefix_from" and "yourprefix_to" respectively. Defaults to "timerange".|`"myCustomName"`|
-|onChange|Function called when the user picks a valid time.|`(value) => alert('New time is: ', value)`|
-|onClockClose|Function called when the clock closes.|`() => alert('Clock closed')`|
-|onClockOpen|Function called when the clock opens.|`() => alert('Clock opened')`|
-|required|Defines whether date input should be required. Defaults to false.|`true`|
-|value|Defines the value of the input.|<ul><li>Date: `new Date()`</li><li>String: `"22:15:00"`</li></ul>|
+|Prop name|Description|Default value|Example values|
+|----|----|----|----|
+|clockClassName|Class name(s) that will be added along with `"react-clock"` to the main React-Clock `<time>` element.|n/a|<ul><li>String: `"class1 class2"`</li><li>Array of strings: `["class1", "class2 class3"]`</li></ul>|
+|clockIcon|Content of the clock button. Setting the value explicitly to `null` will hide the icon.|(default icon)|<ul><li>String: `"Clock"`</li><li>React element: `<ClockIcon />`</li></ul>|
+|className|Class name(s) that will be added along with `"react-timerange-picker"` to the main React-TimeRange-Picker `<div>` element.|n/a|<ul><li>String: `"class1 class2"`</li><li>Array of strings: `["class1", "class2 class3"]`</li></ul>|
+|clearIcon|Content of the clear button. Setting the value explicitly to `null` will hide the icon.|(default icon)|<ul><li>String: `"Clear"`</li><li>React element: `<ClearIcon />`</li></ul>|
+|disabled|Whether the time range picker should be disabled.|`false`|`true`|
+|disableClock|Whether the clock should be disabled.|`false`|`true`|
+|format|Input format based on [Unicode Technical Standard #35](https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table). Supported values are: `H`, `HH`, `h`, `hh`, `m`, `mm`, `s`, `ss`, `a`.|n/a|`"h:m:s a"`|
+|isOpen|Whether the clock should be opened.|`false`|`true`|
+|locale|Locale that should be used by the time range picker and the clock. Can be any [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag).|User's browser settings|`"hu-HU"`|
+|maxDetail|How detailed time picking shall be. Can be `"hour"`, `"minute"` or `"second"`.|`"minute"`|`"second"`|
+|maxTime|Maximum time that the user can select.|n/a|<ul><li>Date: `new Date()`</li><li>String: `"22:15:00"`</li></ul>|
+|minTime|Minimum date that the user can select.|n/a|<ul><li>Date: `new Date()`</li><li>String: `"22:15:00"`</li></ul>|
+|name|Input name prefix. Time from/Time to fields will be named `"yourprefix_from"` and `"yourprefix_to"` respectively.|`"timerange"`|`"myCustomName"`|
+|onChange|Function called when the user picks a valid time.|n/a|`(value) => alert('New time is: ', value)`|
+|onClockClose|Function called when the clock closes.|n/a|`() => alert('Clock closed')`|
+|onClockOpen|Function called when the clock opens.|n/a|`() => alert('Clock opened')`|
+|required|Whether date input should be required.|`false`|`true`|
+|value|Input value.|n/a|<ul><li>Date: `new Date()`</li><li>String: `"22:15:00"`</li></ul>|
 
 ### Clock
 
