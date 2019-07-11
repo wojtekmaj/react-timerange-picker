@@ -76,6 +76,35 @@ describe('TimeRangePicker', () => {
     expect(timeInput.at(1).prop('secondAriaLabel')).toBe(ariaLabelProps.secondAriaLabel);
   });
 
+  describe('passes value to TimeInput components', () => {
+    it('passes single value to TimeInput components', () => {
+      const value = new Date(2019, 0, 1);
+
+      const component = mount(
+        <TimeRangePicker value={value} />
+      );
+
+      const timeInput = component.find('TimeInput');
+
+      expect(timeInput.at(0).prop('value')).toBe(value);
+      expect(timeInput.at(1).prop('value')).toBe(undefined);
+    });
+
+    it('passes the first item of an array of values to TimeInput components', () => {
+      const value1 = new Date(2019, 0, 1);
+      const value2 = new Date(2019, 6, 1);
+
+      const component = mount(
+        <TimeRangePicker value={[value1, value2]} />
+      );
+
+      const timeInput = component.find('TimeInput');
+
+      expect(timeInput.at(0).prop('value')).toBe(value1);
+      expect(timeInput.at(1).prop('value')).toBe(value2);
+    });
+  });
+
   it('applies className to its wrapper when given a string', () => {
     const className = 'testClassName';
 
