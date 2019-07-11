@@ -43,6 +43,39 @@ describe('TimeRangePicker', () => {
     expect(timeInput.at(1).prop('format')).toBe(format);
   });
 
+  it('passes aria-label props to TimeInput components', () => {
+    const ariaLabelProps = {
+      amPmAriaLabel: 'Select AM/PM',
+      clearAriaLabel: 'Clear value',
+      clockAriaLabel: 'Toggle clock',
+      hourAriaLabel: 'Hour',
+      minuteAriaLabel: 'Minute',
+      nativeInputAriaLabel: 'Time',
+      secondAriaLabel: 'Second',
+    };
+
+    const component = mount(
+      <TimeRangePicker {...ariaLabelProps} />
+    );
+
+    const clockButton = component.find('button.react-timerange-picker__clock-button');
+    const clearButton = component.find('button.react-timerange-picker__clear-button');
+    const timeInput = component.find('TimeInput');
+
+    expect(clockButton.prop('aria-label')).toBe(ariaLabelProps.clockAriaLabel);
+    expect(clearButton.prop('aria-label')).toBe(ariaLabelProps.clearAriaLabel);
+    expect(timeInput.at(0).prop('amPmAriaLabel')).toBe(ariaLabelProps.amPmAriaLabel);
+    expect(timeInput.at(0).prop('hourAriaLabel')).toBe(ariaLabelProps.hourAriaLabel);
+    expect(timeInput.at(0).prop('minuteAriaLabel')).toBe(ariaLabelProps.minuteAriaLabel);
+    expect(timeInput.at(0).prop('nativeInputAriaLabel')).toBe(ariaLabelProps.nativeInputAriaLabel);
+    expect(timeInput.at(0).prop('secondAriaLabel')).toBe(ariaLabelProps.secondAriaLabel);
+    expect(timeInput.at(1).prop('amPmAriaLabel')).toBe(ariaLabelProps.amPmAriaLabel);
+    expect(timeInput.at(1).prop('hourAriaLabel')).toBe(ariaLabelProps.hourAriaLabel);
+    expect(timeInput.at(1).prop('minuteAriaLabel')).toBe(ariaLabelProps.minuteAriaLabel);
+    expect(timeInput.at(1).prop('nativeInputAriaLabel')).toBe(ariaLabelProps.nativeInputAriaLabel);
+    expect(timeInput.at(1).prop('secondAriaLabel')).toBe(ariaLabelProps.secondAriaLabel);
+  });
+
   it('applies className to its wrapper when given a string', () => {
     const className = 'testClassName';
 
