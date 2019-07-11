@@ -236,15 +236,14 @@ export default class TimeRangePicker extends PureComponent {
       className: timeRangePickerClassName, // Unused, here to exclude it from clockProps
       maxDetail,
       onChange,
-      value: timeRangePickerValue,
+      value,
       ...clockProps
     } = this.props;
 
     const className = `${baseClassName}__clock`;
+    const [valueFrom] = [].concat(value);
 
     const maxDetailIndex = allViews.indexOf(maxDetail);
-
-    const value = [].concat(timeRangePickerValue)[0]; // TODO: Show clock for "date to" inputs
 
     return (
       <Fit>
@@ -253,7 +252,7 @@ export default class TimeRangePicker extends PureComponent {
             className={clockClassName}
             renderMinuteHand={maxDetailIndex > 0}
             renderSecondHand={maxDetailIndex > 1}
-            value={value}
+            value={valueFrom}
             {...clockProps}
           />
         </div>
