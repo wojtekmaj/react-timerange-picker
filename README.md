@@ -85,10 +85,10 @@ Displays an input field complete with custom inputs, native input and a clock.
 
 |Prop name|Description|Default value|Example values|
 |----|----|----|----|
-|clockClassName|Class name(s) that will be added along with `"react-clock"` to the main React-Clock `<time>` element.|n/a|<ul><li>String: `"class1 class2"`</li><li>Array of strings: `["class1", "class2 class3"]`</li></ul>|
-|clockIcon|Content of the clock button. Setting the value explicitly to `null` will hide the icon.|(default icon)|<ul><li>String: `"Clock"`</li><li>React element: `<ClockIcon />`</li></ul>|
 |className|Class name(s) that will be added along with `"react-timerange-picker"` to the main React-TimeRange-Picker `<div>` element.|n/a|<ul><li>String: `"class1 class2"`</li><li>Array of strings: `["class1", "class2 class3"]`</li></ul>|
 |clearIcon|Content of the clear button. Setting the value explicitly to `null` will hide the icon.|(default icon)|<ul><li>String: `"Clear"`</li><li>React element: `<ClearIcon />`</li></ul>|
+|clockClassName|Class name(s) that will be added along with `"react-clock"` to the main React-Clock `<time>` element.|n/a|<ul><li>String: `"class1 class2"`</li><li>Array of strings: `["class1", "class2 class3"]`</li></ul>|
+|clockIcon|Content of the clock button. Setting the value explicitly to `null` will hide the icon.|(default icon)|<ul><li>String: `"Clock"`</li><li>React element: `<ClockIcon />`</li></ul>|
 |disabled|Whether the time range picker should be disabled.|`false`|`true`|
 |disableClock|Whether the clock should be disabled.|`false`|`true`|
 |format|Input format based on [Unicode Technical Standard #35](https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table). Supported values are: `H`, `HH`, `h`, `hh`, `m`, `mm`, `s`, `ss`, `a`.|n/a|`"h:m:s a"`|
