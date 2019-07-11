@@ -6,7 +6,7 @@ import TimeRangePicker from '../TimeRangePicker';
 /* eslint-disable comma-dangle */
 
 describe('TimeRangePicker', () => {
-  it('passes default name to TimeInput', () => {
+  it('passes default name to TimeInput components', () => {
     const component = mount(
       <TimeRangePicker />
     );
@@ -17,7 +17,7 @@ describe('TimeRangePicker', () => {
     expect(timeInput.at(1).prop('name')).toBe('timerange_to');
   });
 
-  it('passes custom name to TimeInput', () => {
+  it('passes custom name to TimeInput components', () => {
     const name = 'testName';
 
     const component = mount(
@@ -30,7 +30,7 @@ describe('TimeRangePicker', () => {
     expect(timeInput.at(1).prop('name')).toBe(`${name}_to`);
   });
 
-  it('passes format to DateInput', () => {
+  it('passes format to TimeInput components', () => {
     const format = 'H:mm:ss';
 
     const component = mount(
