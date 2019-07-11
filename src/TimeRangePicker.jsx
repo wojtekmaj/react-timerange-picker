@@ -328,8 +328,12 @@ TimeRangePicker.defaultProps = {
   name: 'timerange',
 };
 
+const isValue = PropTypes.oneOfType([
+  isTime,
+  PropTypes.instanceOf(Date),
+]);
+
 TimeRangePicker.propTypes = {
-  ...Clock.propTypes,
   amPmAriaLabel: PropTypes.string,
   className: PropTypes.oneOfType([
     PropTypes.string,
@@ -358,16 +362,13 @@ TimeRangePicker.propTypes = {
   onChange: PropTypes.func,
   onClockClose: PropTypes.func,
   onClockOpen: PropTypes.func,
+  onFocus: PropTypes.func,
   required: PropTypes.bool,
   secondAriaLabel: PropTypes.string,
   showLeadingZeros: PropTypes.bool,
   value: PropTypes.oneOfType([
-    isTime,
-    PropTypes.instanceOf(Date),
-    PropTypes.arrayOf(PropTypes.oneOfType([
-      isTime,
-      PropTypes.instanceOf(Date),
-    ])),
+    isValue,
+    PropTypes.arrayOf(isValue),
   ]),
 };
 
