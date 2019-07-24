@@ -221,9 +221,9 @@ export default class TimeRangePicker extends PureComponent {
             aria-label={clockAriaLabel}
             className={`${baseClassName}__clock-button ${baseClassName}__button`}
             disabled={disabled}
+            onBlur={this.resetValue}
             onClick={this.toggleClock}
             onFocus={this.stopPropagation}
-            onBlur={this.resetValue}
             type="button"
           >
             {clockIcon}
@@ -324,8 +324,8 @@ const ClearIcon = (
     {...iconProps}
     className={`${baseClassName}__clear-button__icon ${baseClassName}__button__icon`}
   >
-    <line x1="4" y1="4" x2="15" y2="15" />
-    <line x1="15" y1="4" x2="4" y2="15" />
+    <line x1="4" x2="15" y1="4" y2="15" />
+    <line x1="15" x2="4" y1="4" y2="15" />
   </svg>
 );
 
