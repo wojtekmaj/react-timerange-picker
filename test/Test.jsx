@@ -16,6 +16,22 @@ import './Test.less';
 
 const now = new Date();
 
+const ariaLabelProps = {
+  amPmAriaLabel: 'Select AM/PM',
+  clearAriaLabel: 'Clear value',
+  clockAriaLabel: 'Toggle clock',
+  hourAriaLabel: 'Hour',
+  minuteAriaLabel: 'Minute',
+  nativeInputAriaLabel: 'Time',
+  secondAriaLabel: 'Second',
+};
+
+const placeholderProps = {
+  hourPlaceholder: 'hh',
+  minutePlaceholder: 'mm',
+  secondPlaceholder: 'ss',
+};
+
 /* eslint-disable no-console */
 
 export default class Test extends PureComponent {
@@ -86,6 +102,8 @@ export default class Test extends PureComponent {
               }}
             >
               <TimeRangePicker
+                {...ariaLabelProps}
+                {...placeholderProps}
                 className="myCustomTimeRangePickerClassName"
                 clockClassName="myCustomClockClassName"
                 disabled={disabled}

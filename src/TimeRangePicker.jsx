@@ -137,16 +137,19 @@ export default class TimeRangePicker extends PureComponent {
       disabled,
       format,
       hourAriaLabel,
+      hourPlaceholder,
       isOpen,
       locale,
       maxDetail,
       maxTime,
       minTime,
       minuteAriaLabel,
+      minutePlaceholder,
       name,
       nativeInputAriaLabel,
       required,
       secondAriaLabel,
+      secondPlaceholder,
       showLeadingZeros,
       value,
     } = this.props;
@@ -161,8 +164,15 @@ export default class TimeRangePicker extends PureComponent {
       secondAriaLabel,
     };
 
+    const placeholderProps = {
+      hourPlaceholder,
+      minutePlaceholder,
+      secondPlaceholder,
+    };
+
     const commonProps = {
       ...ariaLabelProps,
+      ...placeholderProps,
       className: `${baseClassName}__inputGroup`,
       disabled,
       format,
@@ -350,12 +360,14 @@ TimeRangePicker.propTypes = {
   disabled: PropTypes.bool,
   format: PropTypes.string,
   hourAriaLabel: PropTypes.string,
+  hourPlaceholder: PropTypes.string,
   isOpen: PropTypes.bool,
   locale: PropTypes.string,
   maxDetail: PropTypes.oneOf(allViews),
   maxTime: isTime,
   minTime: isTime,
   minuteAriaLabel: PropTypes.string,
+  minutePlaceholder: PropTypes.string,
   name: PropTypes.string,
   nativeInputAriaLabel: PropTypes.string,
   onChange: PropTypes.func,
@@ -364,6 +376,7 @@ TimeRangePicker.propTypes = {
   onFocus: PropTypes.func,
   required: PropTypes.bool,
   secondAriaLabel: PropTypes.string,
+  secondPlaceholder: PropTypes.string,
   showLeadingZeros: PropTypes.bool,
   value: PropTypes.oneOfType([
     isValue,

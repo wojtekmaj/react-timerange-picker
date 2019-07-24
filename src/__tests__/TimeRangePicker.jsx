@@ -76,6 +76,27 @@ describe('TimeRangePicker', () => {
     expect(timeInput.at(1).prop('secondAriaLabel')).toBe(ariaLabelProps.secondAriaLabel);
   });
 
+  it('passes placeholder props to TimeInput components', () => {
+    const placeholderProps = {
+      hourPlaceholder: 'hh',
+      minutePlaceholder: 'mm',
+      secondPlaceholder: 'ss',
+    };
+
+    const component = mount(
+      <TimeRangePicker {...placeholderProps} />
+    );
+
+    const timeInput = component.find('TimeInput');
+
+    expect(timeInput.at(0).prop('hourPlaceholder')).toBe(placeholderProps.hourPlaceholder);
+    expect(timeInput.at(0).prop('minutePlaceholder')).toBe(placeholderProps.minutePlaceholder);
+    expect(timeInput.at(0).prop('secondPlaceholder')).toBe(placeholderProps.secondPlaceholder);
+    expect(timeInput.at(1).prop('hourPlaceholder')).toBe(placeholderProps.hourPlaceholder);
+    expect(timeInput.at(1).prop('minutePlaceholder')).toBe(placeholderProps.minutePlaceholder);
+    expect(timeInput.at(1).prop('secondPlaceholder')).toBe(placeholderProps.secondPlaceholder);
+  });
+
   describe('passes value to TimeInput components', () => {
     it('passes single value to TimeInput components', () => {
       const value = new Date(2019, 0, 1);
