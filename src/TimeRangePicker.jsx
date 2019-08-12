@@ -30,10 +30,6 @@ export default class TimeRangePicker extends PureComponent {
 
   state = {};
 
-  get eventProps() {
-    return makeEventProps(this.props);
-  }
-
   componentDidMount() {
     this.handleOutsideActionListeners();
   }
@@ -52,12 +48,8 @@ export default class TimeRangePicker extends PureComponent {
     this.handleOutsideActionListeners(false);
   }
 
-  handleOutsideActionListeners(shouldListen) {
-    const { isOpen } = this.state;
-
-    const shouldListenWithFallback = typeof shouldListen !== 'undefined' ? shouldListen : isOpen;
-    const fnName = shouldListenWithFallback ? 'addEventListener' : 'removeEventListener';
-    outsideActionEvents.forEach(eventName => document[fnName](eventName, this.onOutsideAction));
+  get eventProps() {
+    return makeEventProps(this.props);
   }
 
   onOutsideAction = (event) => {
@@ -125,6 +117,14 @@ export default class TimeRangePicker extends PureComponent {
   stopPropagation = event => event.stopPropagation();
 
   clear = () => this.onChange(null);
+
+  handleOutsideActionListeners(shouldListen) {
+    const { isOpen } = this.state;
+
+    const shouldListenWithFallback = typeof shouldListen !== 'undefined' ? shouldListen : isOpen;
+    const fnName = shouldListenWithFallback ? 'addEventListener' : 'removeEventListener';
+    outsideActionEvents.forEach(eventName => document[fnName](eventName, this.onOutsideAction));
+  }
 
   renderInputs() {
     const {
