@@ -30,7 +30,7 @@ React-TimeRange-Picker will play nicely with [React-DateRange-Picker](https://gi
 
 Your project needs to use React 16 or later. If you use older version of React, please refer to the table below to find suitable React-TimeRange-Picker version.
 
-|React version|Newest supported React-TimeRange-Picker|
+|React version|Newest available React-TimeRange-Picker|
 |----|----|
 |>16.0|latest|
 |>15.0|2.1.1|
