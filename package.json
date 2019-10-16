@@ -67,7 +67,7 @@
     "less": "^3.8.1",
     "react": "^16.5.0",
     "react-dom": "^16.5.0",
-    "rimraf": "^2.6.2"
+    "rimraf": "^3.0.0"
   },
   "peerDependencies": {
     "react": ">=15.5",
