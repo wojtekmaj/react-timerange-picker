@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import TimeRangePicker from '../TimeRangePicker';
+import TimeRangePicker from './TimeRangePicker';
 
 /* eslint-disable comma-dangle */
 
