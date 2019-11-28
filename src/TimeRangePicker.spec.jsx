@@ -30,6 +30,17 @@ describe('TimeRangePicker', () => {
     expect(timeInput.at(1).prop('name')).toBe(`${name}_to`);
   });
 
+  it('passes autoFocus flag to first TimeInput component', () => {
+    const component = mount(
+      <TimeRangePicker autoFocus />
+    );
+
+    const timeInput = component.find('TimeInput');
+
+    expect(timeInput.at(0).prop('autoFocus')).toBeTruthy();
+    expect(timeInput.at(1).prop('autoFocus')).toBe(undefined);
+  });
+
   it('passes disabled flag to TimeInput components', () => {
     const component = mount(
       <TimeRangePicker disabled />
