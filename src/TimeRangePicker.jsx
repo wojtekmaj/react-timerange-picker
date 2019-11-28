@@ -129,6 +129,7 @@ export default class TimeRangePicker extends PureComponent {
   renderInputs() {
     const {
       amPmAriaLabel,
+      autoFocus,
       clearAriaLabel,
       clearIcon,
       clockAriaLabel,
@@ -189,6 +190,7 @@ export default class TimeRangePicker extends PureComponent {
       <div className={`${baseClassName}__wrapper`}>
         <TimeInput
           {...commonProps}
+          autoFocus={autoFocus}
           name={`${name}_from`}
           onChange={this.onChangeFrom}
           returnValue="start"
@@ -344,6 +346,7 @@ const isValue = PropTypes.oneOfType([
 
 TimeRangePicker.propTypes = {
   amPmAriaLabel: PropTypes.string,
+  autoFocus: PropTypes.bool,
   className: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.arrayOf(PropTypes.string),
