@@ -110,7 +110,8 @@ Displays an input field complete with custom inputs, native input and a clock.
 |onChange|Function called when the user picks a valid time.|n/a|`(value) => alert('New time is: ', value)`|
 |onClockClose|Function called when the clock closes.|n/a|`() => alert('Clock closed')`|
 |onClockOpen|Function called when the clock opens.|n/a|`() => alert('Clock opened')`|
-|required|Whether date input should be required.|`false`|`true`|
+|rangeDivider|Divider between time inputs.|`"–"`|`" to "`|
+|required|Whether time input should be required.|`false`|`true`|
 |secondAriaLabel|`aria-label` for the second input.|n/a|`"Second"`|
 |secondPlaceholder|`placeholder` for the second input.|`"--"`|`"ss"`|
 |value|Input value.|n/a|<ul><li>Date: `new Date()`</li><li>String: `"22:15:00"`</li></ul>|

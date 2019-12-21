@@ -186,7 +186,7 @@ describe('TimeRangePicker', () => {
     expect(timeInput).toHaveLength(2);
   });
 
-  it('renders range divider', () => {
+  it('renders range divider with default divider', () => {
     const component = mount(
       <TimeRangePicker />
     );
@@ -194,6 +194,18 @@ describe('TimeRangePicker', () => {
     const rangeDivider = component.find('.react-timerange-picker__range-divider');
 
     expect(rangeDivider).toHaveLength(1);
+    expect(rangeDivider.text()).toBe('–');
+  });
+
+  it('renders range divider with custom divider', () => {
+    const component = mount(
+      <TimeRangePicker rangeDivider="to" />
+    );
+
+    const rangeDivider = component.find('.react-timerange-picker__range-divider');
+
+    expect(rangeDivider).toHaveLength(1);
+    expect(rangeDivider.text()).toBe('to');
   });
 
   it('renders clear button', () => {
