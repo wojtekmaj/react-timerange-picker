@@ -148,6 +148,7 @@ export default class TimeRangePicker extends PureComponent {
       minutePlaceholder,
       name,
       nativeInputAriaLabel,
+      rangeDivider,
       required,
       secondAriaLabel,
       secondPlaceholder,
@@ -197,7 +198,7 @@ export default class TimeRangePicker extends PureComponent {
           value={valueFrom}
         />
         <span className={`${baseClassName}__range-divider`}>
-          –
+          {rangeDivider}
         </span>
         <TimeInput
           {...commonProps}
@@ -337,6 +338,7 @@ TimeRangePicker.defaultProps = {
   isOpen: null,
   maxDetail: 'minute',
   name: 'timerange',
+  rangeDivider: '–',
 };
 
 const isValue = PropTypes.oneOfType([
@@ -377,6 +379,7 @@ TimeRangePicker.propTypes = {
   onClockClose: PropTypes.func,
   onClockOpen: PropTypes.func,
   onFocus: PropTypes.func,
+  rangeDivider: PropTypes.node,
   required: PropTypes.bool,
   secondAriaLabel: PropTypes.string,
   secondPlaceholder: PropTypes.string,
