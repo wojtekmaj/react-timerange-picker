@@ -49,7 +49,7 @@ Here's an example of basic usage:
 
 ```js
 import React, { Component } from 'react';
-import TimeRangePicker from 'react-timerange-picker';
+import TimeRangePicker from '@wojtekmaj/react-timerange-picker';
 
 class MyApp extends Component {
   state = {
