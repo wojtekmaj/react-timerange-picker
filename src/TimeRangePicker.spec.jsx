@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import TimeRangePicker from '../TimeRangePicker';
+import TimeRangePicker from './TimeRangePicker';
 
 /* eslint-disable comma-dangle */
 
@@ -28,6 +28,28 @@ describe('TimeRangePicker', () => {
 
     expect(timeInput.at(0).prop('name')).toBe(`${name}_from`);
     expect(timeInput.at(1).prop('name')).toBe(`${name}_to`);
+  });
+
+  it('passes autoFocus flag to first TimeInput component', () => {
+    const component = mount(
+      <TimeRangePicker autoFocus />
+    );
+
+    const timeInput = component.find('TimeInput');
+
+    expect(timeInput.at(0).prop('autoFocus')).toBeTruthy();
+    expect(timeInput.at(1).prop('autoFocus')).toBe(undefined);
+  });
+
+  it('passes disabled flag to TimeInput components', () => {
+    const component = mount(
+      <TimeRangePicker disabled />
+    );
+
+    const timeInput = component.find('TimeInput');
+
+    expect(timeInput.at(0).prop('disabled')).toBeTruthy();
+    expect(timeInput.at(1).prop('disabled')).toBeTruthy();
   });
 
   it('passes format to TimeInput components', () => {
@@ -164,7 +186,7 @@ describe('TimeRangePicker', () => {
     expect(timeInput).toHaveLength(2);
   });
 
-  it('renders range divider', () => {
+  it('renders range divider with default divider', () => {
     const component = mount(
       <TimeRangePicker />
     );
@@ -172,6 +194,18 @@ describe('TimeRangePicker', () => {
     const rangeDivider = component.find('.react-timerange-picker__range-divider');
 
     expect(rangeDivider).toHaveLength(1);
+    expect(rangeDivider.text()).toBe('–');
+  });
+
+  it('renders range divider with custom divider', () => {
+    const component = mount(
+      <TimeRangePicker rangeDivider="to" />
+    );
+
+    const rangeDivider = component.find('.react-timerange-picker__range-divider');
+
+    expect(rangeDivider).toHaveLength(1);
+    expect(rangeDivider.text()).toBe('to');
   });
 
   it('renders clear button', () => {

@@ -30,7 +30,7 @@ React-TimeRange-Picker will play nicely with [React-DateRange-Picker](https://gi
 
 Your project needs to use React 16 or later. If you use older version of React, please refer to the table below to find suitable React-TimeRange-Picker version.
 
-|React version|Newest supported React-TimeRange-Picker|
+|React version|Newest available React-TimeRange-Picker|
 |----|----|
 |>16.0|latest|
 |>15.0|2.1.1|
@@ -49,7 +49,7 @@ Here's an example of basic usage:
 
 ```js
 import React, { Component } from 'react';
-import TimeRangePicker from 'react-timerange-picker';
+import TimeRangePicker from '@wojtekmaj/react-timerange-picker';
 
 class MyApp extends Component {
   state = {
@@ -86,6 +86,7 @@ Displays an input field complete with custom inputs, native input and a clock.
 |Prop name|Description|Default value|Example values|
 |----|----|----|----|
 |amPmAriaLabel|`aria-label` for the AM/PM select input.|n/a|`"Select AM/PM"`|
+|autoFocus|Automatically focuses the input on mount.|n/a|`true`|
 |className|Class name(s) that will be added along with `"react-timerange-picker"` to the main React-TimeRange-Picker `<div>` element.|n/a|<ul><li>String: `"class1 class2"`</li><li>Array of strings: `["class1", "class2 class3"]`</li></ul>|
 |clearAriaLabel|`aria-label` for the clear button.|n/a|`"Clear value"`|
 |clearIcon|Content of the clear button. Setting the value explicitly to `null` will hide the icon.|(default icon)|<ul><li>String: `"Clear"`</li><li>React element: `<ClearIcon />`</li></ul>|
@@ -109,7 +110,8 @@ Displays an input field complete with custom inputs, native input and a clock.
 |onChange|Function called when the user picks a valid time.|n/a|`(value) => alert('New time is: ', value)`|
 |onClockClose|Function called when the clock closes.|n/a|`() => alert('Clock closed')`|
 |onClockOpen|Function called when the clock opens.|n/a|`() => alert('Clock opened')`|
-|required|Whether date input should be required.|`false`|`true`|
+|rangeDivider|Divider between time inputs.|`"–"`|`" to "`|
+|required|Whether time input should be required.|`false`|`true`|
 |secondAriaLabel|`aria-label` for the second input.|n/a|`"Second"`|
 |secondPlaceholder|`placeholder` for the second input.|`"--"`|`"ss"`|
 |value|Input value.|n/a|<ul><li>Date: `new Date()`</li><li>String: `"22:15:00"`</li></ul>|

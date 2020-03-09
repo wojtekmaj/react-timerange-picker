@@ -29,10 +29,6 @@ export default class TimeRangePicker extends PureComponent {
 
   state = {};
 
-  get eventProps() {
-    return makeEventProps(this.props);
-  }
-
   componentDidMount() {
     this.handleOutsideActionListeners();
   }
@@ -51,12 +47,8 @@ export default class TimeRangePicker extends PureComponent {
     this.handleOutsideActionListeners(false);
   }
 
-  handleOutsideActionListeners(shouldListen) {
-    const { isOpen } = this.state;
-
-    const shouldListenWithFallback = typeof shouldListen !== 'undefined' ? shouldListen : isOpen;
-    const fnName = shouldListenWithFallback ? 'addEventListener' : 'removeEventListener';
-    outsideActionEvents.forEach(eventName => document[fnName](eventName, this.onOutsideAction));
+  get eventProps() {
+    return makeEventProps(this.props);
   }
 
   onOutsideAction = (event) => {
@@ -125,9 +117,18 @@ export default class TimeRangePicker extends PureComponent {
 
   clear = () => this.onChange(null);
 
+  handleOutsideActionListeners(shouldListen) {
+    const { isOpen } = this.state;
+
+    const shouldListenWithFallback = typeof shouldListen !== 'undefined' ? shouldListen : isOpen;
+    const fnName = shouldListenWithFallback ? 'addEventListener' : 'removeEventListener';
+    outsideActionEvents.forEach(eventName => document[fnName](eventName, this.onOutsideAction));
+  }
+
   renderInputs() {
     const {
       amPmAriaLabel,
+      autoFocus,
       clearAriaLabel,
       clearIcon,
       clockAriaLabel,
@@ -146,6 +147,7 @@ export default class TimeRangePicker extends PureComponent {
       minutePlaceholder,
       name,
       nativeInputAriaLabel,
+      rangeDivider,
       required,
       secondAriaLabel,
       secondPlaceholder,
@@ -188,13 +190,14 @@ export default class TimeRangePicker extends PureComponent {
       <div className={`${baseClassName}__wrapper`}>
         <TimeInput
           {...commonProps}
+          autoFocus={autoFocus}
           name={`${name}_from`}
           onChange={this.onChangeFrom}
           returnValue="start"
           value={valueFrom}
         />
         <span className={`${baseClassName}__range-divider`}>
-          –
+          {rangeDivider}
         </span>
         <TimeInput
           {...commonProps}
@@ -334,6 +337,7 @@ TimeRangePicker.defaultProps = {
   isOpen: null,
   maxDetail: 'minute',
   name: 'timerange',
+  rangeDivider: '–',
 };
 
 const isValue = PropTypes.oneOfType([
@@ -343,6 +347,7 @@ const isValue = PropTypes.oneOfType([
 
 TimeRangePicker.propTypes = {
   amPmAriaLabel: PropTypes.string,
+  autoFocus: PropTypes.bool,
   className: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.arrayOf(PropTypes.string),
@@ -373,6 +378,7 @@ TimeRangePicker.propTypes = {
   onClockClose: PropTypes.func,
   onClockOpen: PropTypes.func,
   onFocus: PropTypes.func,
+  rangeDivider: PropTypes.node,
   required: PropTypes.bool,
   secondAriaLabel: PropTypes.string,
   secondPlaceholder: PropTypes.string,
