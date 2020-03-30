@@ -68,13 +68,13 @@ export default class TimeRangePicker extends PureComponent {
     }
   }
 
-  onChangeFrom = (valueFrom, closeClock = true) => {
+  onChangeFrom = (valueFrom, closeClock) => {
     const { value } = this.props;
     const [, valueTo] = [].concat(value);
     this.onChange([valueFrom, valueTo], closeClock);
   }
 
-  onChangeTo = (valueTo, closeClock = true) => {
+  onChangeTo = (valueTo, closeClock) => {
     const { value } = this.props;
     const [valueFrom] = [].concat(value);
     this.onChange([valueFrom, valueTo], closeClock);
