@@ -48,26 +48,20 @@ Add React-TimeRange-Picker to your project by executing `npm install @wojtekmaj/
 Here's an example of basic usage:
 
 ```js
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import TimeRangePicker from '@wojtekmaj/react-timerange-picker';
 
-class MyApp extends Component {
-  state = {
-    time: ['10:00', '11:00'],
-  }
+function MyApp() {
+  const [value, onChange] = useState(['10:00', '11:00']);
 
-  onChange = time => this.setState({ time })
-
-  render() {
-    return (
-      <div>
-        <TimeRangePicker
-          onChange={this.onChange}
-          value={this.state.time}
-        />
-      </div>
-    );
-  }
+  return (
+    <div>
+      <TimeRangePicker
+        onChange={onChange}
+        value={value}
+      />
+    </div>
+  );
 }
 ```
 
