@@ -361,7 +361,7 @@ describe('TimeRangePicker', () => {
       <TimeRangePicker isOpen />
     );
 
-    const customInputs = component.find('input[type="number"]');
+    const customInputs = component.find('input[data-input]');
     const hourInput = customInputs.at(0);
     const minuteInput = customInputs.at(1);
 
