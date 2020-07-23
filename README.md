@@ -16,7 +16,7 @@ A time range picker for your React app.
 
 ## Demo
 
-Minimal demo page is included in sample directory.
+A minimal demo page can be found in `sample` directory.
 
 [Online demo](http://projects.wojtekmaj.pl/react-timerange-picker/) is also available!
 
@@ -28,7 +28,7 @@ React-TimeRange-Picker will play nicely with [React-DateRange-Picker](https://gi
 
 ### Compatibility
 
-Your project needs to use React 16 or later. If you use older version of React, please refer to the table below to find suitable React-TimeRange-Picker version.
+Your project needs to use React 16 or later. If you use an older version of React, please refer to the table below to find a suitable React-TimeRange-Picker version.
 
 |React version|Newest available React-TimeRange-Picker|
 |----|----|
