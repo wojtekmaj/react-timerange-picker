@@ -80,5 +80,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/wojtekmaj/react-timerange-picker.git"
-  }
+  },
+  "funding": "https://github.com/wojtekmaj/react-timerange-picker?sponsor=1"
 }
