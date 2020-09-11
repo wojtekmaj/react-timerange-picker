@@ -14,7 +14,7 @@
   "license": "MIT",
   "dependencies": {
     "@wojtekmaj/date-utils": "^1.0.0",
-    "@wojtekmaj/react-timerange-picker": "workspace:*",
+    "@wojtekmaj/react-timerange-picker": "portal:../",
     "prop-types": "^15.6.2",
     "react": "^16.5.0",
     "react-dom": "^16.5.0"
