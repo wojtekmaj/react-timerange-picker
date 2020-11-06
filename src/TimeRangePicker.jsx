@@ -112,10 +112,10 @@ export default class TimeRangePicker extends PureComponent {
   }
 
   toggleClock = () => {
-    this.setState(prevState => ({ isOpen: !prevState.isOpen }));
+    this.setState((prevState) => ({ isOpen: !prevState.isOpen }));
   }
 
-  stopPropagation = event => event.stopPropagation();
+  stopPropagation = (event) => event.stopPropagation();
 
   clear = () => this.onChange(null);
 
@@ -124,7 +124,7 @@ export default class TimeRangePicker extends PureComponent {
 
     const shouldListenWithFallback = typeof shouldListen !== 'undefined' ? shouldListen : isOpen;
     const fnName = shouldListenWithFallback ? 'addEventListener' : 'removeEventListener';
-    outsideActionEvents.forEach(eventName => document[fnName](eventName, this.onOutsideAction));
+    outsideActionEvents.forEach((eventName) => document[fnName](eventName, this.onOutsideAction));
   }
 
   renderInputs() {
