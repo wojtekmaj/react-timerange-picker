@@ -2,15 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function ValueOptions({
-  setState,
+  setValue,
   value,
 }) {
   const startTime = [].concat(value)[0];
   const endTime = [].concat(value)[1];
-
-  function setValue(nextValue) {
-    setState({ value: nextValue });
-  }
 
   function setStartValue(startValue) {
     if (!startValue) {
@@ -108,7 +104,7 @@ export default function ValueOptions({
 }
 
 ValueOptions.propTypes = {
-  setState: PropTypes.func.isRequired,
+  setValue: PropTypes.func.isRequired,
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.instanceOf(Date),
