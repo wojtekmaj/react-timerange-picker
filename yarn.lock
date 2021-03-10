@@ -1794,7 +1794,7 @@ __metadata:
     react-clock: ^3.0.0
     react-dom: ^17.0.0
     react-fit: ^1.0.3
-    react-time-picker: ^4.1.0
+    react-time-picker: ^4.2.0
     rimraf: ^3.0.0
   peerDependencies:
     react: ^16.3.0 || ^17.0.0-0
@@ -6806,9 +6806,9 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"react-time-picker@npm:^4.1.0":
-  version: 4.1.2
-  resolution: "react-time-picker@npm:4.1.2"
+"react-time-picker@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "react-time-picker@npm:4.2.0"
   dependencies:
     "@wojtekmaj/date-utils": ^1.0.0
     get-user-locale: ^1.2.0
@@ -6821,7 +6821,7 @@ fsevents@^2.1.2:
   peerDependencies:
     react: ^16.3.0 || ^17.0.0-0
     react-dom: ^16.3.0 || ^17.0.0-0
-  checksum: 21477910650583b5678ff617ad18cafa8ba002959355cbfe25804fc4f7edf5a89609eb42c9e5bc49b20c4725d21c5774b39a1f90d3ec3018ccb3a01851f20e9a
+  checksum: cb6d41c1116708e4340bda06f512060276ceb26b65be808f8c7999e7635cc16e04aa4b02fd70c0ae09c2fbc589aebbcbfcd74cff98881354305b4f666646a3e1
   languageName: node
   linkType: hard
 
