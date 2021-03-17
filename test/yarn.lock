@@ -2037,7 +2037,7 @@ __metadata:
     eslint: ^7.12.0
     eslint-config-wojtekmaj: ^0.5.0
     jest: ^26.6.0
-    less: ^3.8.1
+    less: ^4.0.0
     make-event-props: ^1.1.0
     merge-class-names: ^1.1.1
     prop-types: ^15.6.0
@@ -6653,39 +6653,6 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"less@npm:^3.8.1":
-  version: 3.12.2
-  resolution: "less@npm:3.12.2"
-  dependencies:
-    errno: ^0.1.1
-    graceful-fs: ^4.1.2
-    image-size: ~0.5.0
-    make-dir: ^2.1.0
-    mime: ^1.4.1
-    native-request: ^1.0.5
-    source-map: ~0.6.0
-    tslib: ^1.10.0
-  dependenciesMeta:
-    errno:
-      optional: true
-    graceful-fs:
-      optional: true
-    image-size:
-      optional: true
-    make-dir:
-      optional: true
-    mime:
-      optional: true
-    native-request:
-      optional: true
-    source-map:
-      optional: true
-  bin:
-    lessc: bin/lessc
-  checksum: a9b1b74c1f78e52d5dcbac3c02bbf74487ea93e62c56a6f0a9f40dd4f33e0281d30a2fe1afc71381cac046a31644071e25e6eeebeddd339ef2df5904051e5c53
-  languageName: node
-  linkType: hard
-
 "less@npm:^4.0.0":
   version: 4.1.1
   resolution: "less@npm:4.1.1"
@@ -6900,6 +6867,15 @@ fsevents@^2.1.2:
   dependencies:
     tslib: ^1.10.0
   checksum: 52a55327ea69cbec7693daa11efb94f9e3d13b2697773d3cecd71f68c7eafaca2b0b34f8cc10617a751134e17c8396be992972765f5d5db220047651046762b5
+  languageName: node
+  linkType: hard
+
+"lru-cache@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "lru-cache@npm:6.0.0"
+  dependencies:
+    yallist: ^4.0.0
+  checksum: b8b78353d2391c0f135cdc245c4744ad41c2efb1a6d98f31bc57a2cf48ebf02de96e4876657c3026673576bf1f1f61fc3fdd77ab00ad1ead737537bf17d8019d
   languageName: node
   linkType: hard
 
@@ -7229,13 +7205,6 @@ fsevents@^2.1.2:
     snapdragon: ^0.8.1
     to-regex: ^3.0.1
   checksum: 2e1440c5705f0192b9d9b46bb682a1832052974dad359ed473b9f555abb5c55a08b3d5ba45d7d37c53a83f64b7f93866292824d3086a150ff7980e71874feb3b
-  languageName: node
-  linkType: hard
-
-"native-request@npm:^1.0.5":
-  version: 1.0.7
-  resolution: "native-request@npm:1.0.7"
-  checksum: 14ed09afe0ca2953ec76f46897ac0630dca0e5bd21db94c8c106ac22766408a8a4a296efe563db3809f0c2218392c50d0a3639df79bfde87bb7df43dc8fcbd74
   languageName: node
   linkType: hard
 
@@ -8896,17 +8865,6 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"rimraf@npm:2.6.3":
-  version: 2.6.3
-  resolution: "rimraf@npm:2.6.3"
-  dependencies:
-    glob: ^7.1.3
-  bin:
-    rimraf: ./bin.js
-  checksum: c9ce1854f19327606934558f4729b0f7aa7b9f1a3e7ca292d56261cce1074e20b0a0b16689166da6d8ab24ed9c30f7c71fba0df38e1d37f0233b6f48307c5c7a
-  languageName: node
-  linkType: hard
-
 "rimraf@npm:^2.6.3":
   version: 2.7.1
   resolution: "rimraf@npm:2.7.1"
@@ -9079,15 +9037,6 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"semver@npm:7.0.0":
-  version: 7.0.0
-  resolution: "semver@npm:7.0.0"
-  bin:
-    semver: bin/semver.js
-  checksum: 5162b31e9902be1d51d63523eb21d28164d632f527cb0dc439a58d6eaf1a2f3c49c4e2a0f7cf8d650f673638ae34ac7e0c7c2048ff66bc5dc1298ef8551575b5
-  languageName: node
-  linkType: hard
-
 "semver@npm:^6.0.0, semver@npm:^6.3.0":
   version: 6.3.0
   resolution: "semver@npm:6.3.0"
@@ -9097,12 +9046,14 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"semver@npm:^7.2.1, semver@npm:^7.3.2":
-  version: 7.3.2
-  resolution: "semver@npm:7.3.2"
+"semver@npm:^7.0.0, semver@npm:^7.2.1, semver@npm:^7.3.2":
+  version: 7.3.4
+  resolution: "semver@npm:7.3.4"
+  dependencies:
+    lru-cache: ^6.0.0
   bin:
     semver: bin/semver.js
-  checksum: bceb46d396d039afb5be2b2860bce1b0a43ecbadc72dde7ebe9c56dd9035ca50d9b8e086208ff9bbe53773ebde0bcfc6fc0842d7358398bca7054bb9ced801e3
+  checksum: f2c7f9aeb976d1484b2f39aa7afc8332a1d21fd32ca4a6fbf650e1423455ebf3e7029f6e2e7ba0cd71935b85942521f1ec25b6cc2c031b953c8ca4ff2d7a823d
   languageName: node
   linkType: hard
 
