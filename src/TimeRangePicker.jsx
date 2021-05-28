@@ -83,7 +83,7 @@ export default class TimeRangePicker extends PureComponent {
   }
 
   onFocus = (event) => {
-    const { disabled, onFocus } = this.props;
+    const { disabled, onFocus, openClockOnFocus } = this.props;
 
     if (onFocus) {
       onFocus(event);
@@ -94,7 +94,9 @@ export default class TimeRangePicker extends PureComponent {
       return;
     }
 
-    this.openClock();
+    if (openClockOnFocus) {
+      this.openClock();
+    }
   }
 
   openClock = () => {
@@ -340,6 +342,7 @@ TimeRangePicker.defaultProps = {
   isOpen: null,
   maxDetail: 'minute',
   name: 'timerange',
+  openClockOnFocus: true,
   rangeDivider: '–',
 };
 
@@ -382,6 +385,7 @@ TimeRangePicker.propTypes = {
   onClockClose: PropTypes.func,
   onClockOpen: PropTypes.func,
   onFocus: PropTypes.func,
+  openClockOnFocus: PropTypes.bool,
   rangeDivider: PropTypes.node,
   required: PropTypes.bool,
   secondAriaLabel: PropTypes.string,
