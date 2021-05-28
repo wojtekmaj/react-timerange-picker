@@ -337,7 +337,7 @@ describe('TimeRangePicker', () => {
     expect(component.state('isOpen')).toBe(false);
   });
 
-  it('closes Calendar component when tapped outside', () => {
+  it('closes Clock component when tapped outside', () => {
     const root = document.createElement('div');
     document.body.appendChild(root);
 
@@ -370,7 +370,7 @@ describe('TimeRangePicker', () => {
     expect(component.state('isOpen')).toBe(true);
   });
 
-  it('closes Calendar when calling internal onChange by default', () => {
+  it('closes Clock when calling internal onChange by default', () => {
     const component = mount(
       <TimeRangePicker isOpen />,
     );
@@ -382,7 +382,7 @@ describe('TimeRangePicker', () => {
     expect(component.state('isOpen')).toBe(false);
   });
 
-  it('does not close Calendar when calling internal onChange with prop closeClock = false', () => {
+  it('does not close Clock when calling internal onChange with prop closeClock = false', () => {
     const component = mount(
       <TimeRangePicker
         closeClock={false}
@@ -397,7 +397,7 @@ describe('TimeRangePicker', () => {
     expect(component.state('isOpen')).toBe(true);
   });
 
-  it('does not close Calendar when calling internal onChange with closeCalendar = false', () => {
+  it('does not close Clock when calling internal onChange with closeClock = false', () => {
     const component = mount(
       <TimeRangePicker isOpen />,
     );
@@ -431,10 +431,10 @@ describe('TimeRangePicker', () => {
       <TimeRangePicker onChange={onChange} />,
     );
 
-    const calendar = component.find('Calendar');
+    const clock = component.find('Clock');
     const button = component.find('button.react-timerange-picker__clear-button');
 
-    expect(calendar).toHaveLength(0);
+    expect(clock).toHaveLength(0);
 
     button.simulate('click');
     component.update();
