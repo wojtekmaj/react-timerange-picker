@@ -97,6 +97,10 @@ export default class TimeRangePicker extends PureComponent {
     }
 
     if (openClockOnFocus) {
+      if (event.target.getAttribute('data-select') === 'true') {
+        return;
+      }
+
       this.openClock();
     }
   }

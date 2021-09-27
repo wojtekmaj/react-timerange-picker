@@ -339,6 +339,24 @@ describe('TimeRangePicker', () => {
 
       expect(clock2).toHaveLength(0);
     });
+
+    it('does not open Clock component when focusing on a select element', () => {
+      const component = mount(
+        <TimeRangePicker format="hh:mm:ss a" />,
+      );
+
+      const clock = component.find('Clock');
+      const select = component.find('select[name="amPm"]').first();
+
+      expect(clock).toHaveLength(0);
+
+      select.simulate('focus');
+      component.update();
+
+      const clock2 = component.find('Clock');
+
+      expect(clock2).toHaveLength(0);
+    });
   });
 
   it('closes Clock component when clicked outside', () => {

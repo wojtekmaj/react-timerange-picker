@@ -34,7 +34,7 @@
     "prop-types": "^15.6.0",
     "react-clock": "^3.0.0",
     "react-fit": "^1.0.3",
-    "react-time-picker": "^4.4.1"
+    "react-time-picker": "^4.4.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.15.0",
