@@ -283,8 +283,11 @@ export default class TimeRangePicker extends PureComponent {
   }
 
   render() {
+    const { eventProps } = this;
     const { className, disabled } = this.props;
     const { isOpen } = this.state;
+
+    const { onChange, ...eventPropsWithoutOnChange } = eventProps;
 
     return (
       <div
@@ -294,7 +297,7 @@ export default class TimeRangePicker extends PureComponent {
           `${baseClassName}--${disabled ? 'disabled' : 'enabled'}`,
           className,
         )}
-        {...this.eventProps}
+        {...eventPropsWithoutOnChange}
         onFocus={this.onFocus}
         ref={(ref) => {
           if (!ref) {
