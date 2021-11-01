@@ -72,5 +72,6 @@
     "type": "git",
     "url": "https://github.com/wojtekmaj/react-timerange-picker.git"
   },
-  "funding": "https://github.com/wojtekmaj/react-timerange-picker?sponsor=1"
+  "funding": "https://github.com/wojtekmaj/react-timerange-picker?sponsor=1",
+  "packageManager": "yarn@3.1.0"
 }
