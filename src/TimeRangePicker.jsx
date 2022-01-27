@@ -57,9 +57,8 @@ export default class TimeRangePicker extends PureComponent {
     if (this.wrapper && !this.wrapper.contains(target)) {
       this.closeClock();
     }
-  }
+  };
 
-  // eslint-disable-next-line react/destructuring-assignment
   onChange = (value, closeClock = this.props.closeClock) => {
     const { onChange } = this.props;
 
@@ -70,19 +69,19 @@ export default class TimeRangePicker extends PureComponent {
     if (onChange) {
       onChange(value);
     }
-  }
+  };
 
   onChangeFrom = (valueFrom, closeClock) => {
     const { value } = this.props;
     const [, valueTo] = [].concat(value);
     this.onChange([valueFrom, valueTo], closeClock);
-  }
+  };
 
   onChangeTo = (valueTo, closeClock) => {
     const { value } = this.props;
     const [valueFrom] = [].concat(value);
     this.onChange([valueFrom, valueTo], closeClock);
-  }
+  };
 
   onFocus = (event) => {
     const { disabled, onFocus, openClockOnFocus } = this.props;
@@ -103,17 +102,17 @@ export default class TimeRangePicker extends PureComponent {
 
       this.openClock();
     }
-  }
+  };
 
   onKeyDown = (event) => {
     if (event.key === 'Escape') {
       this.closeClock();
     }
-  }
+  };
 
   openClock = () => {
     this.setState({ isOpen: true });
-  }
+  };
 
   closeClock = () => {
     this.setState((prevState) => {
@@ -123,11 +122,11 @@ export default class TimeRangePicker extends PureComponent {
 
       return { isOpen: false };
     });
-  }
+  };
 
   toggleClock = () => {
     this.setState((prevState) => ({ isOpen: !prevState.isOpen }));
-  }
+  };
 
   stopPropagation = (event) => event.stopPropagation();
 
@@ -207,15 +206,14 @@ export default class TimeRangePicker extends PureComponent {
       <div className={`${baseClassName}__wrapper`}>
         <TimeInput
           {...commonProps}
+          // eslint-disable-next-line jsx-a11y/no-autofocus
           autoFocus={autoFocus}
           name={`${name}_from`}
           onChange={this.onChangeFrom}
           returnValue="start"
           value={valueFrom}
         />
-        <span className={`${baseClassName}__range-divider`}>
-          {rangeDivider}
-        </span>
+        <span className={`${baseClassName}__range-divider`}>{rangeDivider}</span>
         <TimeInput
           {...commonProps}
           name={`${name}_to`}
@@ -369,25 +367,16 @@ TimeRangePicker.defaultProps = {
   rangeDivider: '–',
 };
 
-const isValue = PropTypes.oneOfType([
-  isTime,
-  PropTypes.instanceOf(Date),
-]);
+const isValue = PropTypes.oneOfType([isTime, PropTypes.instanceOf(Date)]);
 
 TimeRangePicker.propTypes = {
   amPmAriaLabel: PropTypes.string,
   autoFocus: PropTypes.bool,
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string),
-  ]),
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
   clearAriaLabel: PropTypes.string,
   clearIcon: PropTypes.node,
   clockAriaLabel: PropTypes.string,
-  clockClassName: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string),
-  ]),
+  clockClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
   clockIcon: PropTypes.node,
   closeClock: PropTypes.bool,
   disableClock: PropTypes.bool,
@@ -414,8 +403,5 @@ TimeRangePicker.propTypes = {
   secondAriaLabel: PropTypes.string,
   secondPlaceholder: PropTypes.string,
   showLeadingZeros: PropTypes.bool,
-  value: PropTypes.oneOfType([
-    isValue,
-    PropTypes.arrayOf(isValue),
-  ]),
+  value: PropTypes.oneOfType([isValue, PropTypes.arrayOf(isValue)]),
 };

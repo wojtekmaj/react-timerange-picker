@@ -5,9 +5,7 @@ import TimeRangePicker from './TimeRangePicker';
 
 describe('TimeRangePicker', () => {
   it('passes default name to TimeInput components', () => {
-    const component = mount(
-      <TimeRangePicker />,
-    );
+    const component = mount(<TimeRangePicker />);
 
     const timeInput = component.find('TimeInput');
 
@@ -18,9 +16,7 @@ describe('TimeRangePicker', () => {
   it('passes custom name to TimeInput components', () => {
     const name = 'testName';
 
-    const component = mount(
-      <TimeRangePicker name={name} />,
-    );
+    const component = mount(<TimeRangePicker name={name} />);
 
     const timeInput = component.find('TimeInput');
 
@@ -29,9 +25,8 @@ describe('TimeRangePicker', () => {
   });
 
   it('passes autoFocus flag to first TimeInput component', () => {
-    const component = mount(
-      <TimeRangePicker autoFocus />,
-    );
+    // eslint-disable-next-line jsx-a11y/no-autofocus
+    const component = mount(<TimeRangePicker autoFocus />);
 
     const timeInput = component.find('TimeInput');
 
@@ -40,9 +35,7 @@ describe('TimeRangePicker', () => {
   });
 
   it('passes disabled flag to TimeInput components', () => {
-    const component = mount(
-      <TimeRangePicker disabled />,
-    );
+    const component = mount(<TimeRangePicker disabled />);
 
     const timeInput = component.find('TimeInput');
 
@@ -53,9 +46,7 @@ describe('TimeRangePicker', () => {
   it('passes format to TimeInput components', () => {
     const format = 'H:mm:ss';
 
-    const component = mount(
-      <TimeRangePicker format={format} />,
-    );
+    const component = mount(<TimeRangePicker format={format} />);
 
     const timeInput = component.find('TimeInput');
 
@@ -74,9 +65,7 @@ describe('TimeRangePicker', () => {
       secondAriaLabel: 'Second',
     };
 
-    const component = mount(
-      <TimeRangePicker {...ariaLabelProps} />,
-    );
+    const component = mount(<TimeRangePicker {...ariaLabelProps} />);
 
     const clockButton = component.find('button.react-timerange-picker__clock-button');
     const clearButton = component.find('button.react-timerange-picker__clear-button');
@@ -103,9 +92,7 @@ describe('TimeRangePicker', () => {
       secondPlaceholder: 'ss',
     };
 
-    const component = mount(
-      <TimeRangePicker {...placeholderProps} />,
-    );
+    const component = mount(<TimeRangePicker {...placeholderProps} />);
 
     const timeInput = component.find('TimeInput');
 
@@ -121,9 +108,7 @@ describe('TimeRangePicker', () => {
     it('passes single value to TimeInput components', () => {
       const value = new Date(2019, 0, 1);
 
-      const component = mount(
-        <TimeRangePicker value={value} />,
-      );
+      const component = mount(<TimeRangePicker value={value} />);
 
       const timeInput = component.find('TimeInput');
 
@@ -135,9 +120,7 @@ describe('TimeRangePicker', () => {
       const value1 = new Date(2019, 0, 1);
       const value2 = new Date(2019, 6, 1);
 
-      const component = mount(
-        <TimeRangePicker value={[value1, value2]} />,
-      );
+      const component = mount(<TimeRangePicker value={[value1, value2]} />);
 
       const timeInput = component.find('TimeInput');
 
@@ -149,9 +132,7 @@ describe('TimeRangePicker', () => {
   it('applies className to its wrapper when given a string', () => {
     const className = 'testClassName';
 
-    const component = mount(
-      <TimeRangePicker className={className} />,
-    );
+    const component = mount(<TimeRangePicker className={className} />);
 
     const wrapperClassName = component.prop('className');
 
@@ -161,12 +142,7 @@ describe('TimeRangePicker', () => {
   it('applies clockClassName to the clock when given a string', () => {
     const clockClassName = 'testClassName';
 
-    const component = mount(
-      <TimeRangePicker
-        clockClassName={clockClassName}
-        isOpen
-      />,
-    );
+    const component = mount(<TimeRangePicker clockClassName={clockClassName} isOpen />);
 
     const clock = component.find('Clock');
     const clockWrapperClassName = clock.prop('className');
@@ -175,9 +151,7 @@ describe('TimeRangePicker', () => {
   });
 
   it('renders TimeInput components', () => {
-    const component = mount(
-      <TimeRangePicker />,
-    );
+    const component = mount(<TimeRangePicker />);
 
     const timeInput = component.find('TimeInput');
 
@@ -185,9 +159,7 @@ describe('TimeRangePicker', () => {
   });
 
   it('renders range divider with default divider', () => {
-    const component = mount(
-      <TimeRangePicker />,
-    );
+    const component = mount(<TimeRangePicker />);
 
     const rangeDivider = component.find('.react-timerange-picker__range-divider');
 
@@ -196,9 +168,7 @@ describe('TimeRangePicker', () => {
   });
 
   it('renders range divider with custom divider', () => {
-    const component = mount(
-      <TimeRangePicker rangeDivider="to" />,
-    );
+    const component = mount(<TimeRangePicker rangeDivider="to" />);
 
     const rangeDivider = component.find('.react-timerange-picker__range-divider');
 
@@ -207,9 +177,7 @@ describe('TimeRangePicker', () => {
   });
 
   it('renders clear button', () => {
-    const component = mount(
-      <TimeRangePicker />,
-    );
+    const component = mount(<TimeRangePicker />);
 
     const clearButton = component.find('button.react-timerange-picker__clear-button');
 
@@ -217,9 +185,7 @@ describe('TimeRangePicker', () => {
   });
 
   it('renders clock button', () => {
-    const component = mount(
-      <TimeRangePicker />,
-    );
+    const component = mount(<TimeRangePicker />);
 
     const clockButton = component.find('button.react-timerange-picker__clock-button');
 
@@ -227,9 +193,7 @@ describe('TimeRangePicker', () => {
   });
 
   it('renders TimeInput and Clock components when given isOpen flag', () => {
-    const component = mount(
-      <TimeRangePicker isOpen />,
-    );
+    const component = mount(<TimeRangePicker isOpen />);
 
     const timeInput = component.find('TimeInput');
     const clock = component.find('Clock');
@@ -239,9 +203,7 @@ describe('TimeRangePicker', () => {
   });
 
   it('does not render Clock component when given disableClock & isOpen flags', () => {
-    const component = mount(
-      <TimeRangePicker disableClock isOpen />,
-    );
+    const component = mount(<TimeRangePicker disableClock isOpen />);
 
     const timeInput = component.find('TimeInput');
     const clock = component.find('Clock');
@@ -251,9 +213,7 @@ describe('TimeRangePicker', () => {
   });
 
   it('opens Clock component when given isOpen flag by changing props', () => {
-    const component = mount(
-      <TimeRangePicker />,
-    );
+    const component = mount(<TimeRangePicker />);
 
     const clock = component.find('Clock');
 
@@ -268,9 +228,7 @@ describe('TimeRangePicker', () => {
   });
 
   it('opens Clock component when clicking on a button', () => {
-    const component = mount(
-      <TimeRangePicker />,
-    );
+    const component = mount(<TimeRangePicker />);
 
     const clock = component.find('Clock');
     const button = component.find('button.react-timerange-picker__clock-button');
@@ -287,9 +245,7 @@ describe('TimeRangePicker', () => {
 
   describe('handles opening Clock component when focusing on an input inside properly', () => {
     it('opens Clock component when focusing on an input inside by default', () => {
-      const component = mount(
-        <TimeRangePicker />,
-      );
+      const component = mount(<TimeRangePicker />);
 
       const clock = component.find('Clock');
       const input = component.find('input[name^="hour"]').first();
@@ -305,9 +261,7 @@ describe('TimeRangePicker', () => {
     });
 
     it('opens Clock component when focusing on an input inside given openClockOnFocus = true', () => {
-      const component = mount(
-        <TimeRangePicker openClockOnFocus />,
-      );
+      const component = mount(<TimeRangePicker openClockOnFocus />);
 
       const clock = component.find('Clock');
       const input = component.find('input[name^="hour"]').first();
@@ -323,9 +277,7 @@ describe('TimeRangePicker', () => {
     });
 
     it('does not open Clock component when focusing on an input inside given openClockOnFocus = false', () => {
-      const component = mount(
-        <TimeRangePicker openClockOnFocus={false} />,
-      );
+      const component = mount(<TimeRangePicker openClockOnFocus={false} />);
 
       const clock = component.find('Clock');
       const input = component.find('input[name^="hour"]').first();
@@ -341,9 +293,7 @@ describe('TimeRangePicker', () => {
     });
 
     it('does not open Clock component when focusing on a select element', () => {
-      const component = mount(
-        <TimeRangePicker format="hh:mm:ss a" />,
-      );
+      const component = mount(<TimeRangePicker format="hh:mm:ss a" />);
 
       const clock = component.find('Clock');
       const select = component.find('select[name="amPm"]').first();
@@ -363,10 +313,7 @@ describe('TimeRangePicker', () => {
     const root = document.createElement('div');
     document.body.appendChild(root);
 
-    const component = mount(
-      <TimeRangePicker isOpen />,
-      { attachTo: root },
-    );
+    const component = mount(<TimeRangePicker isOpen />, { attachTo: root });
 
     const event = document.createEvent('MouseEvent');
     event.initEvent('mousedown', true, true);
@@ -380,10 +327,7 @@ describe('TimeRangePicker', () => {
     const root = document.createElement('div');
     document.body.appendChild(root);
 
-    const component = mount(
-      <TimeRangePicker isOpen />,
-      { attachTo: root },
-    );
+    const component = mount(<TimeRangePicker isOpen />, { attachTo: root });
 
     const event = document.createEvent('FocusEvent');
     event.initEvent('focusin', true, true);
@@ -397,10 +341,7 @@ describe('TimeRangePicker', () => {
     const root = document.createElement('div');
     document.body.appendChild(root);
 
-    const component = mount(
-      <TimeRangePicker isOpen />,
-      { attachTo: root },
-    );
+    const component = mount(<TimeRangePicker isOpen />, { attachTo: root });
 
     const event = document.createEvent('TouchEvent');
     event.initEvent('touchstart', true, true);
@@ -411,9 +352,7 @@ describe('TimeRangePicker', () => {
   });
 
   it('does not close Clock component when clicked inside', () => {
-    const component = mount(
-      <TimeRangePicker isOpen />,
-    );
+    const component = mount(<TimeRangePicker isOpen />);
 
     const customInputs = component.find('input[type="number"]');
     const hourInput = customInputs.at(0);
@@ -427,9 +366,7 @@ describe('TimeRangePicker', () => {
   });
 
   it('closes Clock when calling internal onChange by default', () => {
-    const component = mount(
-      <TimeRangePicker isOpen />,
-    );
+    const component = mount(<TimeRangePicker isOpen />);
 
     const { onChange } = component.instance();
 
@@ -439,12 +376,7 @@ describe('TimeRangePicker', () => {
   });
 
   it('does not close Clock when calling internal onChange with prop closeClock = false', () => {
-    const component = mount(
-      <TimeRangePicker
-        closeClock={false}
-        isOpen
-      />,
-    );
+    const component = mount(<TimeRangePicker closeClock={false} isOpen />);
 
     const { onChange } = component.instance();
 
@@ -454,9 +386,7 @@ describe('TimeRangePicker', () => {
   });
 
   it('does not close Clock when calling internal onChange with closeClock = false', () => {
-    const component = mount(
-      <TimeRangePicker isOpen />,
-    );
+    const component = mount(<TimeRangePicker isOpen />);
 
     const { onChange } = component.instance();
 
@@ -469,9 +399,7 @@ describe('TimeRangePicker', () => {
     const nextValue = new Date(2019, 0, 1);
     const onChange = jest.fn();
 
-    const component = mount(
-      <TimeRangePicker onChange={onChange} />,
-    );
+    const component = mount(<TimeRangePicker onChange={onChange} />);
 
     const { onChange: onChangeInternal } = component.instance();
 
@@ -483,9 +411,7 @@ describe('TimeRangePicker', () => {
   it('clears the value when clicking on a button', () => {
     const onChange = jest.fn();
 
-    const component = mount(
-      <TimeRangePicker onChange={onChange} />,
-    );
+    const component = mount(<TimeRangePicker onChange={onChange} />);
 
     const clock = component.find('Clock');
     const button = component.find('button.react-timerange-picker__clear-button');
@@ -500,9 +426,7 @@ describe('TimeRangePicker', () => {
 
   describe('onChangeFrom', () => {
     it('calls onChange properly given no initial value', () => {
-      const component = mount(
-        <TimeRangePicker />,
-      );
+      const component = mount(<TimeRangePicker />);
 
       const componentInstance = component.instance();
 
@@ -518,9 +442,7 @@ describe('TimeRangePicker', () => {
     it('calls onChange properly given single initial value', () => {
       const value = '10:00:00';
 
-      const component = mount(
-        <TimeRangePicker value={value} />,
-      );
+      const component = mount(<TimeRangePicker value={value} />);
 
       const componentInstance = component.instance();
 
@@ -538,9 +460,7 @@ describe('TimeRangePicker', () => {
       const valueTo = '11:00:00';
       const value = [valueFrom, valueTo];
 
-      const component = mount(
-        <TimeRangePicker value={value} />,
-      );
+      const component = mount(<TimeRangePicker value={value} />);
 
       const componentInstance = component.instance();
 
@@ -556,9 +476,7 @@ describe('TimeRangePicker', () => {
 
   describe('onChangeTo', () => {
     it('calls onChange properly given no initial value', () => {
-      const component = mount(
-        <TimeRangePicker />,
-      );
+      const component = mount(<TimeRangePicker />);
 
       const componentInstance = component.instance();
 
@@ -574,9 +492,7 @@ describe('TimeRangePicker', () => {
     it('calls onChange properly given single initial value', () => {
       const value = '10:00:00';
 
-      const component = mount(
-        <TimeRangePicker value={value} />,
-      );
+      const component = mount(<TimeRangePicker value={value} />);
 
       const componentInstance = component.instance();
 
@@ -594,9 +510,7 @@ describe('TimeRangePicker', () => {
       const valueTo = '11:00:00';
       const value = [valueFrom, valueTo];
 
-      const component = mount(
-        <TimeRangePicker value={value} />,
-      );
+      const component = mount(<TimeRangePicker value={value} />);
 
       const componentInstance = component.instance();
 

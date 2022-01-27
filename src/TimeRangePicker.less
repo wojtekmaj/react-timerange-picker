@@ -28,7 +28,7 @@
     @digit-width: 0.54em;
     @colon-width: 0.217em;
     // own padding + inputs padding + digits width + dots width
-    min-width: calc(~"(4px * 3) + " @digit-width * 6 ~" + " @colon-width * 2);
+    min-width: calc(~'(4px * 3) + ' @digit-width * 6 ~' + ' @colon-width * 2);
     height: 100%;
     flex-grow: 1;
     padding: 0 2px;
@@ -62,7 +62,7 @@
 
       &--hasLeadingZero {
         margin-left: -@digit-width;
-        padding-left: calc(~"1px + " @digit-width);
+        padding-left: calc(~'1px + ' @digit-width);
       }
     }
 

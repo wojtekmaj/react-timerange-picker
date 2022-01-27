@@ -17,10 +17,7 @@ export default function Sample() {
       </header>
       <div className="Sample__container">
         <main className="Sample__container__content">
-          <TimeRangePicker
-            onChange={onChange}
-            value={value}
-          />
+          <TimeRangePicker onChange={onChange} value={value} />
         </main>
       </div>
     </div>

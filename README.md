@@ -1,18 +1,17 @@
-[![npm](https://img.shields.io/npm/v/@wojtekmaj/react-timerange-picker.svg)](https://www.npmjs.com/package/@wojtekmaj/react-timerange-picker) ![downloads](https://img.shields.io/npm/dt/@wojtekmaj/react-timerange-picker.svg) [![CI](https://github.com/wojtekmaj/react-timerange-picker/workflows/CI/badge.svg)](https://github.com/wojtekmaj/react-timerange-picker/actions) ![dependencies](https://img.shields.io/david/wojtekmaj/react-timerange-picker.svg
-) ![dev dependencies](https://img.shields.io/david/dev/wojtekmaj/react-timerange-picker.svg
-) [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
+[![npm](https://img.shields.io/npm/v/@wojtekmaj/react-timerange-picker.svg)](https://www.npmjs.com/package/@wojtekmaj/react-timerange-picker) ![downloads](https://img.shields.io/npm/dt/@wojtekmaj/react-timerange-picker.svg) [![CI](https://github.com/wojtekmaj/react-timerange-picker/workflows/CI/badge.svg)](https://github.com/wojtekmaj/react-timerange-picker/actions) ![dependencies](https://img.shields.io/david/wojtekmaj/react-timerange-picker.svg) ![dev dependencies](https://img.shields.io/david/dev/wojtekmaj/react-timerange-picker.svg) [![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
 
 # React-TimeRange-Picker
 
 A time range picker for your React app.
 
-* Supports virtually any language
-* No moment.js needed
+- Supports virtually any language
+- No moment.js needed
 
 ## tl;dr
-* Install by executing `npm install @wojtekmaj/react-timerange-picker` or `yarn add @wojtekmaj/react-timerange-picker`.
-* Import by adding `import TimeRangePicker from '@wojtekmaj/react-timerange-picker'`.
-* Use by adding `<TimeRangePicker />`. Use `onChange` prop for getting new values.
+
+- Install by executing `npm install @wojtekmaj/react-timerange-picker` or `yarn add @wojtekmaj/react-timerange-picker`.
+- Import by adding `import TimeRangePicker from '@wojtekmaj/react-timerange-picker'`.
+- Use by adding `<TimeRangePicker />`. Use `onChange` prop for getting new values.
 
 ## Demo
 
@@ -31,9 +30,9 @@ React-TimeRange-Picker will play nicely with [React-DateRange-Picker](https://gi
 Your project needs to use React 16.3 or later. If you use an older version of React, please refer to the table below to find a suitable React-TimeRange-Picker version.
 
 | React version | Newest compatible React-TimeRange-Picker version |
-|-------|--------|
-| ≥16.3 | latest |
-| ≥16.0 | 2.x    |
+| ------------- | ------------------------------------------------ |
+| ≥16.3         | latest                                           |
+| ≥16.0         | 2.x                                              |
 
 #### Legacy browsers
 
@@ -56,10 +55,7 @@ function MyApp() {
 
   return (
     <div>
-      <TimeRangePicker
-        onChange={onChange}
-        value={value}
-      />
+      <TimeRangePicker onChange={onChange} value={value} />
     </div>
   );
 }
@@ -79,40 +75,40 @@ Displays an input field complete with custom inputs, native input and a clock.
 
 #### Props
 
-|Prop name|Description|Default value|Example values|
-|----|----|----|----|
-|amPmAriaLabel|`aria-label` for the AM/PM select input.|n/a|`"Select AM/PM"`|
-|autoFocus|Automatically focuses the input on mount.|n/a|`true`|
-|className|Class name(s) that will be added along with `"react-timerange-picker"` to the main React-TimeRange-Picker `<div>` element.|n/a|<ul><li>String: `"class1 class2"`</li><li>Array of strings: `["class1", "class2 class3"]`</li></ul>|
-|clearAriaLabel|`aria-label` for the clear button.|n/a|`"Clear value"`|
-|clearIcon|Content of the clear button. Setting the value explicitly to `null` will hide the icon.|(default icon)|<ul><li>String: `"Clear"`</li><li>React element: `<ClearIcon />`</li></ul>|
-|clockAriaLabel|`aria-label` for the clock button.|n/a|`"Toggle clock"`|
-|clockClassName|Class name(s) that will be added along with `"react-clock"` to the main React-Clock `<time>` element.|n/a|<ul><li>String: `"class1 class2"`</li><li>Array of strings: `["class1", "class2 class3"]`</li></ul>|
-|clockIcon|Content of the clock button. Setting the value explicitly to `null` will hide the icon.|(default icon)|<ul><li>String: `"Clock"`</li><li>React element: `<ClockIcon />`</li></ul>|
-|closeClock|Whether to close the clock on value selection.|`true`|`false`|
-|disabled|Whether the time range picker should be disabled.|`false`|`true`|
-|disableClock|When set to `true`, will remove the clock and the button toggling its visibility.|`false`|`true`|
-|format|Input format based on [Unicode Technical Standard #35](https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table). Supported values are: `H`, `HH`, `h`, `hh`, `m`, `mm`, `s`, `ss`, `a`.|n/a|`"h:m:s a"`|
-|hourAriaLabel|`aria-label` for the hour input.|n/a|`"Hour"`|
-|hourPlaceholder|`placeholder` for the hour input.|`"--"`|`"hh"`|
-|isOpen|Whether the clock should be opened.|`false`|`true`|
-|locale|Locale that should be used by the time range picker and the clock. Can be any [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag).|User's browser settings|`"hu-HU"`|
-|maxDetail|How detailed time picking shall be. Can be `"hour"`, `"minute"` or `"second"`.|`"minute"`|`"second"`|
-|maxTime|Maximum time that the user can select.|n/a|<ul><li>Date: `new Date()`</li><li>String: `"22:15:00"`</li></ul>|
-|minTime|Minimum date that the user can select.|n/a|<ul><li>Date: `new Date()`</li><li>String: `"22:15:00"`</li></ul>|
-|minuteAriaLabel|`aria-label` for the minute input.|n/a|`"Minute"`|
-|minutePlaceholder|`placeholder` for the minute input.|`"--"`|`"mm"`|
-|name|Input name prefix. Time from/Time to fields will be named `"yourprefix_from"` and `"yourprefix_to"` respectively.|`"timerange"`|`"myCustomName"`|
-|nativeInputAriaLabel|`aria-label` for the native time input.|n/a|`"Time"`|
-|onChange|Function called when the user picks a valid time.|n/a|`(value) => alert('New time is: ', value)`|
-|onClockClose|Function called when the clock closes.|n/a|`() => alert('Clock closed')`|
-|onClockOpen|Function called when the clock opens.|n/a|`() => alert('Clock opened')`|
-|openClockOnFocus|Whether to open the clock on input focus.|`true`|`false`|
-|rangeDivider|Divider between time inputs.|`"–"`|`" to "`|
-|required|Whether time input should be required.|`false`|`true`|
-|secondAriaLabel|`aria-label` for the second input.|n/a|`"Second"`|
-|secondPlaceholder|`placeholder` for the second input.|`"--"`|`"ss"`|
-|value|Input value.|n/a|<ul><li>Date: `new Date()`</li><li>String: `"22:15:00"`</li></ul>|
+| Prop name            | Description                                                                                                                                                                                                  | Default value           | Example values                                                                                      |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------- | --------------------------------------------------------------------------------------------------- |
+| amPmAriaLabel        | `aria-label` for the AM/PM select input.                                                                                                                                                                     | n/a                     | `"Select AM/PM"`                                                                                    |
+| autoFocus            | Automatically focuses the input on mount.                                                                                                                                                                    | n/a                     | `true`                                                                                              |
+| className            | Class name(s) that will be added along with `"react-timerange-picker"` to the main React-TimeRange-Picker `<div>` element.                                                                                   | n/a                     | <ul><li>String: `"class1 class2"`</li><li>Array of strings: `["class1", "class2 class3"]`</li></ul> |
+| clearAriaLabel       | `aria-label` for the clear button.                                                                                                                                                                           | n/a                     | `"Clear value"`                                                                                     |
+| clearIcon            | Content of the clear button. Setting the value explicitly to `null` will hide the icon.                                                                                                                      | (default icon)          | <ul><li>String: `"Clear"`</li><li>React element: `<ClearIcon />`</li></ul>                          |
+| clockAriaLabel       | `aria-label` for the clock button.                                                                                                                                                                           | n/a                     | `"Toggle clock"`                                                                                    |
+| clockClassName       | Class name(s) that will be added along with `"react-clock"` to the main React-Clock `<time>` element.                                                                                                        | n/a                     | <ul><li>String: `"class1 class2"`</li><li>Array of strings: `["class1", "class2 class3"]`</li></ul> |
+| clockIcon            | Content of the clock button. Setting the value explicitly to `null` will hide the icon.                                                                                                                      | (default icon)          | <ul><li>String: `"Clock"`</li><li>React element: `<ClockIcon />`</li></ul>                          |
+| closeClock           | Whether to close the clock on value selection.                                                                                                                                                               | `true`                  | `false`                                                                                             |
+| disabled             | Whether the time range picker should be disabled.                                                                                                                                                            | `false`                 | `true`                                                                                              |
+| disableClock         | When set to `true`, will remove the clock and the button toggling its visibility.                                                                                                                            | `false`                 | `true`                                                                                              |
+| format               | Input format based on [Unicode Technical Standard #35](https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table). Supported values are: `H`, `HH`, `h`, `hh`, `m`, `mm`, `s`, `ss`, `a`. | n/a                     | `"h:m:s a"`                                                                                         |
+| hourAriaLabel        | `aria-label` for the hour input.                                                                                                                                                                             | n/a                     | `"Hour"`                                                                                            |
+| hourPlaceholder      | `placeholder` for the hour input.                                                                                                                                                                            | `"--"`                  | `"hh"`                                                                                              |
+| isOpen               | Whether the clock should be opened.                                                                                                                                                                          | `false`                 | `true`                                                                                              |
+| locale               | Locale that should be used by the time range picker and the clock. Can be any [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag).                                                          | User's browser settings | `"hu-HU"`                                                                                           |
+| maxDetail            | How detailed time picking shall be. Can be `"hour"`, `"minute"` or `"second"`.                                                                                                                               | `"minute"`              | `"second"`                                                                                          |
+| maxTime              | Maximum time that the user can select.                                                                                                                                                                       | n/a                     | <ul><li>Date: `new Date()`</li><li>String: `"22:15:00"`</li></ul>                                   |
+| minTime              | Minimum date that the user can select.                                                                                                                                                                       | n/a                     | <ul><li>Date: `new Date()`</li><li>String: `"22:15:00"`</li></ul>                                   |
+| minuteAriaLabel      | `aria-label` for the minute input.                                                                                                                                                                           | n/a                     | `"Minute"`                                                                                          |
+| minutePlaceholder    | `placeholder` for the minute input.                                                                                                                                                                          | `"--"`                  | `"mm"`                                                                                              |
+| name                 | Input name prefix. Time from/Time to fields will be named `"yourprefix_from"` and `"yourprefix_to"` respectively.                                                                                            | `"timerange"`           | `"myCustomName"`                                                                                    |
+| nativeInputAriaLabel | `aria-label` for the native time input.                                                                                                                                                                      | n/a                     | `"Time"`                                                                                            |
+| onChange             | Function called when the user picks a valid time.                                                                                                                                                            | n/a                     | `(value) => alert('New time is: ', value)`                                                          |
+| onClockClose         | Function called when the clock closes.                                                                                                                                                                       | n/a                     | `() => alert('Clock closed')`                                                                       |
+| onClockOpen          | Function called when the clock opens.                                                                                                                                                                        | n/a                     | `() => alert('Clock opened')`                                                                       |
+| openClockOnFocus     | Whether to open the clock on input focus.                                                                                                                                                                    | `true`                  | `false`                                                                                             |
+| rangeDivider         | Divider between time inputs.                                                                                                                                                                                 | `"–"`                   | `" to "`                                                                                            |
+| required             | Whether time input should be required.                                                                                                                                                                       | `false`                 | `true`                                                                                              |
+| secondAriaLabel      | `aria-label` for the second input.                                                                                                                                                                           | n/a                     | `"Second"`                                                                                          |
+| secondPlaceholder    | `placeholder` for the second input.                                                                                                                                                                          | `"--"`                  | `"ss"`                                                                                              |
+| value                | Input value.                                                                                                                                                                                                 | n/a                     | <ul><li>Date: `new Date()`</li><li>String: `"22:15:00"`</li></ul>                                   |
 
 ### Clock
 
