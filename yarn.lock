@@ -1888,7 +1888,7 @@ __metadata:
     react-clock: ^3.0.0
     react-dom: ^17.0.0
     react-fit: ^1.4.0
-    react-time-picker: ^4.4.2
+    react-time-picker: ^4.5.0
     rimraf: ^3.0.0
   peerDependencies:
     react: ^16.3.0 || ^17.0.0 || ^18.0.0
@@ -5963,7 +5963,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-fit@npm:^1.0.3, react-fit@npm:^1.4.0":
+"react-fit@npm:^1.4.0":
   version: 1.4.0
   resolution: "react-fit@npm:1.4.0"
   dependencies:
@@ -6017,9 +6017,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-time-picker@npm:^4.4.2":
-  version: 4.4.4
-  resolution: "react-time-picker@npm:4.4.4"
+"react-time-picker@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "react-time-picker@npm:4.5.0"
   dependencies:
     "@wojtekmaj/date-utils": ^1.0.0
     get-user-locale: ^1.2.0
@@ -6028,12 +6028,12 @@ __metadata:
     merge-refs: ^1.0.0
     prop-types: ^15.6.0
     react-clock: ^3.0.0
-    react-fit: ^1.0.3
+    react-fit: ^1.4.0
     update-input-width: ^1.2.2
   peerDependencies:
-    react: ^16.3.0 || ^17.0.0-0
-    react-dom: ^16.3.0 || ^17.0.0-0
-  checksum: d20ac5c42cdfc97ae8ec22c806d73af10fbee97478bf55baa923c8f18e3d08724f1823e9ee78ae1e2079b359b155f15576dc3d50ca4b13d4e332b5a67881da7b
+    react: ^16.3.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.3.0 || ^17.0.0 || ^18.0.0
+  checksum: 9bcf598500153e05d018cff52a282ed678526853952e67e8dd1deca333335f97aa45110d9a288a0afb232006e91f7937387b1f4c82cb0882c32a0be4250d0ff6
   languageName: node
   linkType: hard
 
