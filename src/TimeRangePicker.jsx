@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import makeEventProps from 'make-event-props';
 import mergeClassNames from 'merge-class-names';
@@ -263,16 +264,31 @@ export default class TimeRangePicker extends PureComponent {
       className: timeRangePickerClassName, // Unused, here to exclude it from clockProps
       maxDetail,
       onChange,
+      portalContainer,
       value,
       ...clockProps
     } = this.props;
 
     const className = `${baseClassName}__clock`;
+    const classNames = mergeClassNames(className, `${className}--${isOpen ? 'open' : 'closed'}`);
+
     const [valueFrom] = [].concat(value);
 
     const maxDetailIndex = allViews.indexOf(maxDetail);
 
-    return (
+    const clock = (
+      <Clock
+        className={clockClassName}
+        renderMinuteHand={maxDetailIndex > 0}
+        renderSecondHand={maxDetailIndex > 1}
+        value={valueFrom}
+        {...clockProps}
+      />
+    );
+
+    return portalContainer ? (
+      createPortal(<div className={classNames}>{clock}</div>, portalContainer)
+    ) : (
       <Fit>
         <div
           ref={(ref) => {
@@ -280,15 +296,9 @@ export default class TimeRangePicker extends PureComponent {
               ref.removeAttribute('style');
             }
           }}
-          className={mergeClassNames(className, `${className}--${isOpen ? 'open' : 'closed'}`)}
+          className={classNames}
         >
-          <Clock
-            className={clockClassName}
-            renderMinuteHand={maxDetailIndex > 0}
-            renderSecondHand={maxDetailIndex > 1}
-            value={valueFrom}
-            {...clockProps}
-          />
+          {clock}
         </div>
       </Fit>
     );
@@ -398,6 +408,7 @@ TimeRangePicker.propTypes = {
   onClockOpen: PropTypes.func,
   onFocus: PropTypes.func,
   openClockOnFocus: PropTypes.bool,
+  portalContainer: PropTypes.object,
   rangeDivider: PropTypes.node,
   required: PropTypes.bool,
   secondAriaLabel: PropTypes.string,
