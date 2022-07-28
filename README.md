@@ -40,7 +40,7 @@ If you need to support legacy browsers like Internet Explorer 10, you will need 
 
 ### Installation
 
-Add React-TimeRange-Picker to your project by executing `npm install @wojtekmaj/react-timerange-picker` or `yarn add @wojtekmaj/react-timerange-picker`.
+Install React-TimeRange-Picker in your project by executing `npm install @wojtekmaj/react-timerange-picker` or `yarn add @wojtekmaj/react-timerange-picker` in your terminal.
 
 ### Usage
 
@@ -121,7 +121,7 @@ TimeRangePicker component passes all props to React-Clock, with the exception of
 
 ## License
 
-The MIT License.
+React-Timerange-picker is licensed under the MIT License.
 
 ## Author
 
