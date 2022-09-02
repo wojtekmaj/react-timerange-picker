@@ -1,58 +1,49 @@
-import React from 'react';
-import { mount } from 'enzyme';
+import React, { createRef } from 'react';
+import { fireEvent, render, waitForElementToBeRemoved } from '@testing-library/react';
 
 import TimeRangePicker from './TimeRangePicker';
 
 describe('TimeRangePicker', () => {
   it('passes default name to TimeInput components', () => {
-    const component = mount(<TimeRangePicker />);
+    const { container } = render(<TimeRangePicker />);
 
-    const timeInput = component.find('TimeInput');
+    const nativeInputs = container.querySelectorAll('input[type="time"]');
 
-    expect(timeInput.at(0).prop('name')).toBe('timerange_from');
-    expect(timeInput.at(1).prop('name')).toBe('timerange_to');
+    expect(nativeInputs[0]).toHaveAttribute('name', 'timerange_from');
+    expect(nativeInputs[1]).toHaveAttribute('name', 'timerange_to');
   });
 
   it('passes custom name to TimeInput components', () => {
     const name = 'testName';
 
-    const component = mount(<TimeRangePicker name={name} />);
+    const { container } = render(<TimeRangePicker name={name} />);
 
-    const timeInput = component.find('TimeInput');
+    const nativeInputs = container.querySelectorAll('input[type="time"]');
 
-    expect(timeInput.at(0).prop('name')).toBe(`${name}_from`);
-    expect(timeInput.at(1).prop('name')).toBe(`${name}_to`);
+    expect(nativeInputs[0]).toHaveAttribute('name', `${name}_from`);
+    expect(nativeInputs[1]).toHaveAttribute('name', `${name}_to`);
   });
 
-  it('passes autoFocus flag to first TimeInput component', () => {
+  // See https://github.com/jsdom/jsdom/issues/3041
+  it.skip('passes autoFocus flag to first TimeInput component', () => {
     // eslint-disable-next-line jsx-a11y/no-autofocus
-    const component = mount(<TimeRangePicker autoFocus />);
+    const { container } = render(<TimeRangePicker autoFocus />);
 
-    const timeInput = component.find('TimeInput');
+    const customInputs = container.querySelectorAll('input[data-input]');
 
-    expect(timeInput.at(0).prop('autoFocus')).toBeTruthy();
-    expect(timeInput.at(1).prop('autoFocus')).toBe(undefined);
+    expect(customInputs[0]).toHaveAttribute('autofocus');
   });
 
   it('passes disabled flag to TimeInput components', () => {
-    const component = mount(<TimeRangePicker disabled />);
+    const { container } = render(<TimeRangePicker disabled />);
 
-    const timeInput = component.find('TimeInput');
+    const nativeInputs = container.querySelectorAll('input[type="time"]');
 
-    expect(timeInput.at(0).prop('disabled')).toBeTruthy();
-    expect(timeInput.at(1).prop('disabled')).toBeTruthy();
+    expect(nativeInputs[0]).toBeDisabled();
+    expect(nativeInputs[1]).toBeDisabled();
   });
 
-  it('passes format to TimeInput components', () => {
-    const format = 'H:mm:ss';
-
-    const component = mount(<TimeRangePicker format={format} />);
-
-    const timeInput = component.find('TimeInput');
-
-    expect(timeInput.at(0).prop('format')).toBe(format);
-    expect(timeInput.at(1).prop('format')).toBe(format);
-  });
+  it.todo('passes format to TimeInput components');
 
   it('passes aria-label props to TimeInput components', () => {
     const ariaLabelProps = {
@@ -65,24 +56,36 @@ describe('TimeRangePicker', () => {
       secondAriaLabel: 'Second',
     };
 
-    const component = mount(<TimeRangePicker {...ariaLabelProps} />);
+    const { container } = render(<TimeRangePicker {...ariaLabelProps} maxDetail="second" />);
 
-    const clockButton = component.find('button.react-timerange-picker__clock-button');
-    const clearButton = component.find('button.react-timerange-picker__clear-button');
-    const timeInput = component.find('TimeInput');
+    const clockButton = container.querySelector('button.react-timerange-picker__clock-button');
+    const clearButton = container.querySelector('button.react-timerange-picker__clear-button');
+    const timeInputs = container.querySelectorAll('.react-timerange-picker__inputGroup');
 
-    expect(clockButton.prop('aria-label')).toBe(ariaLabelProps.clockAriaLabel);
-    expect(clearButton.prop('aria-label')).toBe(ariaLabelProps.clearAriaLabel);
-    expect(timeInput.at(0).prop('amPmAriaLabel')).toBe(ariaLabelProps.amPmAriaLabel);
-    expect(timeInput.at(0).prop('hourAriaLabel')).toBe(ariaLabelProps.hourAriaLabel);
-    expect(timeInput.at(0).prop('minuteAriaLabel')).toBe(ariaLabelProps.minuteAriaLabel);
-    expect(timeInput.at(0).prop('nativeInputAriaLabel')).toBe(ariaLabelProps.nativeInputAriaLabel);
-    expect(timeInput.at(0).prop('secondAriaLabel')).toBe(ariaLabelProps.secondAriaLabel);
-    expect(timeInput.at(1).prop('amPmAriaLabel')).toBe(ariaLabelProps.amPmAriaLabel);
-    expect(timeInput.at(1).prop('hourAriaLabel')).toBe(ariaLabelProps.hourAriaLabel);
-    expect(timeInput.at(1).prop('minuteAriaLabel')).toBe(ariaLabelProps.minuteAriaLabel);
-    expect(timeInput.at(1).prop('nativeInputAriaLabel')).toBe(ariaLabelProps.nativeInputAriaLabel);
-    expect(timeInput.at(1).prop('secondAriaLabel')).toBe(ariaLabelProps.secondAriaLabel);
+    const [timeFromInput, timeToInput] = timeInputs;
+
+    const nativeFromInput = timeFromInput.querySelector('input[type="time"]');
+    const hourFromInput = timeFromInput.querySelector('input[name="hour12"]');
+    const minuteFromInput = timeFromInput.querySelector('input[name="minute"]');
+    const secondFromInput = timeFromInput.querySelector('input[name="second"]');
+
+    const nativeToInput = timeToInput.querySelector('input[type="time"]');
+    const hourToInput = timeToInput.querySelector('input[name="hour12"]');
+    const minuteToInput = timeToInput.querySelector('input[name="minute"]');
+    const secondToInput = timeToInput.querySelector('input[name="second"]');
+
+    expect(clockButton).toHaveAttribute('aria-label', ariaLabelProps.clockAriaLabel);
+    expect(clearButton).toHaveAttribute('aria-label', ariaLabelProps.clearAriaLabel);
+
+    expect(nativeFromInput).toHaveAttribute('aria-label', ariaLabelProps.nativeInputAriaLabel);
+    expect(hourFromInput).toHaveAttribute('aria-label', ariaLabelProps.hourAriaLabel);
+    expect(minuteFromInput).toHaveAttribute('aria-label', ariaLabelProps.minuteAriaLabel);
+    expect(secondFromInput).toHaveAttribute('aria-label', ariaLabelProps.secondAriaLabel);
+
+    expect(nativeToInput).toHaveAttribute('aria-label', ariaLabelProps.nativeInputAriaLabel);
+    expect(hourToInput).toHaveAttribute('aria-label', ariaLabelProps.hourAriaLabel);
+    expect(minuteToInput).toHaveAttribute('aria-label', ariaLabelProps.minuteAriaLabel);
+    expect(secondToInput).toHaveAttribute('aria-label', ariaLabelProps.secondAriaLabel);
   });
 
   it('passes placeholder props to TimeInput components', () => {
@@ -92,220 +95,220 @@ describe('TimeRangePicker', () => {
       secondPlaceholder: 'ss',
     };
 
-    const component = mount(<TimeRangePicker {...placeholderProps} />);
+    const { container } = render(<TimeRangePicker {...placeholderProps} maxDetail="second" />);
 
-    const timeInput = component.find('TimeInput');
+    const timeInputs = container.querySelectorAll('.react-timerange-picker__inputGroup');
 
-    expect(timeInput.at(0).prop('hourPlaceholder')).toBe(placeholderProps.hourPlaceholder);
-    expect(timeInput.at(0).prop('minutePlaceholder')).toBe(placeholderProps.minutePlaceholder);
-    expect(timeInput.at(0).prop('secondPlaceholder')).toBe(placeholderProps.secondPlaceholder);
-    expect(timeInput.at(1).prop('hourPlaceholder')).toBe(placeholderProps.hourPlaceholder);
-    expect(timeInput.at(1).prop('minutePlaceholder')).toBe(placeholderProps.minutePlaceholder);
-    expect(timeInput.at(1).prop('secondPlaceholder')).toBe(placeholderProps.secondPlaceholder);
+    const [timeFromInput, timeToInput] = timeInputs;
+
+    const hourFromInput = timeFromInput.querySelector('input[name="hour12"]');
+    const minuteFromInput = timeFromInput.querySelector('input[name="minute"]');
+    const secondFromInput = timeFromInput.querySelector('input[name="second"]');
+
+    const hourToInput = timeToInput.querySelector('input[name="hour12"]');
+    const minuteToInput = timeToInput.querySelector('input[name="minute"]');
+    const secondToInput = timeToInput.querySelector('input[name="second"]');
+
+    expect(hourFromInput).toHaveAttribute('placeholder', placeholderProps.hourPlaceholder);
+    expect(minuteFromInput).toHaveAttribute('placeholder', placeholderProps.minutePlaceholder);
+    expect(secondFromInput).toHaveAttribute('placeholder', placeholderProps.secondPlaceholder);
+
+    expect(hourToInput).toHaveAttribute('placeholder', placeholderProps.hourPlaceholder);
+    expect(minuteToInput).toHaveAttribute('placeholder', placeholderProps.minutePlaceholder);
+    expect(secondToInput).toHaveAttribute('placeholder', placeholderProps.secondPlaceholder);
   });
 
   describe('passes value to TimeInput components', () => {
     it('passes single value to TimeInput components', () => {
       const value = new Date(2019, 0, 1);
 
-      const component = mount(<TimeRangePicker value={value} />);
+      const { container } = render(<TimeRangePicker value={value} />);
 
-      const timeInput = component.find('TimeInput');
+      const nativeInputs = container.querySelectorAll('input[type="time"]');
 
-      expect(timeInput.at(0).prop('value')).toBe(value);
-      expect(timeInput.at(1).prop('value')).toBe(undefined);
+      expect(nativeInputs[0]).toHaveValue('00:00');
+      expect(nativeInputs[1]).toHaveValue('');
     });
 
     it('passes the first item of an array of values to TimeInput components', () => {
       const value1 = new Date(2019, 0, 1);
-      const value2 = new Date(2019, 6, 1);
+      const value2 = new Date(2019, 6, 1, 12, 30);
 
-      const component = mount(<TimeRangePicker value={[value1, value2]} />);
+      const { container } = render(<TimeRangePicker value={[value1, value2]} />);
 
-      const timeInput = component.find('TimeInput');
+      const nativeInputs = container.querySelectorAll('input[type="time"]');
 
-      expect(timeInput.at(0).prop('value')).toBe(value1);
-      expect(timeInput.at(1).prop('value')).toBe(value2);
+      expect(nativeInputs[0]).toHaveValue('00:00');
+      expect(nativeInputs[1]).toHaveValue('12:30');
     });
   });
 
   it('applies className to its wrapper when given a string', () => {
     const className = 'testClassName';
 
-    const component = mount(<TimeRangePicker className={className} />);
+    const { container } = render(<TimeRangePicker className={className} />);
 
-    const wrapperClassName = component.prop('className');
+    const wrapper = container.firstChild;
 
-    expect(wrapperClassName.includes(className)).toBe(true);
+    expect(wrapper).toHaveClass(className);
   });
 
   it('applies clockClassName to the clock when given a string', () => {
     const clockClassName = 'testClassName';
 
-    const component = mount(<TimeRangePicker clockClassName={clockClassName} isOpen />);
+    const { container } = render(<TimeRangePicker clockClassName={clockClassName} isOpen />);
 
-    const clock = component.find('Clock');
-    const clockWrapperClassName = clock.prop('className');
+    const clock = container.querySelector('.react-clock');
 
-    expect(clockWrapperClassName.includes(clockClassName)).toBe(true);
+    expect(clock).toHaveClass(clockClassName);
   });
 
   it('renders TimeInput components', () => {
-    const component = mount(<TimeRangePicker />);
+    const { container } = render(<TimeRangePicker />);
 
-    const timeInput = component.find('TimeInput');
+    const nativeInputs = container.querySelectorAll('input[type="time"]');
 
-    expect(timeInput).toHaveLength(2);
+    expect(nativeInputs.length).toBe(2);
   });
 
   it('renders range divider with default divider', () => {
-    const component = mount(<TimeRangePicker />);
+    const { container } = render(<TimeRangePicker />);
 
-    const rangeDivider = component.find('.react-timerange-picker__range-divider');
+    const rangeDivider = container.querySelector('.react-timerange-picker__range-divider');
 
-    expect(rangeDivider).toHaveLength(1);
-    expect(rangeDivider.text()).toBe('–');
+    expect(rangeDivider).toBeInTheDocument();
+    expect(rangeDivider).toHaveTextContent('–');
   });
 
   it('renders range divider with custom divider', () => {
-    const component = mount(<TimeRangePicker rangeDivider="to" />);
+    const { container } = render(<TimeRangePicker rangeDivider="to" />);
 
-    const rangeDivider = component.find('.react-timerange-picker__range-divider');
+    const rangeDivider = container.querySelector('.react-timerange-picker__range-divider');
 
-    expect(rangeDivider).toHaveLength(1);
-    expect(rangeDivider.text()).toBe('to');
+    expect(rangeDivider).toBeInTheDocument();
+    expect(rangeDivider).toHaveTextContent('to');
   });
 
   it('renders clear button', () => {
-    const component = mount(<TimeRangePicker />);
+    const { container } = render(<TimeRangePicker />);
 
-    const clearButton = component.find('button.react-timerange-picker__clear-button');
+    const clearButton = container.querySelector('button.react-timerange-picker__clear-button');
 
-    expect(clearButton).toHaveLength(1);
+    expect(clearButton).toBeInTheDocument();
   });
 
   it('renders clock button', () => {
-    const component = mount(<TimeRangePicker />);
+    const { container } = render(<TimeRangePicker />);
 
-    const clockButton = component.find('button.react-timerange-picker__clock-button');
+    const clockButton = container.querySelector('button.react-timerange-picker__clock-button');
 
-    expect(clockButton).toHaveLength(1);
+    expect(clockButton).toBeInTheDocument();
   });
 
-  it('renders TimeInput and Clock components when given isOpen flag', () => {
-    const component = mount(<TimeRangePicker isOpen />);
+  it('renders Clock components when given isOpen flag', () => {
+    const { container } = render(<TimeRangePicker isOpen />);
 
-    const timeInput = component.find('TimeInput');
-    const clock = component.find('Clock');
+    const clock = container.querySelector('.react-clock');
 
-    expect(timeInput).toHaveLength(2);
-    expect(clock).toHaveLength(1);
+    expect(clock).toBeInTheDocument();
   });
 
   it('does not render Clock component when given disableClock & isOpen flags', () => {
-    const component = mount(<TimeRangePicker disableClock isOpen />);
+    const { container } = render(<TimeRangePicker disableClock isOpen />);
 
-    const timeInput = component.find('TimeInput');
-    const clock = component.find('Clock');
+    const clock = container.querySelector('.react-clock');
 
-    expect(timeInput).toHaveLength(2);
-    expect(clock).toHaveLength(0);
+    expect(clock).toBeFalsy();
   });
 
   it('opens Clock component when given isOpen flag by changing props', () => {
-    const component = mount(<TimeRangePicker />);
+    const { container, rerender } = render(<TimeRangePicker />);
 
-    const clock = component.find('Clock');
+    const clock = container.querySelector('.react-clock');
 
-    expect(clock).toHaveLength(0);
+    expect(clock).toBeFalsy();
 
-    component.setProps({ isOpen: true });
-    component.update();
+    rerender(<TimeRangePicker isOpen />);
 
-    const clock2 = component.find('Clock');
+    const clock2 = container.querySelector('.react-clock');
 
-    expect(clock2).toHaveLength(1);
+    expect(clock2).toBeInTheDocument();
   });
 
   it('opens Clock component when clicking on a button', () => {
-    const component = mount(<TimeRangePicker />);
+    const { container } = render(<TimeRangePicker />);
 
-    const clock = component.find('Clock');
-    const button = component.find('button.react-timerange-picker__clock-button');
+    const clock = container.querySelector('.react-clock');
+    const button = container.querySelector('button.react-timerange-picker__clock-button');
 
-    expect(clock).toHaveLength(0);
+    expect(clock).toBeFalsy();
 
-    button.simulate('click');
-    component.update();
+    fireEvent.click(button);
 
-    const clock2 = component.find('Clock');
+    const clock2 = container.querySelector('.react-clock');
 
-    expect(clock2).toHaveLength(1);
+    expect(clock2).toBeInTheDocument();
   });
 
   describe('handles opening Clock component when focusing on an input inside properly', () => {
     it('opens Clock component when focusing on an input inside by default', () => {
-      const component = mount(<TimeRangePicker />);
+      const { container } = render(<TimeRangePicker />);
 
-      const clock = component.find('Clock');
-      const input = component.find('input[name^="hour"]').first();
+      const clock = container.querySelector('.react-clock');
+      const input = container.querySelector('input[name^="hour"]');
 
-      expect(clock).toHaveLength(0);
+      expect(clock).toBeFalsy();
 
-      input.simulate('focus');
-      component.update();
+      fireEvent.focus(input);
 
-      const clock2 = component.find('Clock');
+      const clock2 = container.querySelector('.react-clock');
 
-      expect(clock2).toHaveLength(1);
+      expect(clock2).toBeInTheDocument();
     });
 
     it('opens Clock component when focusing on an input inside given openClockOnFocus = true', () => {
-      const component = mount(<TimeRangePicker openClockOnFocus />);
+      const { container } = render(<TimeRangePicker openClockOnFocus />);
 
-      const clock = component.find('Clock');
-      const input = component.find('input[name^="hour"]').first();
+      const clock = container.querySelector('.react-clock');
+      const input = container.querySelector('input[name^="hour"]');
 
-      expect(clock).toHaveLength(0);
+      expect(clock).toBeFalsy();
 
-      input.simulate('focus');
-      component.update();
+      fireEvent.focus(input);
 
-      const clock2 = component.find('Clock');
+      const clock2 = container.querySelector('.react-clock');
 
-      expect(clock2).toHaveLength(1);
+      expect(clock2).toBeInTheDocument();
     });
 
     it('does not open Clock component when focusing on an input inside given openClockOnFocus = false', () => {
-      const component = mount(<TimeRangePicker openClockOnFocus={false} />);
+      const { container } = render(<TimeRangePicker openClockOnFocus={false} />);
 
-      const clock = component.find('Clock');
-      const input = component.find('input[name^="hour"]').first();
+      const clock = container.querySelector('.react-clock');
+      const input = container.querySelector('input[name^="hour"]');
 
-      expect(clock).toHaveLength(0);
+      expect(clock).toBeFalsy();
 
-      input.simulate('focus');
-      component.update();
+      fireEvent.focus(input);
 
-      const clock2 = component.find('Clock');
+      const clock2 = container.querySelector('.react-clock');
 
-      expect(clock2).toHaveLength(0);
+      expect(clock2).toBeFalsy();
     });
 
     it('does not open Clock component when focusing on a select element', () => {
-      const component = mount(<TimeRangePicker format="hh:mm:ss a" />);
+      const { container } = render(<TimeRangePicker format="hh:mm:ss a" />);
 
-      const clock = component.find('Clock');
-      const select = component.find('select[name="amPm"]').first();
+      const clock = container.querySelector('.react-clock');
+      const select = container.querySelector('select[name="amPm"]');
 
-      expect(clock).toHaveLength(0);
+      expect(clock).toBeFalsy();
 
-      select.simulate('focus');
-      component.update();
+      fireEvent.focus(select);
 
-      const clock2 = component.find('Clock');
+      const clock2 = container.querySelector('.react-clock');
 
-      expect(clock2).toHaveLength(0);
+      expect(clock2).toBeFalsy();
     });
   });
 
@@ -313,95 +316,98 @@ describe('TimeRangePicker', () => {
     const root = document.createElement('div');
     document.body.appendChild(root);
 
-    const component = mount(<TimeRangePicker isOpen />, { attachTo: root });
+    const { container } = render(<TimeRangePicker isOpen />, { attachTo: root });
 
-    const event = document.createEvent('MouseEvent');
-    event.initEvent('mousedown', true, true);
-    document.body.dispatchEvent(event);
-    component.update();
+    fireEvent.mouseDown(document.body);
 
-    expect(component.state('isOpen')).toBe(false);
+    waitForElementToBeRemoved(() => container.querySelector('.react-clock'));
   });
 
   it('closes Clock component when focused outside', () => {
     const root = document.createElement('div');
     document.body.appendChild(root);
 
-    const component = mount(<TimeRangePicker isOpen />, { attachTo: root });
+    const { container } = render(<TimeRangePicker isOpen />, { attachTo: root });
 
-    const event = document.createEvent('FocusEvent');
-    event.initEvent('focusin', true, true);
-    document.body.dispatchEvent(event);
-    component.update();
+    fireEvent.focusIn(document.body);
 
-    expect(component.state('isOpen')).toBe(false);
+    waitForElementToBeRemoved(() => container.querySelector('.react-clock'));
   });
 
   it('closes Clock component when tapped outside', () => {
     const root = document.createElement('div');
     document.body.appendChild(root);
 
-    const component = mount(<TimeRangePicker isOpen />, { attachTo: root });
+    const { container } = render(<TimeRangePicker isOpen />, { attachTo: root });
 
-    const event = document.createEvent('TouchEvent');
-    event.initEvent('touchstart', true, true);
-    document.body.dispatchEvent(event);
-    component.update();
+    fireEvent.touchStart(document.body);
 
-    expect(component.state('isOpen')).toBe(false);
+    waitForElementToBeRemoved(() => container.querySelector('.react-clock'));
   });
 
   it('does not close Clock component when clicked inside', () => {
-    const component = mount(<TimeRangePicker isOpen />);
+    const { container } = render(<TimeRangePicker isOpen />);
 
-    const customInputs = component.find('input[type="number"]');
-    const hourInput = customInputs.at(0);
-    const minuteInput = customInputs.at(1);
+    const customInputs = container.querySelectorAll('input[data-input]');
+    const hourInput = customInputs[0];
+    const minuteInput = customInputs[1];
 
-    hourInput.simulate('blur');
-    minuteInput.simulate('focus');
-    component.update();
+    fireEvent.blur(hourInput);
+    fireEvent.focus(minuteInput);
 
-    expect(component.state('isOpen')).toBe(true);
+    const clock = container.querySelector('.react-clock');
+
+    expect(clock).toBeInTheDocument();
   });
 
   it('closes Clock when calling internal onChange by default', () => {
-    const component = mount(<TimeRangePicker isOpen />);
+    const instance = createRef();
 
-    const { onChange } = component.instance();
+    const { container } = render(<TimeRangePicker isOpen ref={instance} />);
+
+    const { onChange } = instance.current;
 
     onChange(new Date());
 
-    expect(component.state('isOpen')).toBe(false);
+    waitForElementToBeRemoved(() => container.querySelector('.react-clock'));
   });
 
   it('does not close Clock when calling internal onChange with prop closeClock = false', () => {
-    const component = mount(<TimeRangePicker closeClock={false} isOpen />);
+    const instance = createRef();
 
-    const { onChange } = component.instance();
+    const { container } = render(<TimeRangePicker closeClock={false} isOpen ref={instance} />);
+
+    const { onChange } = instance.current;
 
     onChange(new Date());
 
-    expect(component.state('isOpen')).toBe(true);
+    const clock = container.querySelector('.react-clock');
+
+    expect(clock).toBeInTheDocument(1);
   });
 
   it('does not close Clock when calling internal onChange with closeClock = false', () => {
-    const component = mount(<TimeRangePicker isOpen />);
+    const instance = createRef();
 
-    const { onChange } = component.instance();
+    const { container } = render(<TimeRangePicker isOpen ref={instance} />);
+
+    const { onChange } = instance.current;
 
     onChange(new Date(), false);
 
-    expect(component.state('isOpen')).toBe(true);
+    const clock = container.querySelector('.react-clock');
+
+    expect(clock).toBeInTheDocument(1);
   });
 
   it('calls onChange callback when calling internal onChange', () => {
+    const instance = createRef();
     const nextValue = new Date(2019, 0, 1);
     const onChange = jest.fn();
 
-    const component = mount(<TimeRangePicker onChange={onChange} />);
+    render(<TimeRangePicker onChange={onChange} ref={instance} />);
 
-    const { onChange: onChangeInternal } = component.instance();
+    const { onChange: onChangeInternal } = instance.current;
 
     onChangeInternal(nextValue);
 
@@ -409,26 +415,29 @@ describe('TimeRangePicker', () => {
   });
 
   it('clears the value when clicking on a button', () => {
+    const instance = createRef();
     const onChange = jest.fn();
 
-    const component = mount(<TimeRangePicker onChange={onChange} />);
+    const { container } = render(<TimeRangePicker onChange={onChange} ref={instance} />);
 
-    const clock = component.find('Clock');
-    const button = component.find('button.react-timerange-picker__clear-button');
+    const clock = container.querySelector('.react-clock');
 
-    expect(clock).toHaveLength(0);
+    expect(clock).toBeFalsy();
 
-    button.simulate('click');
-    component.update();
+    const button = container.querySelector('button.react-timerange-picker__clear-button');
+
+    fireEvent.click(button);
 
     expect(onChange).toHaveBeenCalledWith(null);
   });
 
   describe('onChangeFrom', () => {
     it('calls onChange properly given no initial value', () => {
-      const component = mount(<TimeRangePicker />);
+      const instance = createRef();
 
-      const componentInstance = component.instance();
+      render(<TimeRangePicker ref={instance} />);
+
+      const componentInstance = instance.current;
 
       const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
 
@@ -440,11 +449,12 @@ describe('TimeRangePicker', () => {
     });
 
     it('calls onChange properly given single initial value', () => {
+      const instance = createRef();
       const value = '10:00:00';
 
-      const component = mount(<TimeRangePicker value={value} />);
+      render(<TimeRangePicker value={value} ref={instance} />);
 
-      const componentInstance = component.instance();
+      const componentInstance = instance.current;
 
       const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
 
@@ -456,13 +466,14 @@ describe('TimeRangePicker', () => {
     });
 
     it('calls onChange properly given initial value as an array', () => {
+      const instance = createRef();
       const valueFrom = '10:00:00';
       const valueTo = '11:00:00';
       const value = [valueFrom, valueTo];
 
-      const component = mount(<TimeRangePicker value={value} />);
+      render(<TimeRangePicker value={value} ref={instance} />);
 
-      const componentInstance = component.instance();
+      const componentInstance = instance.current;
 
       const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
 
@@ -476,9 +487,11 @@ describe('TimeRangePicker', () => {
 
   describe('onChangeTo', () => {
     it('calls onChange properly given no initial value', () => {
-      const component = mount(<TimeRangePicker />);
+      const instance = createRef();
 
-      const componentInstance = component.instance();
+      render(<TimeRangePicker ref={instance} />);
+
+      const componentInstance = instance.current;
 
       const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
 
@@ -490,11 +503,12 @@ describe('TimeRangePicker', () => {
     });
 
     it('calls onChange properly given single initial value', () => {
+      const instance = createRef();
       const value = '10:00:00';
 
-      const component = mount(<TimeRangePicker value={value} />);
+      render(<TimeRangePicker value={value} ref={instance} />);
 
-      const componentInstance = component.instance();
+      const componentInstance = instance.current;
 
       const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
 
@@ -506,13 +520,14 @@ describe('TimeRangePicker', () => {
     });
 
     it('calls onChange properly given initial value as an array', () => {
+      const instance = createRef();
       const valueFrom = '10:00:00';
       const valueTo = '11:00:00';
       const value = [valueFrom, valueTo];
 
-      const component = mount(<TimeRangePicker value={value} />);
+      render(<TimeRangePicker value={value} ref={instance} />);
 
-      const componentInstance = component.instance();
+      const componentInstance = instance.current;
 
       const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
 
