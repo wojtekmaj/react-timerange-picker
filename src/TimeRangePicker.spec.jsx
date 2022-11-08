@@ -1,5 +1,5 @@
 import React, { createRef } from 'react';
-import { fireEvent, render, waitForElementToBeRemoved } from '@testing-library/react';
+import { act, fireEvent, render, waitForElementToBeRemoved } from '@testing-library/react';
 
 import TimeRangePicker from './TimeRangePicker';
 
@@ -381,9 +381,11 @@ describe('TimeRangePicker', () => {
 
     const { container } = render(<TimeRangePicker isOpen ref={instance} />);
 
-    const { onChange } = instance.current;
+    const { onChange: onChangeInternal } = instance.current;
 
-    onChange(new Date());
+    act(() => {
+      onChangeInternal(new Date());
+    });
 
     waitForElementToBeRemoved(() => container.querySelector('.react-clock'));
   });
@@ -393,9 +395,11 @@ describe('TimeRangePicker', () => {
 
     const { container } = render(<TimeRangePicker closeClock={false} isOpen ref={instance} />);
 
-    const { onChange } = instance.current;
+    const { onChange: onChangeInternal } = instance.current;
 
-    onChange(new Date());
+    act(() => {
+      onChangeInternal(new Date());
+    });
 
     const clock = container.querySelector('.react-clock');
 
@@ -407,9 +411,11 @@ describe('TimeRangePicker', () => {
 
     const { container } = render(<TimeRangePicker isOpen ref={instance} />);
 
-    const { onChange } = instance.current;
+    const { onChange: onChangeInternal } = instance.current;
 
-    onChange(new Date(), false);
+    act(() => {
+      onChangeInternal(new Date(), false);
+    });
 
     const clock = container.querySelector('.react-clock');
 
@@ -425,7 +431,9 @@ describe('TimeRangePicker', () => {
 
     const { onChange: onChangeInternal } = instance.current;
 
-    onChangeInternal(nextValue);
+    act(() => {
+      onChangeInternal(nextValue);
+    });
 
     expect(onChange).toHaveBeenCalledWith(nextValue);
   });
@@ -454,11 +462,15 @@ describe('TimeRangePicker', () => {
       render(<TimeRangePicker ref={instance} />);
 
       const componentInstance = instance.current;
+      const { onChangeFrom: onChangeFromInternal } = componentInstance;
 
       const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
 
-      const nextValueFrom = new Date();
-      componentInstance.onChangeFrom(nextValueFrom);
+      const nextValueFrom = '16:00:00';
+
+      act(() => {
+        onChangeFromInternal(nextValueFrom);
+      });
 
       expect(onChangeSpy).toHaveBeenCalled();
       expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, undefined], undefined);
@@ -471,11 +483,15 @@ describe('TimeRangePicker', () => {
       render(<TimeRangePicker value={value} ref={instance} />);
 
       const componentInstance = instance.current;
+      const { onChangeFrom: onChangeFromInternal } = componentInstance;
 
       const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
 
-      const nextValueFrom = new Date();
-      componentInstance.onChangeFrom(nextValueFrom);
+      const nextValueFrom = '16:00:00';
+
+      act(() => {
+        onChangeFromInternal(nextValueFrom);
+      });
 
       expect(onChangeSpy).toHaveBeenCalled();
       expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, undefined], undefined);
@@ -490,11 +506,15 @@ describe('TimeRangePicker', () => {
       render(<TimeRangePicker value={value} ref={instance} />);
 
       const componentInstance = instance.current;
+      const { onChangeFrom: onChangeFromInternal } = componentInstance;
 
       const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
 
       const nextValueFrom = '16:00:00';
-      componentInstance.onChangeFrom(nextValueFrom);
+
+      act(() => {
+        onChangeFromInternal(nextValueFrom);
+      });
 
       expect(onChangeSpy).toHaveBeenCalled();
       expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, valueTo], undefined);
@@ -508,11 +528,15 @@ describe('TimeRangePicker', () => {
       render(<TimeRangePicker ref={instance} />);
 
       const componentInstance = instance.current;
+      const { onChangeTo: onChangeToInternal } = componentInstance;
 
       const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
 
       const nextValueTo = '16:00:00';
-      componentInstance.onChangeTo(nextValueTo);
+
+      act(() => {
+        onChangeToInternal(nextValueTo);
+      });
 
       expect(onChangeSpy).toHaveBeenCalled();
       expect(onChangeSpy).toHaveBeenCalledWith([undefined, nextValueTo], undefined);
@@ -525,11 +549,15 @@ describe('TimeRangePicker', () => {
       render(<TimeRangePicker value={value} ref={instance} />);
 
       const componentInstance = instance.current;
+      const { onChangeTo: onChangeToInternal } = componentInstance;
 
       const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
 
       const nextValueTo = '16:00:00';
-      componentInstance.onChangeTo(nextValueTo);
+
+      act(() => {
+        onChangeToInternal(nextValueTo);
+      });
 
       expect(onChangeSpy).toHaveBeenCalled();
       expect(onChangeSpy).toHaveBeenCalledWith([value, nextValueTo], undefined);
@@ -544,11 +572,15 @@ describe('TimeRangePicker', () => {
       render(<TimeRangePicker value={value} ref={instance} />);
 
       const componentInstance = instance.current;
+      const { onChangeTo: onChangeToInternal } = componentInstance;
 
       const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
 
       const nextValueTo = '16:00:00';
-      componentInstance.onChangeTo(nextValueTo);
+
+      act(() => {
+        onChangeToInternal(nextValueTo);
+      });
 
       expect(onChangeSpy).toHaveBeenCalled();
       expect(onChangeSpy).toHaveBeenCalledWith([valueFrom, nextValueTo], undefined);
