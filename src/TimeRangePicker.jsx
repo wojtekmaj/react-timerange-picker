@@ -2,7 +2,7 @@ import React, { createRef, PureComponent } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import makeEventProps from 'make-event-props';
-import mergeClassNames from 'merge-class-names';
+import clsx from 'clsx';
 import Fit from 'react-fit';
 
 import Clock from 'react-clock';
@@ -281,7 +281,7 @@ export default class TimeRangePicker extends PureComponent {
     } = this.props;
 
     const className = `${baseClassName}__clock`;
-    const classNames = mergeClassNames(className, `${className}--${isOpen ? 'open' : 'closed'}`);
+    const classNames = clsx(className, `${className}--${isOpen ? 'open' : 'closed'}`);
 
     const [valueFrom] = [].concat(value);
 
@@ -329,7 +329,7 @@ export default class TimeRangePicker extends PureComponent {
 
     return (
       <div
-        className={mergeClassNames(
+        className={clsx(
           baseClassName,
           `${baseClassName}--${isOpen ? 'open' : 'closed'}`,
           `${baseClassName}--${disabled ? 'disabled' : 'enabled'}`,
