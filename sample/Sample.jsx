@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import TimeRangePicker from '@wojtekmaj/react-timerange-picker';
 
-import './Sample.less';
+import './Sample.css';
 
 const now = new Date();
 const nextHour = new Date();

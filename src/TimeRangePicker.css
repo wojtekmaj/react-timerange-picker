@@ -1,0 +1,119 @@
+.react-timerange-picker {
+  display: inline-flex;
+  position: relative;
+}
+
+.react-timerange-picker,
+.react-timerange-picker *,
+.react-timerange-picker *:before,
+.react-timerange-picker *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.react-timerange-picker--disabled {
+  background-color: #f0f0f0;
+  color: #6d6d6d;
+}
+
+.react-timerange-picker__wrapper {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 0;
+  align-items: center;
+  border: thin solid gray;
+}
+
+.react-timerange-picker__inputGroup {
+  min-width: calc((4px * 3) + 0.54em * 6 + 0.217em * 2);
+  height: 100%;
+  flex-grow: 1;
+  padding: 0 2px;
+  box-sizing: content-box;
+}
+
+.react-timerange-picker__inputGroup__divider {
+  padding: 1px 0;
+  white-space: pre;
+}
+
+.react-timerange-picker__inputGroup__divider,
+.react-timerange-picker__inputGroup__leadingZero {
+  display: inline-block;
+}
+
+.react-timerange-picker__inputGroup__input {
+  min-width: 0.54em;
+  height: 100%;
+  position: relative;
+  padding: 0 1px;
+  border: 0;
+  background: none;
+  font: inherit;
+  box-sizing: content-box;
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.react-timerange-picker__inputGroup__input::-webkit-outer-spin-button,
+.react-timerange-picker__inputGroup__input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+.react-timerange-picker__inputGroup__input:invalid {
+  background: rgba(255, 0, 0, 0.1);
+}
+
+.react-timerange-picker__inputGroup__input--hasLeadingZero {
+  margin-left: -0.54em;
+  padding-left: calc(1px + 0.54em);
+}
+
+.react-timerange-picker__inputGroup__amPm {
+  font: inherit;
+  -webkit-appearance: menulist;
+  -moz-appearance: menulist;
+  appearance: menulist;
+}
+
+.react-timerange-picker__button {
+  border: 0;
+  background: transparent;
+  padding: 4px 6px;
+}
+
+.react-timerange-picker__button:enabled {
+  cursor: pointer;
+}
+
+.react-timerange-picker__button:enabled:hover .react-timerange-picker__button__icon,
+.react-timerange-picker__button:enabled:focus .react-timerange-picker__button__icon {
+  stroke: #0078d7;
+}
+
+.react-timerange-picker__button:disabled .react-timerange-picker__button__icon {
+  stroke: #6d6d6d;
+}
+
+.react-timerange-picker__button svg {
+  display: inherit;
+}
+
+.react-timerange-picker__clock {
+  width: 200px;
+  height: 200px;
+  max-width: 100vw;
+  padding: 25px;
+  background-color: white;
+  border: thin solid #a0a096;
+  z-index: 1;
+}
+
+.react-timerange-picker__clock--closed {
+  display: none;
+}
