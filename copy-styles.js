@@ -1,9 +1,9 @@
 const fs = require('fs');
 
-fs.copyFile('src/TimeRangePicker.less', 'dist/TimeRangePicker.less', (error) => {
+fs.copyFile('src/TimeRangePicker.css', 'dist/TimeRangePicker.css', (error) => {
   if (error) {
     throw error;
   }
   // eslint-disable-next-line no-console
-  console.log('TimeRangePicker.less copied successfully.');
+  console.log('TimeRangePicker.css copied successfully.');
 });
