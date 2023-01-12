@@ -322,7 +322,7 @@ export default class TimeRangePicker extends PureComponent {
 
   render() {
     const { eventProps } = this;
-    const { className, disabled } = this.props;
+    const { className, 'data-testid': dataTestid, disabled } = this.props;
     const { isOpen } = this.state;
 
     const { onChange, ...eventPropsWithoutOnChange } = eventProps;
@@ -335,6 +335,7 @@ export default class TimeRangePicker extends PureComponent {
           `${baseClassName}--${disabled ? 'disabled' : 'enabled'}`,
           className,
         )}
+        data-testid={dataTestid}
         {...eventPropsWithoutOnChange}
         onFocus={this.onFocus}
         ref={this.wrapper}
@@ -399,6 +400,7 @@ TimeRangePicker.propTypes = {
   clockClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
   clockIcon: PropTypes.node,
   closeClock: PropTypes.bool,
+  'data-testid': PropTypes.string,
   disableClock: PropTypes.bool,
   disabled: PropTypes.bool,
   format: PropTypes.string,

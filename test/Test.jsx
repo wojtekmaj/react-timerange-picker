@@ -82,6 +82,7 @@ export default function Test() {
               {...placeholderProps}
               className="myCustomTimeRangePickerClassName"
               clockClassName="myCustomClockClassName"
+              data-testid="myCustomTimeRangePicker"
               disabled={disabled}
               locale={locale}
               maxDetail={maxDetail}
