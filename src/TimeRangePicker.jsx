@@ -242,7 +242,7 @@ export default class TimeRangePicker extends PureComponent {
             onFocus={this.stopPropagation}
             type="button"
           >
-            {clearIcon}
+            {typeof clearIcon === 'function' ? React.createElement(clearIcon) : clearIcon}
           </button>
         )}
         {clockIcon !== null && !disableClock && (
@@ -255,7 +255,7 @@ export default class TimeRangePicker extends PureComponent {
             onFocus={this.stopPropagation}
             type="button"
           >
-            {clockIcon}
+            {typeof clockIcon === 'function' ? React.createElement(clockIcon) : clockIcon}
           </button>
         )}
       </div>
@@ -396,10 +396,10 @@ TimeRangePicker.propTypes = {
   autoFocus: PropTypes.bool,
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
   clearAriaLabel: PropTypes.string,
-  clearIcon: PropTypes.node,
+  clearIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   clockAriaLabel: PropTypes.string,
   clockClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-  clockIcon: PropTypes.node,
+  clockIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   closeClock: PropTypes.bool,
   'data-testid': PropTypes.string,
   disableClock: PropTypes.bool,

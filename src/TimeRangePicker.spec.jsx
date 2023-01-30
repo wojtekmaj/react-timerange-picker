@@ -220,20 +220,92 @@ describe('TimeRangePicker', () => {
     expect(rangeDivider).toHaveTextContent('to');
   });
 
-  it('renders clear button', () => {
-    const { container } = render(<TimeRangePicker />);
+  describe('renders clear button properly', () => {
+    it('renders clear button', () => {
+      const { container } = render(<TimeRangePicker />);
 
-    const clearButton = container.querySelector('button.react-timerange-picker__clear-button');
+      const clearButton = container.querySelector('button.react-timerange-picker__clear-button');
 
-    expect(clearButton).toBeInTheDocument();
+      expect(clearButton).toBeInTheDocument();
+    });
+
+    it('renders clear icon by default when clearIcon is not given', () => {
+      const { container } = render(<TimeRangePicker />);
+
+      const clearButton = container.querySelector('button.react-timerange-picker__clear-button');
+
+      const clearIcon = clearButton.querySelector('svg');
+
+      expect(clearIcon).toBeInTheDocument();
+    });
+
+    it('renders clear icon when given clearIcon as a React element', () => {
+      function ClearIcon() {
+        return '❌';
+      }
+
+      const { container } = render(<TimeRangePicker clearIcon={<ClearIcon />} />);
+
+      const clearButton = container.querySelector('button.react-timerange-picker__clear-button');
+
+      expect(clearButton).toHaveTextContent('❌');
+    });
+
+    it('renders clear icon when given clearIcon as a function', () => {
+      function ClearIcon() {
+        return '❌';
+      }
+
+      const { container } = render(<TimeRangePicker clearIcon={ClearIcon} />);
+
+      const clearButton = container.querySelector('button.react-timerange-picker__clear-button');
+
+      expect(clearButton).toHaveTextContent('❌');
+    });
   });
 
-  it('renders clock button', () => {
-    const { container } = render(<TimeRangePicker />);
+  describe('renders clock button properly', () => {
+    it('renders clock button', () => {
+      const { container } = render(<TimeRangePicker />);
 
-    const clockButton = container.querySelector('button.react-timerange-picker__clock-button');
+      const clockButton = container.querySelector('button.react-timerange-picker__clock-button');
 
-    expect(clockButton).toBeInTheDocument();
+      expect(clockButton).toBeInTheDocument();
+    });
+
+    it('renders clock icon by default when clockIcon is not given', () => {
+      const { container } = render(<TimeRangePicker />);
+
+      const clockButton = container.querySelector('button.react-timerange-picker__clock-button');
+
+      const clockIcon = clockButton.querySelector('svg');
+
+      expect(clockIcon).toBeInTheDocument();
+    });
+
+    it('renders clock icon when given clockIcon as a React element', () => {
+      function ClockIcon() {
+        return '⏰';
+      }
+
+      const { container } = render(<TimeRangePicker clockIcon={<ClockIcon />} />);
+
+      const clockButton = container.querySelector('button.react-timerange-picker__clock-button');
+
+      expect(clockButton).toHaveTextContent('⏰');
+    });
+
+    it('renders clock icon when given clockIcon as a function', () => {
+      function ClockIcon() {
+        return '⏰';
+      }
+
+      const { container } = render(<TimeRangePicker clockIcon={ClockIcon} />);
+
+      const clockButton = container.querySelector('button.react-timerange-picker__clock-button');
+
+      expect(clockButton).toHaveTextContent('⏰');
+    });
   });
 
   it('renders Clock components when given isOpen flag', () => {
