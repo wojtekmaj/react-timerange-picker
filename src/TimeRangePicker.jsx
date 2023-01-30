@@ -322,7 +322,7 @@ export default class TimeRangePicker extends PureComponent {
 
   render() {
     const { eventProps } = this;
-    const { className, 'data-testid': dataTestid, disabled } = this.props;
+    const { className, 'data-testid': dataTestid, disabled, id } = this.props;
     const { isOpen } = this.state;
 
     const { onChange, ...eventPropsWithoutOnChange } = eventProps;
@@ -336,6 +336,7 @@ export default class TimeRangePicker extends PureComponent {
           className,
         )}
         data-testid={dataTestid}
+        id={id}
         {...eventPropsWithoutOnChange}
         onFocus={this.onFocus}
         ref={this.wrapper}
@@ -406,6 +407,7 @@ TimeRangePicker.propTypes = {
   format: PropTypes.string,
   hourAriaLabel: PropTypes.string,
   hourPlaceholder: PropTypes.string,
+  id: PropTypes.string,
   isOpen: PropTypes.bool,
   locale: PropTypes.string,
   maxDetail: PropTypes.oneOf(allViews),
