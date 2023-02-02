@@ -6,4 +6,6 @@ import TimeRangePicker from './TimeRangePicker';
 // eslint-disable-next-line import/no-unresolved
 import './TimeRangePicker.css';
 
+export { TimeRangePicker };
+
 export default TimeRangePicker;
