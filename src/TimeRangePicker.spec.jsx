@@ -171,7 +171,7 @@ describe('TimeRangePicker', () => {
 
     const { container } = render(<TimeRangePicker className={className} />);
 
-    const wrapper = container.firstChild;
+    const wrapper = container.firstElementChild;
 
     expect(wrapper).toHaveClass(className);
   });
@@ -179,7 +179,7 @@ describe('TimeRangePicker', () => {
   it('applies "--open" className to its wrapper when given isOpen flag', () => {
     const { container } = render(<TimeRangePicker isOpen />);
 
-    const wrapper = container.firstChild;
+    const wrapper = container.firstElementChild;
 
     expect(wrapper).toHaveClass('react-timerange-picker--open');
   });
