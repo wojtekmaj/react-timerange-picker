@@ -63,9 +63,12 @@ function MyApp() {
 
 ### Custom styling
 
-If you don't want to use default React-TimeRange-Picker and React-Clock styles, you can import React-TimeRange-Picker without them by using `import TimeRangePicker from '@wojtekmaj/react-timerange-picker/dist/entry.nostyle';` instead.
+If you want to use default React-Date-Picker and React-Calendar styling to build upon it, you can import them by using:
 
-Styles loaded by the default entry file are `@wojtekmaj/react-timerange-picker/dist/TimeRangePicker.css` and `react-clock/dist/Clock.css`. You can copy them to your project to build your own upon them.
+```js
+import '@wojtekmaj/react-timerange-picker/dist/TimeRangePicker.css';
+import 'react-clock/dist/Clock.css';
+```
 
 ### Next.js and Vite
 
