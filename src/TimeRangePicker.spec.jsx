@@ -1,3 +1,4 @@
+import { describe, expect, it, vi } from 'vitest';
 import React, { createRef } from 'react';
 import { act, fireEvent, render, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -520,7 +521,7 @@ describe('TimeRangePicker', () => {
   it('calls onChange callback when calling internal onChange', () => {
     const instance = createRef();
     const nextValue = new Date(2019, 0, 1);
-    const onChange = jest.fn();
+    const onChange = vi.fn();
 
     render(<TimeRangePicker onChange={onChange} ref={instance} />);
 
@@ -535,7 +536,7 @@ describe('TimeRangePicker', () => {
 
   it('clears the value when clicking on a button', () => {
     const instance = createRef();
-    const onChange = jest.fn();
+    const onChange = vi.fn();
 
     const { container } = render(<TimeRangePicker onChange={onChange} ref={instance} />);
 
@@ -559,7 +560,7 @@ describe('TimeRangePicker', () => {
       const componentInstance = instance.current;
       const { onChangeFrom: onChangeFromInternal } = componentInstance;
 
-      const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
+      const onChangeSpy = vi.spyOn(componentInstance, 'onChange');
 
       const nextValueFrom = '16:00:00';
 
@@ -580,7 +581,7 @@ describe('TimeRangePicker', () => {
       const componentInstance = instance.current;
       const { onChangeFrom: onChangeFromInternal } = componentInstance;
 
-      const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
+      const onChangeSpy = vi.spyOn(componentInstance, 'onChange');
 
       const nextValueFrom = '16:00:00';
 
@@ -603,7 +604,7 @@ describe('TimeRangePicker', () => {
       const componentInstance = instance.current;
       const { onChangeFrom: onChangeFromInternal } = componentInstance;
 
-      const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
+      const onChangeSpy = vi.spyOn(componentInstance, 'onChange');
 
       const nextValueFrom = '16:00:00';
 
@@ -625,7 +626,7 @@ describe('TimeRangePicker', () => {
       const componentInstance = instance.current;
       const { onChangeTo: onChangeToInternal } = componentInstance;
 
-      const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
+      const onChangeSpy = vi.spyOn(componentInstance, 'onChange');
 
       const nextValueTo = '16:00:00';
 
@@ -646,7 +647,7 @@ describe('TimeRangePicker', () => {
       const componentInstance = instance.current;
       const { onChangeTo: onChangeToInternal } = componentInstance;
 
-      const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
+      const onChangeSpy = vi.spyOn(componentInstance, 'onChange');
 
       const nextValueTo = '16:00:00';
 
@@ -669,7 +670,7 @@ describe('TimeRangePicker', () => {
       const componentInstance = instance.current;
       const { onChangeTo: onChangeToInternal } = componentInstance;
 
-      const onChangeSpy = jest.spyOn(componentInstance, 'onChange');
+      const onChangeSpy = vi.spyOn(componentInstance, 'onChange');
 
       const nextValueTo = '16:00:00';
 
