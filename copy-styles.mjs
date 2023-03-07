@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'node:fs';
 
 fs.copyFile('src/TimeRangePicker.css', 'dist/TimeRangePicker.css', (error) => {
   if (error) {
