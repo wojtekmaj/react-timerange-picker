@@ -533,19 +533,19 @@ __metadata:
   linkType: hard
 
 "@wojtekmaj/react-timerange-picker@npm:latest":
-  version: 4.1.0
-  resolution: "@wojtekmaj/react-timerange-picker@npm:4.1.0"
+  version: 4.2.0
+  resolution: "@wojtekmaj/react-timerange-picker@npm:4.2.0"
   dependencies:
     clsx: ^1.2.1
     make-event-props: ^1.1.0
     prop-types: ^15.6.0
     react-clock: ^4.0.0
     react-fit: ^1.4.0
-    react-time-picker: ^5.1.0
+    react-time-picker: ^5.2.0
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: d427e997463e05bfa93200473be528b43d20856086b1b329c898bbbb87e1345fb11c5a66e76b9d5e6c5961f943af890ce67babb1191686de0dff3c55a7622ce2
+  checksum: bb6b44cd823870dd6188b1495f2c38a1f7ef95cb41dfc1d491f0a476d07cb26a8c2ef6427244dd1f31b0ecc40f7b71c1e698aedc71c95f0168b533722fbaa8b0
   languageName: node
   linkType: hard
 
@@ -1622,9 +1622,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-time-picker@npm:^5.1.0":
-  version: 5.1.0
-  resolution: "react-time-picker@npm:5.1.0"
+"react-time-picker@npm:^5.2.0":
+  version: 5.2.0
+  resolution: "react-time-picker@npm:5.2.0"
   dependencies:
     "@wojtekmaj/date-utils": ^1.0.0
     clsx: ^1.2.1
@@ -1637,7 +1637,7 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 9dacc5bf130bc1462f4f756f570a94108286a6124cf0555844b9a5449eff3617f71936f5a56657c1835d5dfe345a5c168b0b6b5593053d8d0f823363353787be
+  checksum: 24ae145f954927a1a131eb63d215174ca7253aa19d19da00acd799bb4856e3b63d8e84071cf031781e78ce35ba7707cdaf9664ff2e57a8b53e00b03e0f2549a7
   languageName: node
   linkType: hard
 
