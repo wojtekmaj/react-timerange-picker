@@ -15,7 +15,90 @@ const allViews = ['hour', 'minute', 'second'];
 const baseClassName = 'react-timerange-picker';
 const outsideActionEvents = ['mousedown', 'focusin', 'touchstart'];
 
+const iconProps = {
+  xmlns: 'http://www.w3.org/2000/svg',
+  width: 19,
+  height: 19,
+  viewBox: '0 0 19 19',
+  stroke: 'black',
+  strokeWidth: 2,
+};
+
+const ClockIcon = (
+  <svg
+    {...iconProps}
+    className={`${baseClassName}__clock-button__icon ${baseClassName}__button__icon`}
+    fill="none"
+  >
+    <circle cx="9.5" cy="9.5" r="7.5" />
+    <path d="M9.5 4.5 v5 h4" />
+  </svg>
+);
+
+const ClearIcon = (
+  <svg
+    {...iconProps}
+    className={`${baseClassName}__clear-button__icon ${baseClassName}__button__icon`}
+  >
+    <line x1="4" x2="15" y1="4" y2="15" />
+    <line x1="15" x2="4" y1="4" y2="15" />
+  </svg>
+);
+
+const isValue = PropTypes.oneOfType([isTime, PropTypes.instanceOf(Date)]);
+
 export default class TimeRangePicker extends PureComponent {
+  static defaultProps = {
+    clearIcon: ClearIcon,
+    clockIcon: ClockIcon,
+    closeClock: true,
+    isOpen: null,
+    maxDetail: 'minute',
+    name: 'timerange',
+    openClockOnFocus: true,
+    rangeDivider: '–',
+  };
+
+  static propTypes = {
+    amPmAriaLabel: PropTypes.string,
+    autoFocus: PropTypes.bool,
+    className: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+    clearAriaLabel: PropTypes.string,
+    clearIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    clockAriaLabel: PropTypes.string,
+    clockClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+    clockIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    closeClock: PropTypes.bool,
+    'data-testid': PropTypes.string,
+    disableClock: PropTypes.bool,
+    disabled: PropTypes.bool,
+    format: PropTypes.string,
+    hourAriaLabel: PropTypes.string,
+    hourPlaceholder: PropTypes.string,
+    id: PropTypes.string,
+    isOpen: PropTypes.bool,
+    locale: PropTypes.string,
+    maxDetail: PropTypes.oneOf(allViews),
+    maxTime: isTime,
+    minTime: isTime,
+    minuteAriaLabel: PropTypes.string,
+    minutePlaceholder: PropTypes.string,
+    name: PropTypes.string,
+    nativeInputAriaLabel: PropTypes.string,
+    onChange: PropTypes.func,
+    onClockClose: PropTypes.func,
+    onClockOpen: PropTypes.func,
+    onFocus: PropTypes.func,
+    openClockOnFocus: PropTypes.bool,
+    portalContainer: PropTypes.object,
+    rangeDivider: PropTypes.node,
+    required: PropTypes.bool,
+    secondAriaLabel: PropTypes.string,
+    secondPlaceholder: PropTypes.string,
+    showLeadingZeros: PropTypes.bool,
+    value: PropTypes.oneOfType([isValue, PropTypes.arrayOf(isValue)]),
+  };
+
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.isOpen !== prevState.isOpenProps) {
       return {
@@ -347,86 +430,3 @@ export default class TimeRangePicker extends PureComponent {
     );
   }
 }
-
-const iconProps = {
-  xmlns: 'http://www.w3.org/2000/svg',
-  width: 19,
-  height: 19,
-  viewBox: '0 0 19 19',
-  stroke: 'black',
-  strokeWidth: 2,
-};
-
-const ClockIcon = (
-  <svg
-    {...iconProps}
-    className={`${baseClassName}__clock-button__icon ${baseClassName}__button__icon`}
-    fill="none"
-  >
-    <circle cx="9.5" cy="9.5" r="7.5" />
-    <path d="M9.5 4.5 v5 h4" />
-  </svg>
-);
-
-const ClearIcon = (
-  <svg
-    {...iconProps}
-    className={`${baseClassName}__clear-button__icon ${baseClassName}__button__icon`}
-  >
-    <line x1="4" x2="15" y1="4" y2="15" />
-    <line x1="15" x2="4" y1="4" y2="15" />
-  </svg>
-);
-
-TimeRangePicker.defaultProps = {
-  clearIcon: ClearIcon,
-  clockIcon: ClockIcon,
-  closeClock: true,
-  isOpen: null,
-  maxDetail: 'minute',
-  name: 'timerange',
-  openClockOnFocus: true,
-  rangeDivider: '–',
-};
-
-const isValue = PropTypes.oneOfType([isTime, PropTypes.instanceOf(Date)]);
-
-TimeRangePicker.propTypes = {
-  amPmAriaLabel: PropTypes.string,
-  autoFocus: PropTypes.bool,
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-  clearAriaLabel: PropTypes.string,
-  clearIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  clockAriaLabel: PropTypes.string,
-  clockClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-  clockIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  closeClock: PropTypes.bool,
-  'data-testid': PropTypes.string,
-  disableClock: PropTypes.bool,
-  disabled: PropTypes.bool,
-  format: PropTypes.string,
-  hourAriaLabel: PropTypes.string,
-  hourPlaceholder: PropTypes.string,
-  id: PropTypes.string,
-  isOpen: PropTypes.bool,
-  locale: PropTypes.string,
-  maxDetail: PropTypes.oneOf(allViews),
-  maxTime: isTime,
-  minTime: isTime,
-  minuteAriaLabel: PropTypes.string,
-  minutePlaceholder: PropTypes.string,
-  name: PropTypes.string,
-  nativeInputAriaLabel: PropTypes.string,
-  onChange: PropTypes.func,
-  onClockClose: PropTypes.func,
-  onClockOpen: PropTypes.func,
-  onFocus: PropTypes.func,
-  openClockOnFocus: PropTypes.bool,
-  portalContainer: PropTypes.object,
-  rangeDivider: PropTypes.node,
-  required: PropTypes.bool,
-  secondAriaLabel: PropTypes.string,
-  secondPlaceholder: PropTypes.string,
-  showLeadingZeros: PropTypes.bool,
-  value: PropTypes.oneOfType([isValue, PropTypes.arrayOf(isValue)]),
-};
