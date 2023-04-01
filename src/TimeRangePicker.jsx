@@ -333,7 +333,6 @@ export default class TimeRangePicker extends PureComponent {
             aria-label={clockAriaLabel}
             className={`${baseClassName}__clock-button ${baseClassName}__button`}
             disabled={disabled}
-            onBlur={this.resetValue}
             onClick={this.toggleClock}
             onFocus={this.stopPropagation}
             type="button"
