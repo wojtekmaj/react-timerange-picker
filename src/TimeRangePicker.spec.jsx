@@ -470,68 +470,35 @@ describe('TimeRangePicker', () => {
     expect(clock).toBeInTheDocument();
   });
 
-  it('closes Clock when calling internal onChange by default', async () => {
-    const instance = createRef();
+  it('does not close Clock when changing value', () => {
+    const { container } = render(<TimeRangePicker isOpen />);
 
-    const { container } = render(<TimeRangePicker isOpen ref={instance} />);
-
-    const { onChange: onChangeInternal } = instance.current;
+    const hourInput = container.querySelector('input[name="hour12"]');
 
     act(() => {
-      onChangeInternal(new Date());
-    });
-
-    await waitForElementToBeRemovedOrHidden(() =>
-      container.querySelector('.react-timerange-picker__clock'),
-    );
-  });
-
-  it('does not close Clock when calling internal onChange with prop closeClock = false', () => {
-    const instance = createRef();
-
-    const { container } = render(<TimeRangePicker closeClock={false} isOpen ref={instance} />);
-
-    const { onChange: onChangeInternal } = instance.current;
-
-    act(() => {
-      onChangeInternal(new Date());
+      fireEvent.change(hourInput, { target: { value: '9' } });
     });
 
     const clock = container.querySelector('.react-clock');
 
-    expect(clock).toBeInTheDocument(1);
+    expect(clock).toBeInTheDocument();
   });
 
-  it('does not close Clock when calling internal onChange with closeClock = false', () => {
-    const instance = createRef();
-
-    const { container } = render(<TimeRangePicker isOpen ref={instance} />);
-
-    const { onChange: onChangeInternal } = instance.current;
-
-    act(() => {
-      onChangeInternal(new Date(), false);
-    });
-
-    const clock = container.querySelector('.react-clock');
-
-    expect(clock).toBeInTheDocument(1);
-  });
-
-  it('calls onChange callback when calling internal onChange', () => {
-    const instance = createRef();
-    const nextValue = new Date(2019, 0, 1);
+  it('calls onChange callback when changing value', () => {
+    const value = '22:41:28';
     const onChange = vi.fn();
 
-    render(<TimeRangePicker onChange={onChange} ref={instance} />);
+    const { container } = render(
+      <TimeRangePicker maxDetail="second" onChange={onChange} value={value} />,
+    );
 
-    const { onChange: onChangeInternal } = instance.current;
+    const hourInput = container.querySelector('input[name="hour12"]');
 
     act(() => {
-      onChangeInternal(nextValue);
+      fireEvent.change(hourInput, { target: { value: '9' } });
     });
 
-    expect(onChange).toHaveBeenCalledWith(nextValue);
+    expect(onChange).toHaveBeenCalledWith(['21:41:28', undefined]);
   });
 
   it('clears the value when clicking on a button', () => {
@@ -553,133 +520,193 @@ describe('TimeRangePicker', () => {
 
   describe('onChangeFrom', () => {
     it('calls onChange properly given no initial value', () => {
-      const instance = createRef();
+      const onChange = vi.fn();
 
-      render(<TimeRangePicker ref={instance} />);
-
-      const componentInstance = instance.current;
-      const { onChangeFrom: onChangeFromInternal } = componentInstance;
-
-      const onChangeSpy = vi.spyOn(componentInstance, 'onChange');
+      const { container } = render(
+        <TimeRangePicker format="H:m:s" maxDetail="second" onChange={onChange} />,
+      );
 
       const nextValueFrom = '16:00:00';
 
+      const customInputs = container.querySelectorAll('input[data-input]');
+      const hourInput = customInputs[0];
+      const minuteInput = customInputs[1];
+      const secondInput = customInputs[2];
+
       act(() => {
-        onChangeFromInternal(nextValueFrom);
+        fireEvent.change(hourInput, { target: { value: '16' } });
       });
 
-      expect(onChangeSpy).toHaveBeenCalled();
-      expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, undefined], undefined);
+      act(() => {
+        fireEvent.change(minuteInput, { target: { value: '0' } });
+      });
+
+      act(() => {
+        fireEvent.change(secondInput, { target: { value: '0' } });
+      });
+
+      expect(onChange).toHaveBeenCalled();
+      expect(onChange).toHaveBeenCalledWith([nextValueFrom, undefined]);
     });
 
     it('calls onChange properly given single initial value', () => {
-      const instance = createRef();
+      const onChange = vi.fn();
       const value = '10:00:00';
 
-      render(<TimeRangePicker value={value} ref={instance} />);
-
-      const componentInstance = instance.current;
-      const { onChangeFrom: onChangeFromInternal } = componentInstance;
-
-      const onChangeSpy = vi.spyOn(componentInstance, 'onChange');
+      const { container } = render(
+        <TimeRangePicker format="H:m:s" maxDetail="second" onChange={onChange} value={value} />,
+      );
 
       const nextValueFrom = '16:00:00';
 
+      const customInputs = container.querySelectorAll('input[data-input]');
+      const hourInput = customInputs[0];
+      const minuteInput = customInputs[1];
+      const secondInput = customInputs[2];
+
       act(() => {
-        onChangeFromInternal(nextValueFrom);
+        fireEvent.change(hourInput, { target: { value: '16' } });
       });
 
-      expect(onChangeSpy).toHaveBeenCalled();
-      expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, undefined], undefined);
+      act(() => {
+        fireEvent.change(minuteInput, { target: { value: '0' } });
+      });
+
+      act(() => {
+        fireEvent.change(secondInput, { target: { value: '0' } });
+      });
+
+      expect(onChange).toHaveBeenCalled();
+      expect(onChange).toHaveBeenCalledWith([nextValueFrom, undefined]);
     });
 
     it('calls onChange properly given initial value as an array', () => {
-      const instance = createRef();
+      const onChange = vi.fn();
       const valueFrom = '10:00:00';
-      const valueTo = '11:00:00';
+      const valueTo = '16:00:00';
       const value = [valueFrom, valueTo];
 
-      render(<TimeRangePicker value={value} ref={instance} />);
+      const { container } = render(
+        <TimeRangePicker format="H:m:s" maxDetail="second" onChange={onChange} value={value} />,
+      );
 
-      const componentInstance = instance.current;
-      const { onChangeFrom: onChangeFromInternal } = componentInstance;
+      const nextValueFrom = '13:00:00';
 
-      const onChangeSpy = vi.spyOn(componentInstance, 'onChange');
-
-      const nextValueFrom = '16:00:00';
+      const customInputs = container.querySelectorAll('input[data-input]');
+      const hourInput = customInputs[0];
+      const minuteInput = customInputs[1];
+      const secondInput = customInputs[2];
 
       act(() => {
-        onChangeFromInternal(nextValueFrom);
+        fireEvent.change(hourInput, { target: { value: '13' } });
       });
 
-      expect(onChangeSpy).toHaveBeenCalled();
-      expect(onChangeSpy).toHaveBeenCalledWith([nextValueFrom, valueTo], undefined);
+      act(() => {
+        fireEvent.change(minuteInput, { target: { value: '0' } });
+      });
+
+      act(() => {
+        fireEvent.change(secondInput, { target: { value: '0' } });
+      });
+
+      expect(onChange).toHaveBeenCalled();
+      expect(onChange).toHaveBeenCalledWith([nextValueFrom, valueTo]);
     });
   });
 
   describe('onChangeTo', () => {
     it('calls onChange properly given no initial value', () => {
-      const instance = createRef();
+      const onChange = vi.fn();
 
-      render(<TimeRangePicker ref={instance} />);
-
-      const componentInstance = instance.current;
-      const { onChangeTo: onChangeToInternal } = componentInstance;
-
-      const onChangeSpy = vi.spyOn(componentInstance, 'onChange');
+      const { container } = render(
+        <TimeRangePicker format="H:m:s" maxDetail="second" onChange={onChange} />,
+      );
 
       const nextValueTo = '16:00:00';
 
+      const customInputs = container.querySelectorAll('input[data-input]');
+      const hourInput = customInputs[3];
+      const minuteInput = customInputs[4];
+      const secondInput = customInputs[5];
+
       act(() => {
-        onChangeToInternal(nextValueTo);
+        fireEvent.change(hourInput, { target: { value: '16' } });
       });
 
-      expect(onChangeSpy).toHaveBeenCalled();
-      expect(onChangeSpy).toHaveBeenCalledWith([undefined, nextValueTo], undefined);
+      act(() => {
+        fireEvent.change(minuteInput, { target: { value: '0' } });
+      });
+
+      act(() => {
+        fireEvent.change(secondInput, { target: { value: '0' } });
+      });
+
+      expect(onChange).toHaveBeenCalled();
+      expect(onChange).toHaveBeenCalledWith([undefined, nextValueTo]);
     });
 
     it('calls onChange properly given single initial value', () => {
-      const instance = createRef();
+      const onChange = vi.fn();
       const value = '10:00:00';
 
-      render(<TimeRangePicker value={value} ref={instance} />);
-
-      const componentInstance = instance.current;
-      const { onChangeTo: onChangeToInternal } = componentInstance;
-
-      const onChangeSpy = vi.spyOn(componentInstance, 'onChange');
+      const { container } = render(
+        <TimeRangePicker format="H:m:s" maxDetail="second" onChange={onChange} value={value} />,
+      );
 
       const nextValueTo = '16:00:00';
 
+      const customInputs = container.querySelectorAll('input[data-input]');
+      const hourInput = customInputs[3];
+      const minuteInput = customInputs[4];
+      const secondInput = customInputs[5];
+
       act(() => {
-        onChangeToInternal(nextValueTo);
+        fireEvent.change(hourInput, { target: { value: '16' } });
       });
 
-      expect(onChangeSpy).toHaveBeenCalled();
-      expect(onChangeSpy).toHaveBeenCalledWith([value, nextValueTo], undefined);
+      act(() => {
+        fireEvent.change(minuteInput, { target: { value: '0' } });
+      });
+
+      act(() => {
+        fireEvent.change(secondInput, { target: { value: '0' } });
+      });
+
+      expect(onChange).toHaveBeenCalled();
+      expect(onChange).toHaveBeenCalledWith([value, nextValueTo]);
     });
 
     it('calls onChange properly given initial value as an array', () => {
-      const instance = createRef();
+      const onChange = vi.fn();
       const valueFrom = '10:00:00';
-      const valueTo = '11:00:00';
+      const valueTo = '16:00:00';
       const value = [valueFrom, valueTo];
 
-      render(<TimeRangePicker value={value} ref={instance} />);
+      const { container } = render(
+        <TimeRangePicker format="H:m:s" maxDetail="second" onChange={onChange} value={value} />,
+      );
 
-      const componentInstance = instance.current;
-      const { onChangeTo: onChangeToInternal } = componentInstance;
+      const nextValueTo = '13:00:00';
 
-      const onChangeSpy = vi.spyOn(componentInstance, 'onChange');
-
-      const nextValueTo = '16:00:00';
+      const customInputs = container.querySelectorAll('input[data-input]');
+      const hourInput = customInputs[3];
+      const minuteInput = customInputs[4];
+      const secondInput = customInputs[5];
 
       act(() => {
-        onChangeToInternal(nextValueTo);
+        fireEvent.change(hourInput, { target: { value: '13' } });
       });
 
-      expect(onChangeSpy).toHaveBeenCalled();
-      expect(onChangeSpy).toHaveBeenCalledWith([valueFrom, nextValueTo], undefined);
+      act(() => {
+        fireEvent.change(minuteInput, { target: { value: '0' } });
+      });
+
+      act(() => {
+        fireEvent.change(secondInput, { target: { value: '0' } });
+      });
+
+      expect(onChange).toHaveBeenCalled();
+      expect(onChange).toHaveBeenCalledWith([valueFrom, nextValueTo]);
     });
   });
 });
