@@ -1,19 +1,18 @@
-import React, { createRef, PureComponent } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import makeEventProps from 'make-event-props';
 import clsx from 'clsx';
-import Fit from 'react-fit';
-
 import Clock from 'react-clock';
+import Fit from 'react-fit';
 
 import TimeInput from 'react-time-picker/dist/TimeInput';
 
 import { isTime } from './shared/propTypes';
 
-const allViews = ['hour', 'minute', 'second'];
 const baseClassName = 'react-timerange-picker';
 const outsideActionEvents = ['mousedown', 'focusin', 'touchstart'];
+const allViews = ['hour', 'minute', 'second'];
 
 const iconProps = {
   xmlns: 'http://www.w3.org/2000/svg',
@@ -45,227 +44,178 @@ const ClearIcon = (
   </svg>
 );
 
-const isValue = PropTypes.oneOfType([isTime, PropTypes.instanceOf(Date)]);
+const isValue = PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]);
 
-export default class TimeRangePicker extends PureComponent {
-  static defaultProps = {
-    clearIcon: ClearIcon,
-    clockIcon: ClockIcon,
-    closeClock: true,
-    isOpen: null,
-    maxDetail: 'minute',
-    name: 'timerange',
-    openClockOnFocus: true,
-    rangeDivider: '–',
-  };
+export default function TimeRangePicker(props) {
+  const {
+    amPmAriaLabel,
+    autoFocus,
+    className,
+    clearAriaLabel,
+    clearIcon,
+    clockAriaLabel,
+    clockIcon,
+    closeClock: shouldCloseClockProps,
+    'data-testid': dataTestid,
+    disableClock,
+    disabled,
+    format,
+    hourAriaLabel,
+    hourPlaceholder,
+    id,
+    isOpen: isOpenProps,
+    locale,
+    maxDetail,
+    maxTime,
+    minTime,
+    minuteAriaLabel,
+    minutePlaceholder,
+    name,
+    nativeInputAriaLabel,
+    onChange: onChangeProps,
+    onClockClose,
+    onClockOpen,
+    onFocus: onFocusProps,
+    openClockOnFocus,
+    rangeDivider,
+    required,
+    secondAriaLabel,
+    secondPlaceholder,
+    showLeadingZeros,
+    value,
+    ...otherProps
+  } = props;
 
-  static propTypes = {
-    amPmAriaLabel: PropTypes.string,
-    autoFocus: PropTypes.bool,
-    className: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-    clearAriaLabel: PropTypes.string,
-    clearIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    clockAriaLabel: PropTypes.string,
-    clockClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-    clockIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    closeClock: PropTypes.bool,
-    'data-testid': PropTypes.string,
-    disableClock: PropTypes.bool,
-    disabled: PropTypes.bool,
-    format: PropTypes.string,
-    hourAriaLabel: PropTypes.string,
-    hourPlaceholder: PropTypes.string,
-    id: PropTypes.string,
-    isOpen: PropTypes.bool,
-    locale: PropTypes.string,
-    maxDetail: PropTypes.oneOf(allViews),
-    maxTime: isTime,
-    minTime: isTime,
-    minuteAriaLabel: PropTypes.string,
-    minutePlaceholder: PropTypes.string,
-    name: PropTypes.string,
-    nativeInputAriaLabel: PropTypes.string,
-    onChange: PropTypes.func,
-    onClockClose: PropTypes.func,
-    onClockOpen: PropTypes.func,
-    onFocus: PropTypes.func,
-    openClockOnFocus: PropTypes.bool,
-    portalContainer: PropTypes.object,
-    rangeDivider: PropTypes.node,
-    required: PropTypes.bool,
-    secondAriaLabel: PropTypes.string,
-    secondPlaceholder: PropTypes.string,
-    showLeadingZeros: PropTypes.bool,
-    value: PropTypes.oneOfType([isValue, PropTypes.arrayOf(isValue)]),
-  };
+  const [isOpen, setIsOpen] = useState(isOpenProps);
+  const wrapper = useRef();
+  const clockWrapper = useRef();
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.isOpen !== prevState.isOpenProps) {
-      return {
-        isOpen: nextProps.isOpen,
-        isOpenProps: nextProps.isOpen,
-      };
-    }
+  useEffect(() => {
+    setIsOpen(isOpenProps);
+  }, [isOpenProps]);
 
-    return null;
-  }
+  function openClock() {
+    setIsOpen(true);
 
-  state = {};
-
-  wrapper = createRef();
-
-  clockWrapper = createRef();
-
-  componentDidMount() {
-    this.handleOutsideActionListeners();
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    const { isOpen } = this.state;
-    const { onClockClose, onClockOpen } = this.props;
-
-    if (isOpen !== prevState.isOpen) {
-      this.handleOutsideActionListeners();
-      const callback = isOpen ? onClockOpen : onClockClose;
-      if (callback) callback();
+    if (onClockOpen) {
+      onClockOpen();
     }
   }
 
-  componentWillUnmount() {
-    this.handleOutsideActionListeners(false);
+  const closeClock = useCallback(() => {
+    setIsOpen(false);
+
+    if (onClockClose) {
+      onClockClose();
+    }
+  }, [onClockClose]);
+
+  function toggleClock() {
+    if (isOpen) {
+      closeClock();
+    } else {
+      openClock();
+    }
   }
 
-  get eventProps() {
-    return makeEventProps(this.props);
+  function onChange(value, shouldCloseClock = shouldCloseClockProps) {
+    if (shouldCloseClock) {
+      closeClock();
+    }
+
+    if (onChangeProps) {
+      onChangeProps(value);
+    }
   }
 
-  onOutsideAction = (event) => {
-    const { wrapper, clockWrapper } = this;
+  function onChangeFrom(valueFrom, closeClock) {
+    const [, valueTo] = [].concat(value);
 
-    // Try event.composedPath first to handle clicks inside a Shadow DOM.
-    const target = 'composedPath' in event ? event.composedPath()[0] : event.target;
+    onChange([valueFrom, valueTo], closeClock);
+  }
+
+  function onChangeTo(valueTo, closeClock) {
+    const [valueFrom] = [].concat(value);
+
+    onChange([valueFrom, valueTo], closeClock);
+  }
+
+  function onFocus(event) {
+    if (onFocusProps) {
+      onFocusProps(event);
+    }
 
     if (
-      wrapper.current &&
-      !wrapper.current.contains(target) &&
-      (!clockWrapper.current || !clockWrapper.current.contains(target))
+      // Internet Explorer still fires onFocus on disabled elements
+      disabled ||
+      isOpen ||
+      !openClockOnFocus ||
+      event.target.dataset.select === 'true'
     ) {
-      this.closeClock();
-    }
-  };
-
-  onChange = (value, closeClock = this.props.closeClock) => {
-    const { onChange } = this.props;
-
-    if (closeClock) {
-      this.closeClock();
-    }
-
-    if (onChange) {
-      onChange(value);
-    }
-  };
-
-  onChangeFrom = (valueFrom, closeClock) => {
-    const { value } = this.props;
-    const [, valueTo] = [].concat(value);
-    this.onChange([valueFrom, valueTo], closeClock);
-  };
-
-  onChangeTo = (valueTo, closeClock) => {
-    const { value } = this.props;
-    const [valueFrom] = [].concat(value);
-    this.onChange([valueFrom, valueTo], closeClock);
-  };
-
-  onFocus = (event) => {
-    const { disabled, onFocus, openClockOnFocus } = this.props;
-
-    if (onFocus) {
-      onFocus(event);
-    }
-
-    // Internet Explorer still fires onFocus on disabled elements
-    if (disabled) {
       return;
     }
 
-    if (openClockOnFocus) {
-      if (event.target.dataset.select === 'true') {
-        return;
-      }
-
-      this.openClock();
-    }
-  };
-
-  onKeyDown = (event) => {
-    if (event.key === 'Escape') {
-      this.closeClock();
-    }
-  };
-
-  openClock = () => {
-    this.setState({ isOpen: true });
-  };
-
-  closeClock = () => {
-    this.setState((prevState) => {
-      if (!prevState.isOpen) {
-        return null;
-      }
-
-      return { isOpen: false };
-    });
-  };
-
-  toggleClock = () => {
-    this.setState((prevState) => ({ isOpen: !prevState.isOpen }));
-  };
-
-  stopPropagation = (event) => event.stopPropagation();
-
-  clear = () => this.onChange(null);
-
-  handleOutsideActionListeners(shouldListen) {
-    const { isOpen } = this.state;
-
-    const shouldListenWithFallback = typeof shouldListen !== 'undefined' ? shouldListen : isOpen;
-    const fnName = shouldListenWithFallback ? 'addEventListener' : 'removeEventListener';
-    outsideActionEvents.forEach((eventName) => document[fnName](eventName, this.onOutsideAction));
-    document[fnName]('keydown', this.onKeyDown);
+    openClock();
   }
 
-  renderInputs() {
-    const {
-      amPmAriaLabel,
-      autoFocus,
-      clearAriaLabel,
-      clearIcon,
-      clockAriaLabel,
-      clockIcon,
-      disableClock,
-      disabled,
-      format,
-      hourAriaLabel,
-      hourPlaceholder,
-      isOpen,
-      locale,
-      maxDetail,
-      maxTime,
-      minTime,
-      minuteAriaLabel,
-      minutePlaceholder,
-      name,
-      nativeInputAriaLabel,
-      rangeDivider,
-      required,
-      secondAriaLabel,
-      secondPlaceholder,
-      showLeadingZeros,
-      value,
-    } = this.props;
+  const onKeyDown = useCallback(
+    (event) => {
+      if (event.key === 'Escape') {
+        closeClock();
+      }
+    },
+    [closeClock],
+  );
 
+  function clear() {
+    onChange(null);
+  }
+
+  function stopPropagation(event) {
+    event.stopPropagation();
+  }
+
+  const onOutsideAction = useCallback(
+    (event) => {
+      const { current: wrapperEl } = wrapper;
+      const { current: clockWrapperEl } = clockWrapper;
+
+      // Try event.composedPath first to handle clicks inside a Shadow DOM.
+      const target = 'composedPath' in event ? event.composedPath()[0] : event.target;
+
+      if (
+        wrapperEl &&
+        !wrapperEl.contains(target) &&
+        (!clockWrapperEl || !clockWrapperEl.contains(target))
+      ) {
+        closeClock();
+      }
+    },
+    [clockWrapper, closeClock, wrapper],
+  );
+
+  const handleOutsideActionListeners = useCallback(
+    (shouldListen = isOpen) => {
+      const action = shouldListen ? 'addEventListener' : 'removeEventListener';
+
+      outsideActionEvents.forEach((event) => {
+        document[action](event, onOutsideAction);
+      });
+
+      document[action]('keydown', onKeyDown);
+    },
+    [isOpen, onOutsideAction, onKeyDown],
+  );
+
+  useEffect(() => {
+    handleOutsideActionListeners();
+
+    return () => {
+      handleOutsideActionListeners(false);
+    };
+  }, [handleOutsideActionListeners, isOpen]);
+
+  function renderInputs() {
     const [valueFrom, valueTo] = [].concat(value);
 
     const ariaLabelProps = {
@@ -288,7 +238,7 @@ export default class TimeRangePicker extends PureComponent {
       className: `${baseClassName}__inputGroup`,
       disabled,
       format,
-      isOpen,
+      isClockOpen: isOpen,
       locale,
       maxDetail,
       maxTime,
@@ -304,7 +254,7 @@ export default class TimeRangePicker extends PureComponent {
           // eslint-disable-next-line jsx-a11y/no-autofocus
           autoFocus={autoFocus}
           name={`${name}_from`}
-          onChange={this.onChangeFrom}
+          onChange={onChangeFrom}
           returnValue="start"
           value={valueFrom}
         />
@@ -312,7 +262,7 @@ export default class TimeRangePicker extends PureComponent {
         <TimeInput
           {...commonProps}
           name={`${name}_to`}
-          onChange={this.onChangeTo}
+          onChange={onChangeTo}
           returnValue="end"
           value={valueTo}
         />
@@ -321,8 +271,8 @@ export default class TimeRangePicker extends PureComponent {
             aria-label={clearAriaLabel}
             className={`${baseClassName}__clear-button ${baseClassName}__button`}
             disabled={disabled}
-            onClick={this.clear}
-            onFocus={this.stopPropagation}
+            onClick={clear}
+            onFocus={stopPropagation}
             type="button"
           >
             {typeof clearIcon === 'function' ? React.createElement(clearIcon) : clearIcon}
@@ -333,8 +283,8 @@ export default class TimeRangePicker extends PureComponent {
             aria-label={clockAriaLabel}
             className={`${baseClassName}__clock-button ${baseClassName}__button`}
             disabled={disabled}
-            onClick={this.toggleClock}
-            onFocus={this.stopPropagation}
+            onClick={toggleClock}
+            onFocus={stopPropagation}
             type="button"
           >
             {typeof clockIcon === 'function' ? React.createElement(clockIcon) : clockIcon}
@@ -344,10 +294,7 @@ export default class TimeRangePicker extends PureComponent {
     );
   }
 
-  renderClock() {
-    const { disableClock } = this.props;
-    const { isOpen } = this.state;
-
+  function renderClock() {
     if (isOpen === null || disableClock) {
       return null;
     }
@@ -355,33 +302,28 @@ export default class TimeRangePicker extends PureComponent {
     const {
       clockClassName,
       className: timeRangePickerClassName, // Unused, here to exclude it from clockProps
-      maxDetail,
-      onChange,
+      onChange: onChangeProps, // Unused, here to exclude it from clockProps
       portalContainer,
       value,
       ...clockProps
-    } = this.props;
+    } = props;
 
     const className = `${baseClassName}__clock`;
     const classNames = clsx(className, `${className}--${isOpen ? 'open' : 'closed'}`);
 
-    const [valueFrom] = [].concat(value);
-
-    const maxDetailIndex = allViews.indexOf(maxDetail);
-
     const clock = (
       <Clock
         className={clockClassName}
-        renderMinuteHand={maxDetailIndex > 0}
-        renderSecondHand={maxDetailIndex > 1}
-        value={valueFrom}
+        onChange={(value) => onChange(value)}
+        selectRange
+        value={value || null}
         {...clockProps}
       />
     );
 
     return portalContainer ? (
       createPortal(
-        <div ref={this.clockWrapper} className={classNames}>
+        <div ref={clockWrapper} className={classNames}>
           {clock}
         </div>,
         portalContainer,
@@ -402,30 +344,80 @@ export default class TimeRangePicker extends PureComponent {
     );
   }
 
-  render() {
-    const { eventProps } = this;
-    const { className, 'data-testid': dataTestid, disabled, id } = this.props;
-    const { isOpen } = this.state;
+  const eventProps = useMemo(() => makeEventProps(otherProps), [otherProps]);
 
-    const { onChange, ...eventPropsWithoutOnChange } = eventProps;
+  const {
+    onChange: onChangeEventProps, // Unused, here to exclude it from eventPropsWithoutOnChange
+    ...eventPropsWithoutOnChange
+  } = eventProps;
 
-    return (
-      <div
-        className={clsx(
-          baseClassName,
-          `${baseClassName}--${isOpen ? 'open' : 'closed'}`,
-          `${baseClassName}--${disabled ? 'disabled' : 'enabled'}`,
-          className,
-        )}
-        data-testid={dataTestid}
-        id={id}
-        {...eventPropsWithoutOnChange}
-        onFocus={this.onFocus}
-        ref={this.wrapper}
-      >
-        {this.renderInputs()}
-        {this.renderClock()}
-      </div>
-    );
-  }
+  return (
+    <div
+      className={clsx(
+        baseClassName,
+        `${baseClassName}--${isOpen ? 'open' : 'closed'}`,
+        `${baseClassName}--${disabled ? 'disabled' : 'enabled'}`,
+        className,
+      )}
+      data-testid={dataTestid}
+      id={id}
+      {...eventPropsWithoutOnChange}
+      onFocus={onFocus}
+      ref={wrapper}
+    >
+      {renderInputs()}
+      {renderClock()}
+    </div>
+  );
 }
+
+TimeRangePicker.defaultProps = {
+  clearIcon: ClearIcon,
+  clockIcon: ClockIcon,
+  closeClock: true,
+  isOpen: null,
+  maxDetail: 'minute',
+  name: 'timerange',
+  openClockOnFocus: true,
+  rangeDivider: '–',
+};
+
+TimeRangePicker.propTypes = {
+  amPmAriaLabel: PropTypes.string,
+  autoFocus: PropTypes.bool,
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+  clearAriaLabel: PropTypes.string,
+  clearIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  clockAriaLabel: PropTypes.string,
+  clockClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+  clockIcon: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  closeClock: PropTypes.bool,
+  'data-testid': PropTypes.string,
+  disableClock: PropTypes.bool,
+  disabled: PropTypes.bool,
+  format: PropTypes.string,
+  hourAriaLabel: PropTypes.string,
+  hourPlaceholder: PropTypes.string,
+  id: PropTypes.string,
+  isOpen: PropTypes.bool,
+  locale: PropTypes.string,
+  maxDetail: PropTypes.oneOf(allViews),
+  maxTime: isTime,
+  minTime: isTime,
+  minuteAriaLabel: PropTypes.string,
+  minutePlaceholder: PropTypes.string,
+  name: PropTypes.string,
+  nativeInputAriaLabel: PropTypes.string,
+  onChange: PropTypes.func,
+  onClockClose: PropTypes.func,
+  onClockOpen: PropTypes.func,
+  onFocus: PropTypes.func,
+  openClockOnFocus: PropTypes.bool,
+  portalContainer: PropTypes.object,
+  rangeDivider: PropTypes.node,
+  required: PropTypes.bool,
+  secondAriaLabel: PropTypes.string,
+  secondPlaceholder: PropTypes.string,
+  showLeadingZeros: PropTypes.bool,
+  value: PropTypes.oneOfType([isValue, PropTypes.arrayOf(isValue)]),
+};
