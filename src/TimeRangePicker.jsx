@@ -182,6 +182,7 @@ export default function TimeRangePicker(props) {
       const target = 'composedPath' in event ? event.composedPath()[0] : event.target;
 
       if (
+        target &&
         wrapperEl &&
         !wrapperEl.contains(target) &&
         (!clockWrapperEl || !clockWrapperEl.contains(target))
