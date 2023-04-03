@@ -310,15 +310,7 @@ export default function TimeRangePicker(props) {
     const className = `${baseClassName}__clock`;
     const classNames = clsx(className, `${className}--${isOpen ? 'open' : 'closed'}`);
 
-    const clock = (
-      <Clock
-        className={clockClassName}
-        onChange={(value) => onChange(value)}
-        selectRange
-        value={value || null}
-        {...clockProps}
-      />
-    );
+    const clock = <Clock className={clockClassName} selectRange value={value} {...clockProps} />;
 
     return portalContainer ? (
       createPortal(
