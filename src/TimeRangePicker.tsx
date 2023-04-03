@@ -10,6 +10,8 @@ import TimeInput from 'react-time-picker/dist/cjs/TimeInput';
 
 import { isTime } from './shared/propTypes';
 
+import type { ClassName, Detail, LooseValue } from './shared/types';
+
 const baseClassName = 'react-timerange-picker';
 const outsideActionEvents = ['mousedown', 'focusin', 'touchstart'];
 const allViews = ['hour', 'minute', 'second'];
@@ -44,7 +46,51 @@ const ClearIcon = (
   </svg>
 );
 
-export default function TimeRangePicker(props) {
+type Icon = React.ReactElement | string;
+
+type IconOrRenderFunction = Icon | React.ComponentType | React.ReactElement;
+
+type TimeRangePickerProps = {
+  amPmAriaLabel?: string;
+  autoFocus?: boolean;
+  className?: ClassName;
+  clearAriaLabel?: string;
+  clearIcon?: IconOrRenderFunction;
+  clockAriaLabel?: string;
+  clockClassName?: ClassName;
+  clockIcon?: IconOrRenderFunction;
+  closeClock?: boolean;
+  'data-testid'?: string;
+  disableClock?: boolean;
+  disabled?: boolean;
+  format?: string;
+  hourAriaLabel?: string;
+  hourPlaceholder?: string;
+  id?: string;
+  isOpen?: boolean;
+  locale?: string;
+  maxDetail?: Detail;
+  maxTime?: string;
+  minTime?: string;
+  minuteAriaLabel?: string;
+  minutePlaceholder?: string;
+  name?: string;
+  nativeInputAriaLabel?: string;
+  onChange?: (value: null | (string | Date | null)[]) => void;
+  onClockClose?: () => void;
+  onClockOpen?: () => void;
+  onFocus?: (event: React.FocusEvent<HTMLDivElement>) => void;
+  openClockOnFocus?: boolean;
+  portalContainer?: HTMLElement;
+  rangeDivider?: React.ReactNode;
+  required?: boolean;
+  secondAriaLabel?: string;
+  secondPlaceholder?: string;
+  showLeadingZeros?: boolean;
+  value?: LooseValue;
+};
+
+export default function TimeRangePicker(props: TimeRangePickerProps) {
   const {
     amPmAriaLabel,
     autoFocus,
@@ -85,8 +131,8 @@ export default function TimeRangePicker(props) {
   } = props;
 
   const [isOpen, setIsOpen] = useState(isOpenProps);
-  const wrapper = useRef();
-  const clockWrapper = useRef();
+  const wrapper = useRef<HTMLDivElement>(null);
+  const clockWrapper = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setIsOpen(isOpenProps);
@@ -116,7 +162,10 @@ export default function TimeRangePicker(props) {
     }
   }
 
-  function onChange(value, shouldCloseClock = shouldCloseClockProps) {
+  function onChange(
+    value: null | (string | Date | null)[],
+    shouldCloseClock = shouldCloseClockProps,
+  ) {
     if (shouldCloseClock) {
       closeClock();
     }
@@ -126,19 +175,19 @@ export default function TimeRangePicker(props) {
     }
   }
 
-  function onChangeFrom(valueFrom, closeClock) {
-    const [, valueTo] = [].concat(value);
+  function onChangeFrom(valueFrom: string | null, closeClock: boolean) {
+    const [, valueTo] = Array.isArray(value) ? value : [value];
 
-    onChange([valueFrom, valueTo], closeClock);
+    onChange([valueFrom, valueTo || null], closeClock);
   }
 
-  function onChangeTo(valueTo, closeClock) {
-    const [valueFrom] = [].concat(value);
+  function onChangeTo(valueTo: string | null, closeClock: boolean) {
+    const [valueFrom] = Array.isArray(value) ? value : [value];
 
-    onChange([valueFrom, valueTo], closeClock);
+    onChange([valueFrom || null, valueTo], closeClock);
   }
 
-  function onFocus(event) {
+  function onFocus(event: React.FocusEvent<HTMLInputElement>) {
     if (onFocusProps) {
       onFocusProps(event);
     }
@@ -157,7 +206,7 @@ export default function TimeRangePicker(props) {
   }
 
   const onKeyDown = useCallback(
-    (event) => {
+    (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         closeClock();
       }
@@ -169,17 +218,19 @@ export default function TimeRangePicker(props) {
     onChange(null);
   }
 
-  function stopPropagation(event) {
+  function stopPropagation(event: React.FocusEvent) {
     event.stopPropagation();
   }
 
   const onOutsideAction = useCallback(
-    (event) => {
+    (event: Event) => {
       const { current: wrapperEl } = wrapper;
       const { current: clockWrapperEl } = clockWrapper;
 
       // Try event.composedPath first to handle clicks inside a Shadow DOM.
-      const target = 'composedPath' in event ? event.composedPath()[0] : event.target;
+      const target = (
+        'composedPath' in event ? event.composedPath()[0] : (event as Event).target
+      ) as HTMLElement;
 
       if (
         target &&
@@ -195,13 +246,19 @@ export default function TimeRangePicker(props) {
 
   const handleOutsideActionListeners = useCallback(
     (shouldListen = isOpen) => {
-      const action = shouldListen ? 'addEventListener' : 'removeEventListener';
-
       outsideActionEvents.forEach((event) => {
-        document[action](event, onOutsideAction);
+        if (shouldListen) {
+          document.addEventListener(event, onOutsideAction);
+        } else {
+          document.removeEventListener(event, onOutsideAction);
+        }
       });
 
-      document[action]('keydown', onKeyDown);
+      if (shouldListen) {
+        document.addEventListener('keydown', onKeyDown);
+      } else {
+        document.removeEventListener('keydown', onKeyDown);
+      }
     },
     [isOpen, onOutsideAction, onKeyDown],
   );
@@ -215,7 +272,7 @@ export default function TimeRangePicker(props) {
   }, [handleOutsideActionListeners, isOpen]);
 
   function renderInputs() {
-    const [valueFrom, valueTo] = [].concat(value);
+    const [valueFrom, valueTo] = Array.isArray(value) ? value : [value];
 
     const ariaLabelProps = {
       amPmAriaLabel,
@@ -254,17 +311,10 @@ export default function TimeRangePicker(props) {
           autoFocus={autoFocus}
           name={`${name}_from`}
           onChange={onChangeFrom}
-          returnValue="start"
           value={valueFrom}
         />
         <span className={`${baseClassName}__range-divider`}>{rangeDivider}</span>
-        <TimeInput
-          {...commonProps}
-          name={`${name}_to`}
-          onChange={onChangeTo}
-          returnValue="end"
-          value={valueTo}
-        />
+        <TimeInput {...commonProps} name={`${name}_to`} onChange={onChangeTo} value={valueTo} />
         {clearIcon !== null && (
           <button
             aria-label={clearAriaLabel}
@@ -310,7 +360,9 @@ export default function TimeRangePicker(props) {
     const className = `${baseClassName}__clock`;
     const classNames = clsx(className, `${className}--${isOpen ? 'open' : 'closed'}`);
 
-    const clock = <Clock className={clockClassName} selectRange value={value} {...clockProps} />;
+    const [valueFrom] = Array.isArray(value) ? value : [value];
+
+    const clock = <Clock className={clockClassName} value={valueFrom} {...clockProps} />;
 
     return portalContainer ? (
       createPortal(

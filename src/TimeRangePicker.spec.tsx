@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 
 import TimeRangePicker from './TimeRangePicker';
 
-async function waitForElementToBeRemovedOrHidden(callback) {
+async function waitForElementToBeRemovedOrHidden(callback: () => HTMLElement | null) {
   const element = callback();
 
   if (element) {
@@ -84,7 +84,9 @@ describe('TimeRangePicker', () => {
 
     const clockButton = container.querySelector('button.react-timerange-picker__clock-button');
     const clearButton = container.querySelector('button.react-timerange-picker__clear-button');
-    const timeInputs = container.querySelectorAll('.react-timerange-picker__inputGroup');
+    const timeInputs = container.querySelectorAll(
+      '.react-timerange-picker__inputGroup',
+    ) as unknown as [HTMLDivElement, HTMLDivElement];
 
     const [timeFromInput, timeToInput] = timeInputs;
 
@@ -121,7 +123,9 @@ describe('TimeRangePicker', () => {
 
     const { container } = render(<TimeRangePicker {...placeholderProps} maxDetail="second" />);
 
-    const timeInputs = container.querySelectorAll('.react-timerange-picker__inputGroup');
+    const timeInputs = container.querySelectorAll(
+      '.react-timerange-picker__inputGroup',
+    ) as unknown as [HTMLDivElement, HTMLDivElement];
 
     const [timeFromInput, timeToInput] = timeInputs;
 
@@ -233,7 +237,9 @@ describe('TimeRangePicker', () => {
     it('renders clear icon by default when clearIcon is not given', () => {
       const { container } = render(<TimeRangePicker />);
 
-      const clearButton = container.querySelector('button.react-timerange-picker__clear-button');
+      const clearButton = container.querySelector(
+        'button.react-timerange-picker__clear-button',
+      ) as HTMLButtonElement;
 
       const clearIcon = clearButton.querySelector('svg');
 
@@ -250,7 +256,7 @@ describe('TimeRangePicker', () => {
 
     it('renders clear icon when given clearIcon as a React element', () => {
       function ClearIcon() {
-        return '❌';
+        return <>❌</>;
       }
 
       const { container } = render(<TimeRangePicker clearIcon={<ClearIcon />} />);
@@ -262,7 +268,7 @@ describe('TimeRangePicker', () => {
 
     it('renders clear icon when given clearIcon as a function', () => {
       function ClearIcon() {
-        return '❌';
+        return <>❌</>;
       }
 
       const { container } = render(<TimeRangePicker clearIcon={ClearIcon} />);
@@ -285,7 +291,9 @@ describe('TimeRangePicker', () => {
     it('renders clock icon by default when clockIcon is not given', () => {
       const { container } = render(<TimeRangePicker />);
 
-      const clockButton = container.querySelector('button.react-timerange-picker__clock-button');
+      const clockButton = container.querySelector(
+        'button.react-timerange-picker__clock-button',
+      ) as HTMLButtonElement;
 
       const clockIcon = clockButton.querySelector('svg');
 
@@ -302,7 +310,7 @@ describe('TimeRangePicker', () => {
 
     it('renders clock icon when given clockIcon as a React element', () => {
       function ClockIcon() {
-        return '🕒';
+        return <>🕒</>;
       }
 
       const { container } = render(<TimeRangePicker clockIcon={<ClockIcon />} />);
@@ -314,7 +322,7 @@ describe('TimeRangePicker', () => {
 
     it('renders clock icon when given clockIcon as a function', () => {
       function ClockIcon() {
-        return '🕒';
+        return <>🕒</>;
       }
 
       const { container } = render(<TimeRangePicker clockIcon={ClockIcon} />);
@@ -359,7 +367,9 @@ describe('TimeRangePicker', () => {
     const { container } = render(<TimeRangePicker />);
 
     const clock = container.querySelector('.react-clock');
-    const button = container.querySelector('button.react-timerange-picker__clock-button');
+    const button = container.querySelector(
+      'button.react-timerange-picker__clock-button',
+    ) as HTMLButtonElement;
 
     expect(clock).toBeFalsy();
 
@@ -375,7 +385,7 @@ describe('TimeRangePicker', () => {
       const { container } = render(<TimeRangePicker />);
 
       const clock = container.querySelector('.react-clock');
-      const input = container.querySelector('input[name^="hour"]');
+      const input = container.querySelector('input[name^="hour"]') as HTMLInputElement;
 
       expect(clock).toBeFalsy();
 
@@ -390,7 +400,7 @@ describe('TimeRangePicker', () => {
       const { container } = render(<TimeRangePicker openClockOnFocus />);
 
       const clock = container.querySelector('.react-clock');
-      const input = container.querySelector('input[name^="hour"]');
+      const input = container.querySelector('input[name^="hour"]') as HTMLInputElement;
 
       expect(clock).toBeFalsy();
 
@@ -405,7 +415,7 @@ describe('TimeRangePicker', () => {
       const { container } = render(<TimeRangePicker openClockOnFocus={false} />);
 
       const clock = container.querySelector('.react-clock');
-      const input = container.querySelector('input[name^="hour"]');
+      const input = container.querySelector('input[name^="hour"]') as HTMLInputElement;
 
       expect(clock).toBeFalsy();
 
@@ -420,7 +430,7 @@ describe('TimeRangePicker', () => {
       const { container } = render(<TimeRangePicker format="hh:mm:ss a" />);
 
       const clock = container.querySelector('.react-clock');
-      const select = container.querySelector('select[name="amPm"]');
+      const select = container.querySelector('select[name="amPm"]') as HTMLSelectElement;
 
       expect(clock).toBeFalsy();
 
@@ -466,8 +476,8 @@ describe('TimeRangePicker', () => {
     const { container } = render(<TimeRangePicker isOpen />);
 
     const customInputs = container.querySelectorAll('input[data-input]');
-    const hourInput = customInputs[0];
-    const minuteInput = customInputs[1];
+    const hourInput = customInputs[0] as HTMLInputElement;
+    const minuteInput = customInputs[1] as HTMLInputElement;
 
     fireEvent.blur(hourInput);
     fireEvent.focus(minuteInput);
@@ -480,7 +490,7 @@ describe('TimeRangePicker', () => {
   it('does not close Clock when changing value', () => {
     const { container } = render(<TimeRangePicker isOpen />);
 
-    const hourInput = container.querySelector('input[name="hour12"]');
+    const hourInput = container.querySelector('input[name="hour12"]') as HTMLInputElement;
 
     act(() => {
       fireEvent.change(hourInput, { target: { value: '9' } });
@@ -499,13 +509,13 @@ describe('TimeRangePicker', () => {
       <TimeRangePicker maxDetail="second" onChange={onChange} value={value} />,
     );
 
-    const hourInput = container.querySelector('input[name="hour12"]');
+    const hourInput = container.querySelector('input[name="hour12"]') as HTMLInputElement;
 
     act(() => {
       fireEvent.change(hourInput, { target: { value: '9' } });
     });
 
-    expect(onChange).toHaveBeenCalledWith(['21:41:28', undefined]);
+    expect(onChange).toHaveBeenCalledWith(['21:41:28', null]);
   });
 
   it('clears the value when clicking on a button', () => {
@@ -517,7 +527,9 @@ describe('TimeRangePicker', () => {
 
     expect(clock).toBeFalsy();
 
-    const button = container.querySelector('button.react-timerange-picker__clear-button');
+    const button = container.querySelector(
+      'button.react-timerange-picker__clear-button',
+    ) as HTMLButtonElement;
 
     fireEvent.click(button);
 
@@ -535,9 +547,9 @@ describe('TimeRangePicker', () => {
       const nextValueFrom = '16:00:00';
 
       const customInputs = container.querySelectorAll('input[data-input]');
-      const hourInput = customInputs[0];
-      const minuteInput = customInputs[1];
-      const secondInput = customInputs[2];
+      const hourInput = customInputs[0] as HTMLInputElement;
+      const minuteInput = customInputs[1] as HTMLInputElement;
+      const secondInput = customInputs[2] as HTMLInputElement;
 
       act(() => {
         fireEvent.change(hourInput, { target: { value: '16' } });
@@ -552,7 +564,7 @@ describe('TimeRangePicker', () => {
       });
 
       expect(onChange).toHaveBeenCalled();
-      expect(onChange).toHaveBeenCalledWith([nextValueFrom, undefined]);
+      expect(onChange).toHaveBeenCalledWith([nextValueFrom, null]);
     });
 
     it('calls onChange properly given single initial value', () => {
@@ -566,9 +578,9 @@ describe('TimeRangePicker', () => {
       const nextValueFrom = '16:00:00';
 
       const customInputs = container.querySelectorAll('input[data-input]');
-      const hourInput = customInputs[0];
-      const minuteInput = customInputs[1];
-      const secondInput = customInputs[2];
+      const hourInput = customInputs[0] as HTMLInputElement;
+      const minuteInput = customInputs[1] as HTMLInputElement;
+      const secondInput = customInputs[2] as HTMLInputElement;
 
       act(() => {
         fireEvent.change(hourInput, { target: { value: '16' } });
@@ -583,7 +595,7 @@ describe('TimeRangePicker', () => {
       });
 
       expect(onChange).toHaveBeenCalled();
-      expect(onChange).toHaveBeenCalledWith([nextValueFrom, undefined]);
+      expect(onChange).toHaveBeenCalledWith([nextValueFrom, null]);
     });
 
     it('calls onChange properly given initial value as an array', () => {
@@ -599,9 +611,9 @@ describe('TimeRangePicker', () => {
       const nextValueFrom = '13:00:00';
 
       const customInputs = container.querySelectorAll('input[data-input]');
-      const hourInput = customInputs[0];
-      const minuteInput = customInputs[1];
-      const secondInput = customInputs[2];
+      const hourInput = customInputs[0] as HTMLInputElement;
+      const minuteInput = customInputs[1] as HTMLInputElement;
+      const secondInput = customInputs[2] as HTMLInputElement;
 
       act(() => {
         fireEvent.change(hourInput, { target: { value: '13' } });
@@ -631,9 +643,9 @@ describe('TimeRangePicker', () => {
       const nextValueTo = '16:00:00';
 
       const customInputs = container.querySelectorAll('input[data-input]');
-      const hourInput = customInputs[3];
-      const minuteInput = customInputs[4];
-      const secondInput = customInputs[5];
+      const hourInput = customInputs[3] as HTMLInputElement;
+      const minuteInput = customInputs[4] as HTMLInputElement;
+      const secondInput = customInputs[5] as HTMLInputElement;
 
       act(() => {
         fireEvent.change(hourInput, { target: { value: '16' } });
@@ -648,7 +660,7 @@ describe('TimeRangePicker', () => {
       });
 
       expect(onChange).toHaveBeenCalled();
-      expect(onChange).toHaveBeenCalledWith([undefined, nextValueTo]);
+      expect(onChange).toHaveBeenCalledWith([null, nextValueTo]);
     });
 
     it('calls onChange properly given single initial value', () => {
@@ -662,9 +674,9 @@ describe('TimeRangePicker', () => {
       const nextValueTo = '16:00:00';
 
       const customInputs = container.querySelectorAll('input[data-input]');
-      const hourInput = customInputs[3];
-      const minuteInput = customInputs[4];
-      const secondInput = customInputs[5];
+      const hourInput = customInputs[3] as HTMLInputElement;
+      const minuteInput = customInputs[4] as HTMLInputElement;
+      const secondInput = customInputs[5] as HTMLInputElement;
 
       act(() => {
         fireEvent.change(hourInput, { target: { value: '16' } });
@@ -695,9 +707,9 @@ describe('TimeRangePicker', () => {
       const nextValueTo = '13:00:00';
 
       const customInputs = container.querySelectorAll('input[data-input]');
-      const hourInput = customInputs[3];
-      const minuteInput = customInputs[4];
-      const secondInput = customInputs[5];
+      const hourInput = customInputs[3] as HTMLInputElement;
+      const minuteInput = customInputs[4] as HTMLInputElement;
+      const secondInput = customInputs[5] as HTMLInputElement;
 
       act(() => {
         fireEvent.change(hourInput, { target: { value: '13' } });
