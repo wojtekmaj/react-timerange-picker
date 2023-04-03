@@ -50,10 +50,10 @@ export default function TimeRangePicker(props) {
     autoFocus,
     className,
     clearAriaLabel,
-    clearIcon,
+    clearIcon = ClearIcon,
     clockAriaLabel,
-    clockIcon,
-    closeClock: shouldCloseClockProps,
+    clockIcon = ClockIcon,
+    closeClock: shouldCloseClockProps = true,
     'data-testid': dataTestid,
     disableClock,
     disabled,
@@ -61,21 +61,21 @@ export default function TimeRangePicker(props) {
     hourAriaLabel,
     hourPlaceholder,
     id,
-    isOpen: isOpenProps,
+    isOpen: isOpenProps = null,
     locale,
-    maxDetail,
+    maxDetail = 'minute',
     maxTime,
     minTime,
     minuteAriaLabel,
     minutePlaceholder,
-    name,
+    name = 'timerange',
     nativeInputAriaLabel,
     onChange: onChangeProps,
     onClockClose,
     onClockOpen,
     onFocus: onFocusProps,
-    openClockOnFocus,
-    rangeDivider,
+    openClockOnFocus = true,
+    rangeDivider = '–',
     required,
     secondAriaLabel,
     secondPlaceholder,
@@ -368,17 +368,6 @@ export default function TimeRangePicker(props) {
     </div>
   );
 }
-
-TimeRangePicker.defaultProps = {
-  clearIcon: ClearIcon,
-  clockIcon: ClockIcon,
-  closeClock: true,
-  isOpen: null,
-  maxDetail: 'minute',
-  name: 'timerange',
-  openClockOnFocus: true,
-  rangeDivider: '–',
-};
 
 const isValue = PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]);
 
