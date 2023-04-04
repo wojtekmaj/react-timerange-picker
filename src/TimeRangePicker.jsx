@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import Clock from 'react-clock';
 import Fit from 'react-fit';
 
-import TimeInput from 'react-time-picker/dist/TimeInput';
+import TimeInput from 'react-time-picker/dist/cjs/TimeInput';
 
 import { isTime } from './shared/propTypes';
 
