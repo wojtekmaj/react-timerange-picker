@@ -359,6 +359,8 @@ export default function TimeRangePicker(props) {
 
 const isValue = PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]);
 
+const isValueOrValueArray = PropTypes.oneOfType([isValue, PropTypes.arrayOf(isValue)]);
+
 TimeRangePicker.propTypes = {
   amPmAriaLabel: PropTypes.string,
   autoFocus: PropTypes.bool,
@@ -396,5 +398,5 @@ TimeRangePicker.propTypes = {
   secondAriaLabel: PropTypes.string,
   secondPlaceholder: PropTypes.string,
   showLeadingZeros: PropTypes.bool,
-  value: PropTypes.oneOfType([isValue, PropTypes.arrayOf(isValue)]),
+  value: isValueOrValueArray,
 };
