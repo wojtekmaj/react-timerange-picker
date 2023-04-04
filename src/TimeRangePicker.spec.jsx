@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import React, { createRef } from 'react';
+import React from 'react';
 import { act, fireEvent, render, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -493,10 +493,9 @@ describe('TimeRangePicker', () => {
   });
 
   it('clears the value when clicking on a button', () => {
-    const instance = createRef();
     const onChange = vi.fn();
 
-    const { container } = render(<TimeRangePicker onChange={onChange} ref={instance} />);
+    const { container } = render(<TimeRangePicker onChange={onChange} />);
 
     const clock = container.querySelector('.react-clock');
 
