@@ -81,7 +81,7 @@ type TimeRangePickerProps = {
   onClockOpen?: () => void;
   onFocus?: (event: React.FocusEvent<HTMLDivElement>) => void;
   openClockOnFocus?: boolean;
-  portalContainer?: HTMLElement;
+  portalContainer?: HTMLElement | null;
   rangeDivider?: React.ReactNode;
   required?: boolean;
   secondAriaLabel?: string;
