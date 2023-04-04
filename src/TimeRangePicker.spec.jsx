@@ -417,10 +417,7 @@ describe('TimeRangePicker', () => {
   });
 
   it('closes Clock component when clicked outside', async () => {
-    const root = document.createElement('div');
-    document.body.appendChild(root);
-
-    const { container } = render(<TimeRangePicker isOpen />, { attachTo: root });
+    const { container } = render(<TimeRangePicker isOpen />);
 
     userEvent.click(document.body);
 
@@ -430,10 +427,7 @@ describe('TimeRangePicker', () => {
   });
 
   it('closes Clock component when focused outside', async () => {
-    const root = document.createElement('div');
-    document.body.appendChild(root);
-
-    const { container } = render(<TimeRangePicker isOpen />, { attachTo: root });
+    const { container } = render(<TimeRangePicker isOpen />);
 
     fireEvent.focusIn(document.body);
 
@@ -443,10 +437,7 @@ describe('TimeRangePicker', () => {
   });
 
   it('closes Clock component when tapped outside', async () => {
-    const root = document.createElement('div');
-    document.body.appendChild(root);
-
-    const { container } = render(<TimeRangePicker isOpen />, { attachTo: root });
+    const { container } = render(<TimeRangePicker isOpen />);
 
     fireEvent.touchStart(document.body);
 
