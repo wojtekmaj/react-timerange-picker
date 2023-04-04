@@ -10,7 +10,7 @@ import TimeInput from 'react-time-picker/dist/cjs/TimeInput';
 
 import { isTime } from './shared/propTypes';
 
-import type { ClassName, Detail, LooseValue } from './shared/types';
+import type { ClassName, Detail, LooseValue, Value } from './shared/types';
 
 const baseClassName = 'react-timerange-picker';
 const outsideActionEvents = ['mousedown', 'focusin', 'touchstart'];
@@ -76,7 +76,7 @@ type TimeRangePickerProps = {
   minutePlaceholder?: string;
   name?: string;
   nativeInputAriaLabel?: string;
-  onChange?: (value: null | (string | Date | null)[]) => void;
+  onChange?: (value: Value) => void;
   onClockClose?: () => void;
   onClockOpen?: () => void;
   onFocus?: (event: React.FocusEvent<HTMLDivElement>) => void;
@@ -162,10 +162,7 @@ export default function TimeRangePicker(props: TimeRangePickerProps) {
     }
   }
 
-  function onChange(
-    value: null | (string | Date | null)[],
-    shouldCloseClock = shouldCloseClockProps,
-  ) {
+  function onChange(value: Value, shouldCloseClock = shouldCloseClockProps) {
     if (shouldCloseClock) {
       closeClock();
     }

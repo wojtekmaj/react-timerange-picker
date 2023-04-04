@@ -602,7 +602,7 @@ describe('TimeRangePicker', () => {
       const onChange = vi.fn();
       const valueFrom = '10:00:00';
       const valueTo = '16:00:00';
-      const value = [valueFrom, valueTo];
+      const value = [valueFrom, valueTo] as [string, string];
 
       const { container } = render(
         <TimeRangePicker format="H:m:s" maxDetail="second" onChange={onChange} value={value} />,
@@ -698,7 +698,7 @@ describe('TimeRangePicker', () => {
       const onChange = vi.fn();
       const valueFrom = '10:00:00';
       const valueTo = '16:00:00';
-      const value = [valueFrom, valueTo];
+      const value = [valueFrom, valueTo] as [string, string];
 
       const { container } = render(
         <TimeRangePicker format="H:m:s" maxDetail="second" onChange={onChange} value={value} />,
