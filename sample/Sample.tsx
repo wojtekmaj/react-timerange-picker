@@ -3,12 +3,16 @@ import TimeRangePicker from '@wojtekmaj/react-timerange-picker';
 
 import './Sample.css';
 
+type ValuePiece = Date | string | null;
+
+type Value = ValuePiece | [ValuePiece, ValuePiece];
+
 const now = new Date();
 const nextHour = new Date();
 nextHour.setHours(nextHour.getHours() + 1);
 
 export default function Sample() {
-  const [value, onChange] = useState([now, nextHour]);
+  const [value, onChange] = useState<Value>([now, nextHour]);
 
   return (
     <div className="Sample">
