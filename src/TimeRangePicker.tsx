@@ -88,7 +88,7 @@ type TimeRangePickerProps = {
   secondPlaceholder?: string;
   showLeadingZeros?: boolean;
   value?: LooseValue;
-};
+} & Omit<React.ComponentPropsWithoutRef<typeof Clock>, 'value'>;
 
 export default function TimeRangePicker(props: TimeRangePickerProps) {
   const {
