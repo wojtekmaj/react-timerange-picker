@@ -4060,8 +4060,8 @@ __metadata:
   linkType: hard
 
 "react-time-picker@npm:^6.0.2":
-  version: 6.0.2
-  resolution: "react-time-picker@npm:6.0.2"
+  version: 6.0.3
+  resolution: "react-time-picker@npm:6.0.3"
   dependencies:
     "@wojtekmaj/date-utils": ^1.1.3
     clsx: ^1.2.1
@@ -4074,7 +4074,7 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: d5bd6e28113a371e2aae26138eef5c3fc6d10b69e25b9b4e6ae222fd6830989e6c6b96e46d79250b6826a1d4fe85f871bbd2d7885ae1ad4246af0fbff5821833
+  checksum: 33ca290b5db1ea0c16c37fccb5265cd88a1a20814932f3418d51ad5477583c43a1e90f2816fbf23fddaeb97f5aaa67fb637ea0f6d7ee1f7813fbd17ddc55cf97
   languageName: node
   linkType: hard
 
