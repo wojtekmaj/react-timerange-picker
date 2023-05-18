@@ -426,6 +426,23 @@ describe('TimeRangePicker', () => {
       expect(clock2).toBeFalsy();
     });
 
+    it('does not open Clock when focusing on an input inside given shouldOpenCalendar function returning false', () => {
+      const shouldOpenClock = () => false;
+
+      const { container } = render(<TimeRangePicker shouldOpenClock={shouldOpenClock} />);
+
+      const clock = container.querySelector('.react-clock');
+      const input = container.querySelector('input[name^="hour"]') as HTMLInputElement;
+
+      expect(clock).toBeFalsy();
+
+      fireEvent.focus(input);
+
+      const clock2 = container.querySelector('.react-clock');
+
+      expect(clock2).toBeFalsy();
+    });
+
     it('does not open Clock component when focusing on a select element', () => {
       const { container } = render(<TimeRangePicker format="hh:mm:ss a" />);
 
@@ -450,6 +467,18 @@ describe('TimeRangePicker', () => {
     await waitForElementToBeRemovedOrHidden(() =>
       container.querySelector('.react-timerange-picker__clock'),
     );
+  });
+
+  it('does not close Clock clicked outside with shouldCloseClock function returning false', () => {
+    const shouldCloseClock = () => false;
+
+    const { container } = render(<TimeRangePicker isOpen shouldCloseClock={shouldCloseClock} />);
+
+    userEvent.click(document.body);
+
+    const clock = container.querySelector('.react-clock');
+
+    expect(clock).toBeInTheDocument();
   });
 
   it('closes Clock component when focused outside', async () => {
