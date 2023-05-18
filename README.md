@@ -70,10 +70,6 @@ import '@wojtekmaj/react-timerange-picker/dist/TimeRangePicker.css';
 import 'react-clock/dist/Clock.css';
 ```
 
-### Next.js and Vite
-
-Next.js and Vite do not allow components from `node_modules` to import styles. You'll need to follow instructions from [Custom styling](#custom-styling) to get going.
-
 ## User guide
 
 ### TimeRangePicker
