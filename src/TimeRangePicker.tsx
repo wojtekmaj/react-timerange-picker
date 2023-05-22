@@ -84,6 +84,7 @@ export type TimeRangePickerProps = {
   onClockClose?: () => void;
   onClockOpen?: () => void;
   onFocus?: (event: React.FocusEvent<HTMLDivElement>) => void;
+  onInvalidChange?: () => void;
   openClockOnFocus?: boolean;
   portalContainer?: HTMLElement | null;
   rangeDivider?: React.ReactNode;
@@ -127,6 +128,7 @@ export default function TimeRangePicker(props: TimeRangePickerProps) {
     onClockClose,
     onClockOpen,
     onFocus: onFocusProps,
+    onInvalidChange,
     openClockOnFocus = true,
     rangeDivider = '–',
     required,
@@ -320,6 +322,7 @@ export default function TimeRangePicker(props: TimeRangePickerProps) {
       maxDetail,
       maxTime,
       minTime,
+      onInvalidChange,
       required,
       showLeadingZeros,
     };

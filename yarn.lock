@@ -810,7 +810,7 @@ __metadata:
     react-clock: ^4.2.0
     react-dom: ^18.2.0
     react-fit: ^1.5.1
-    react-time-picker: ^6.0.2
+    react-time-picker: ^6.2.0
     rimraf: ^3.0.0
     typescript: ^5.0.0
     vitest: ^0.30.1
@@ -4096,9 +4096,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-time-picker@npm:^6.0.2":
-  version: 6.0.2
-  resolution: "react-time-picker@npm:6.0.2"
+"react-time-picker@npm:^6.2.0":
+  version: 6.2.0
+  resolution: "react-time-picker@npm:6.2.0"
   dependencies:
     "@wojtekmaj/date-utils": ^1.1.3
     clsx: ^1.2.1
@@ -4111,7 +4111,7 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: d5bd6e28113a371e2aae26138eef5c3fc6d10b69e25b9b4e6ae222fd6830989e6c6b96e46d79250b6826a1d4fe85f871bbd2d7885ae1ad4246af0fbff5821833
+  checksum: ee8d244e483d840f2e190e030bb0a89e2f492bf4c33156db12c5f798e60e81606b80e299734fa36c0c231bc7e6b06a71d34ab8238b4299a4ac334412bcbf47d7
   languageName: node
   linkType: hard
 

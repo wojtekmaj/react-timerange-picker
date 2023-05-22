@@ -547,6 +547,23 @@ describe('TimeRangePicker', () => {
     expect(onChange).toHaveBeenCalledWith(['21:41:28', null]);
   });
 
+  it('calls onInvalidChange callback when changing value to an invalid one', () => {
+    const value = '22:41:28';
+    const onInvalidChange = vi.fn();
+
+    const { container } = render(
+      <TimeRangePicker maxDetail="second" onInvalidChange={onInvalidChange} value={value} />,
+    );
+
+    const hourInput = container.querySelector('input[name="hour12"]') as HTMLInputElement;
+
+    act(() => {
+      fireEvent.change(hourInput, { target: { value: '99' } });
+    });
+
+    expect(onInvalidChange).toHaveBeenCalled();
+  });
+
   it('clears the value when clicking on a button', () => {
     const onChange = vi.fn();
 
