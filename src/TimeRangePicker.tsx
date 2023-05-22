@@ -95,7 +95,7 @@ export type TimeRangePickerProps = {
   showLeadingZeros?: boolean;
   value?: LooseValue;
 } & ClockProps &
-  EventProps;
+  Omit<EventProps, 'onChange' | 'onFocus'>;
 
 export default function TimeRangePicker(props: TimeRangePickerProps) {
   const {
