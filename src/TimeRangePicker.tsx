@@ -8,7 +8,7 @@ import Fit from 'react-fit';
 
 import TimeInput from 'react-time-picker/dist/cjs/TimeInput';
 
-import { isTime } from './shared/propTypes';
+import { isTime, rangeOf } from './shared/propTypes';
 
 import type { ClassName, CloseReason, Detail, LooseValue, OpenReason, Value } from './shared/types';
 
@@ -435,7 +435,7 @@ export default function TimeRangePicker(props: TimeRangePickerProps) {
 
 const isValue = PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]);
 
-const isValueOrValueArray = PropTypes.oneOfType([isValue, PropTypes.arrayOf(isValue)]);
+const isValueOrValueArray = PropTypes.oneOfType([isValue, rangeOf(isValue)]);
 
 TimeRangePicker.propTypes = {
   amPmAriaLabel: PropTypes.string,
