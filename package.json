@@ -37,12 +37,12 @@
   },
   "license": "MIT",
   "dependencies": {
-    "clsx": "^1.2.1",
+    "clsx": "^2.0.0",
     "make-event-props": "^1.4.2",
     "prop-types": "^15.6.0",
-    "react-clock": "^4.2.0",
+    "react-clock": "^4.3.0",
     "react-fit": "^1.5.1",
-    "react-time-picker": "^6.2.0"
+    "react-time-picker": "^6.2.1"
   },
   "devDependencies": {
     "@testing-library/dom": "^9.0.0",
