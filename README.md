@@ -46,12 +46,16 @@ Add React-TimeRange-Picker to your project by executing `npm install @wojtekmaj/
 
 Here's an example of basic usage:
 
-```js
-import React, { useState } from 'react';
+```tsx
+import { useState } from 'react';
 import TimeRangePicker from '@wojtekmaj/react-timerange-picker';
 
+type ValuePiece = Date | string | null;
+
+type Value = ValuePiece | [ValuePiece, ValuePiece];
+
 function MyApp() {
-  const [value, onChange] = useState(['10:00', '11:00']);
+  const [value, onChange] = useState<Value>(['10:00', '11:00']);
 
   return (
     <div>
@@ -65,7 +69,7 @@ function MyApp() {
 
 If you want to use default React-Date-Picker and React-Calendar styling to build upon it, you can import them by using:
 
-```js
+```ts
 import '@wojtekmaj/react-timerange-picker/dist/TimeRangePicker.css';
 import 'react-clock/dist/Clock.css';
 ```
