@@ -10,10 +10,17 @@ import Fit from 'react-fit';
 
 import TimeInput from 'react-time-picker/dist/cjs/TimeInput';
 
-import { isTime, rangeOf } from './shared/propTypes';
+import { isTime, rangeOf } from './shared/propTypes.js';
 
 import type { ReactNodeArray } from 'prop-types';
-import type { ClassName, CloseReason, Detail, LooseValue, OpenReason, Value } from './shared/types';
+import type {
+  ClassName,
+  CloseReason,
+  Detail,
+  LooseValue,
+  OpenReason,
+  Value,
+} from './shared/types.js';
 
 const baseClassName = 'react-timerange-picker';
 const outsideActionEvents = ['mousedown', 'focusin', 'touchstart'] as const;

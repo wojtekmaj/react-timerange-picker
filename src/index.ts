@@ -1,6 +1,6 @@
-import TimeRangePicker from './TimeRangePicker';
+import TimeRangePicker from './TimeRangePicker.js';
 
-export type { TimeRangePickerProps } from './TimeRangePicker';
+export type { TimeRangePickerProps } from './TimeRangePicker.js';
 
 export { TimeRangePicker };
 
