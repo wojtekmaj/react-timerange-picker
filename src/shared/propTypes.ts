@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 import type { Requireable, Validator } from 'prop-types';
-import type { Range } from './types';
+import type { Range } from './types.js';
 
 const hourOptionalSecondsRegExp = /^(([0-1])?[0-9]|2[0-3]):[0-5][0-9](:([0-5][0-9]))?$/;
 
