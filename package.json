@@ -39,7 +39,7 @@
   "license": "MIT",
   "dependencies": {
     "clsx": "^2.0.0",
-    "make-event-props": "^1.4.2",
+    "make-event-props": "^1.6.0",
     "prop-types": "^15.6.0",
     "react-clock": "^4.3.0",
     "react-fit": "^1.6.0",
