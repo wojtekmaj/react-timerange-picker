@@ -42,7 +42,7 @@
     "make-event-props": "^1.6.0",
     "prop-types": "^15.6.0",
     "react-clock": "^4.5.0",
-    "react-fit": "^1.6.0",
+    "react-fit": "^1.7.0",
     "react-time-picker": "^6.2.1"
   },
   "devDependencies": {
