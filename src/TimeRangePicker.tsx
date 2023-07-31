@@ -8,7 +8,7 @@ import clsx from 'clsx';
 import Clock from 'react-clock';
 import Fit from 'react-fit';
 
-import TimeInput from 'react-time-picker/dist/cjs/TimeInput';
+import TimeInput from 'react-time-picker/dist/esm/TimeInput';
 
 import { isTime, rangeOf } from './shared/propTypes.js';
 
