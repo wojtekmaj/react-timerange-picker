@@ -480,7 +480,6 @@ TimeRangePicker.propTypes = {
   onClockOpen: PropTypes.func,
   onFocus: PropTypes.func,
   openClockOnFocus: PropTypes.bool,
-  portalContainer: isBrowser ? PropTypes.instanceOf(HTMLElement) : undefined,
   rangeDivider: PropTypes.node,
   required: PropTypes.bool,
   secondAriaLabel: PropTypes.string,
@@ -488,5 +487,9 @@ TimeRangePicker.propTypes = {
   showLeadingZeros: PropTypes.bool,
   value: isValueOrValueArray,
 };
+
+if (isBrowser) {
+  TimeRangePicker.propTypes.portalContainer = PropTypes.instanceOf(HTMLElement);
+}
 
 export default TimeRangePicker;
