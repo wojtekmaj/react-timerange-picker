@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import TimeRangePicker from '@wojtekmaj/react-timerange-picker';
 
 import './Sample.css';
