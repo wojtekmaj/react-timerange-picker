@@ -105,7 +105,6 @@ export type TimeRangePickerProps = {
   secondPlaceholder?: string;
   shouldCloseClock?: ({ reason }: { reason: CloseReason }) => boolean;
   shouldOpenClock?: ({ reason }: { reason: OpenReason }) => boolean;
-  showLeadingZeros?: boolean;
   value?: LooseValue;
 } & ClockProps &
   Omit<EventProps, 'onChange' | 'onFocus'>;
@@ -148,7 +147,6 @@ const TimeRangePicker: React.FC<TimeRangePickerProps> = function TimeRangePicker
     secondPlaceholder,
     shouldCloseClock,
     shouldOpenClock,
-    showLeadingZeros,
     value,
     ...otherProps
   } = props;
@@ -336,7 +334,6 @@ const TimeRangePicker: React.FC<TimeRangePickerProps> = function TimeRangePicker
       minTime,
       onInvalidChange,
       required,
-      showLeadingZeros,
     };
 
     return (
@@ -484,7 +481,6 @@ TimeRangePicker.propTypes = {
   required: PropTypes.bool,
   secondAriaLabel: PropTypes.string,
   secondPlaceholder: PropTypes.string,
-  showLeadingZeros: PropTypes.bool,
   value: isValueOrValueArray,
 };
 
