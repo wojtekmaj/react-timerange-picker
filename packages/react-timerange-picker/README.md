@@ -19,6 +19,15 @@ A minimal demo page can be found in `sample` directory.
 
 [Online demo](https://projects.wojtekmaj.pl/react-timerange-picker/) is also available!
 
+## Consider native alternative
+
+If you don't need to support legacy browsers and don't need the advanced features this package provides, consider using native time input instead. It's more accessible, adds no extra weight to your bundle, and works better on mobile devices.
+
+```tsx
+<input aria-label="Time from" max={valueTo} min={minTime} type="date" />
+<input aria-label="Time to" max={maxTime} min={valueFrom} type="date" />
+```
+
 ## Looking for a date range picker or a datetime range picker?
 
 React-TimeRange-Picker will play nicely with [React-DateRange-Picker](https://github.com/wojtekmaj/react-daterange-picker) and [React-DateTimeRange-Picker](https://github.com/wojtekmaj/react-datetimerange-picker). Check them out!
