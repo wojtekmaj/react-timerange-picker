@@ -587,6 +587,7 @@ const TimeRangePicker: React.FC<TimeRangePickerProps> = function TimeRangePicker
         )}
         {clockIcon !== null && !disableClock && (
           <button
+            aria-expanded={isOpen || false}
             aria-label={clockAriaLabel}
             className={`${baseClassName}__clock-button ${baseClassName}__button`}
             disabled={disabled}
