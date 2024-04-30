@@ -41,6 +41,7 @@
 .react-timerange-picker__inputGroup__divider,
 .react-timerange-picker__inputGroup__leadingZero {
   display: inline-block;
+  font: inherit;
 }
 
 .react-timerange-picker__inputGroup__input {
