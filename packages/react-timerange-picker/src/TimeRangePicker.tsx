@@ -102,12 +102,9 @@ export type TimeRangePickerProps = {
    */
   clockAriaLabel?: string;
   /**
-   * Class name(s) that will be added along with `"react-clock"` to the main React-Clock `<time>` element.
-   *
-   * @example 'class1 class2'
-   * @example ['class1', 'class2 class3']
+   * Props to pass to React-Clock component.
    */
-  clockClassName?: ClassName;
+  clockProps?: ClockProps;
   /**
    * Content of the clock button. Setting the value explicitly to `null` will hide the icon.
    *
@@ -326,8 +323,7 @@ export type TimeRangePickerProps = {
    * @example ["22:15:00", "23:45:00"]
    */
   value?: LooseValue;
-} & ClockProps &
-  Omit<EventProps, 'onChange' | 'onFocus'>;
+} & Omit<EventProps, 'onChange' | 'onFocus'>;
 
 export default function TimeRangePicker(props: TimeRangePickerProps) {
   const {
@@ -602,21 +598,14 @@ export default function TimeRangePicker(props: TimeRangePickerProps) {
       return null;
     }
 
-    const {
-      clockClassName,
-      className: timeRangePickerClassName, // Unused, here to exclude it from clockProps
-      onChange: onChangeProps, // Unused, here to exclude it from clockProps
-      portalContainer,
-      value,
-      ...clockProps
-    } = props;
+    const { clockProps, portalContainer, value } = props;
 
     const className = `${baseClassName}__clock`;
     const classNames = clsx(className, `${className}--${isOpen ? 'open' : 'closed'}`);
 
     const [valueFrom] = Array.isArray(value) ? value : [value];
 
-    const clock = <Clock className={clockClassName} value={valueFrom} {...clockProps} />;
+    const clock = <Clock locale={locale} value={valueFrom} {...clockProps} />;
 
     return portalContainer ? (
       createPortal(

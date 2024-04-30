@@ -83,7 +83,7 @@ export default function Test() {
               {...ariaLabelProps}
               {...placeholderProps}
               className="myCustomTimeRangePickerClassName"
-              clockClassName="myCustomClockClassName"
+              clockProps={{ className: 'myCustomClockClassName' }}
               data-testid="myCustomTimeRangePicker"
               disabled={disabled}
               locale={locale}

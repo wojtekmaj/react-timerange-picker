@@ -187,10 +187,12 @@ describe('TimeRangePicker', () => {
     expect(wrapper).toHaveClass('react-timerange-picker--open');
   });
 
-  it('applies clockClassName to the clock when given a string', () => {
+  it('applies clock className to the clock when given a string', () => {
     const clockClassName = 'testClassName';
 
-    const { container } = render(<TimeRangePicker clockClassName={clockClassName} isOpen />);
+    const { container } = render(
+      <TimeRangePicker clockProps={{ className: clockClassName }} isOpen />,
+    );
 
     const clock = container.querySelector('.react-clock');
 
