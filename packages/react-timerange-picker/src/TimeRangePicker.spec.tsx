@@ -40,7 +40,6 @@ describe('TimeRangePicker', () => {
   });
 
   it('passes autoFocus flag to first TimeInput component', () => {
-    // eslint-disable-next-line jsx-a11y/no-autofocus
     const { container } = render(<TimeRangePicker autoFocus />);
 
     const customInputs = container.querySelectorAll('input[data-input]');
