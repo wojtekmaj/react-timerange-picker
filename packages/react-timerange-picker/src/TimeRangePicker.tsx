@@ -327,7 +327,7 @@ export type TimeRangePickerProps = {
   value?: LooseValue;
 } & Omit<EventProps, 'onChange' | 'onFocus'>;
 
-export default function TimeRangePicker(props: TimeRangePickerProps) {
+export default function TimeRangePicker(props: TimeRangePickerProps): React.ReactElement {
   const {
     amPmAriaLabel,
     autoFocus,
