@@ -15,7 +15,7 @@
       "import": "./dist/esm/index.js",
       "require": "./dist/cjs/index.js"
     },
-    "./dist/TimeRangePicker.css": "./dist/TimeRangePicker.css"
+    "./*": "./*"
   },
   "scripts": {
     "build": "yarn build-js && yarn copy-styles",
