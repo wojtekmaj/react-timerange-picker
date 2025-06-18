@@ -1,3 +1,4 @@
+import { useId } from 'react';
 import { getHoursMinutesSeconds } from '@wojtekmaj/date-utils';
 
 import type { LooseValue } from './shared/types.js';
@@ -8,6 +9,9 @@ type ValueOptionsProps = {
 };
 
 export default function ValueOptions({ setValue, value }: ValueOptionsProps) {
+  const startTimeId = useId();
+  const endTimeId = useId();
+
   const [startTime, endTime] = Array.isArray(value) ? value : [value, null];
 
   function setStartValue(nextStartTime: string | null) {
@@ -49,9 +53,9 @@ export default function ValueOptions({ setValue, value }: ValueOptionsProps) {
       <legend>Set time externally</legend>
 
       <div>
-        <label htmlFor="startTime">Start time</label>
+        <label htmlFor={startTimeId}>Start time</label>
         <input
-          id="startTime"
+          id={startTimeId}
           onChange={onStartChange}
           type="time"
           value={
@@ -70,9 +74,9 @@ export default function ValueOptions({ setValue, value }: ValueOptionsProps) {
       </div>
 
       <div>
-        <label htmlFor="endTime">End time</label>
+        <label htmlFor={endTimeId}>End time</label>
         <input
-          id="endTime"
+          id={endTimeId}
           onChange={onEndChange}
           type="time"
           value={
