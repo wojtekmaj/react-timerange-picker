@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import makeEventProps from 'make-event-props';
 import Clock from 'react-clock';
 import Fit from 'react-fit';
-import TimeInput from 'react-time-picker/dist/esm/TimeInput';
+import TimeInput from 'react-time-picker/dist/TimeInput';
 
 import type {
   ClassName,
