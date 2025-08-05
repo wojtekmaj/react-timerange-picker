@@ -50,7 +50,7 @@
     "clsx": "^2.0.0",
     "make-event-props": "^2.0.0",
     "react-clock": "^5.0.0",
-    "react-fit": "^2.0.0",
+    "react-fit": "^3.0.0",
     "react-time-picker": "^7.0.0"
   },
   "devDependencies": {
