@@ -2,11 +2,10 @@
 
 import { createElement, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import makeEventProps from 'make-event-props';
 import clsx from 'clsx';
+import makeEventProps from 'make-event-props';
 import Clock from 'react-clock';
 import Fit from 'react-fit';
-
 import TimeInput from 'react-time-picker/dist/esm/TimeInput';
 
 import type {
