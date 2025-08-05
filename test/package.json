@@ -19,7 +19,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@wojtekmaj/date-utils": "^1.0.0",
+    "@wojtekmaj/date-utils": "^2.0.2",
     "@wojtekmaj/react-timerange-picker": "workspace:packages/react-timerange-picker",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
