@@ -375,7 +375,7 @@ describe('TimeRangePicker', () => {
 
     expect(clock).toBeFalsy();
 
-    fireEvent.click(button);
+    await userEvent.click(button);
 
     const clock2 = container.querySelector('.react-clock');
 
@@ -581,7 +581,7 @@ describe('TimeRangePicker', () => {
       'button.react-timerange-picker__clear-button',
     ) as HTMLButtonElement;
 
-    fireEvent.click(button);
+    await userEvent.click(button);
 
     expect(onChange).toHaveBeenCalledWith(null);
   });
@@ -783,7 +783,7 @@ describe('TimeRangePicker', () => {
     const { container } = await render(<TimeRangePicker onClick={onClick} />);
 
     const wrapper = container.firstElementChild as HTMLDivElement;
-    fireEvent.click(wrapper);
+    await userEvent.click(wrapper);
 
     expect(onClick).toHaveBeenCalled();
   });
