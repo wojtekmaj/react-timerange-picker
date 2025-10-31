@@ -563,12 +563,15 @@ export default function TimeRangePicker(props: TimeRangePickerProps): React.Reac
           onChange={onChangeFrom}
           value={valueFrom}
         />
-        <span className={`${baseClassName}__range-divider`}>{rangeDivider}</span>
+        <span className={`${baseClassName}__range-divider`} data-testid="range-divider">
+          {rangeDivider}
+        </span>
         <TimeInput {...commonProps} name={`${name}_to`} onChange={onChangeTo} value={valueTo} />
         {clearIcon !== null && (
           <button
             aria-label={clearAriaLabel}
             className={`${baseClassName}__clear-button ${baseClassName}__button`}
+            data-testid="clear-button"
             disabled={disabled}
             onClick={clear}
             onFocus={stopPropagation}
@@ -582,6 +585,7 @@ export default function TimeRangePicker(props: TimeRangePickerProps): React.Reac
             aria-expanded={isOpen || false}
             aria-label={clockAriaLabel}
             className={`${baseClassName}__clock-button ${baseClassName}__button`}
+            data-testid="clock-button"
             disabled={disabled}
             onClick={toggleClock}
             onFocus={stopPropagation}
