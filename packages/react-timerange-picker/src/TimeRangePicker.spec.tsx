@@ -525,8 +525,8 @@ describe('TimeRangePicker', () => {
 
     const hourInput = container.querySelector('input[name="hour12"]') as HTMLInputElement;
 
-    act(() => {
-      fireEvent.change(hourInput, { target: { value: '9' } });
+    await act(async () => {
+      await userEvent.fill(hourInput, '9');
     });
 
     const clock = container.querySelector('.react-clock');
@@ -544,8 +544,8 @@ describe('TimeRangePicker', () => {
 
     const hourInput = container.querySelector('input[name="hour12"]') as HTMLInputElement;
 
-    act(() => {
-      fireEvent.change(hourInput, { target: { value: '9' } });
+    await act(async () => {
+      await userEvent.fill(hourInput, '9');
     });
 
     expect(onChange).toHaveBeenCalledWith(['21:41:28', null]);
@@ -561,8 +561,8 @@ describe('TimeRangePicker', () => {
 
     const hourInput = container.querySelector('input[name="hour12"]') as HTMLInputElement;
 
-    act(() => {
-      fireEvent.change(hourInput, { target: { value: '99' } });
+    await act(async () => {
+      await userEvent.fill(hourInput, '99');
     });
 
     expect(onInvalidChange).toHaveBeenCalled();
@@ -601,16 +601,12 @@ describe('TimeRangePicker', () => {
       const minuteInput = customInputs[1] as HTMLInputElement;
       const secondInput = customInputs[2] as HTMLInputElement;
 
-      act(() => {
-        fireEvent.change(hourInput, { target: { value: '16' } });
-      });
+      await act(async () => {
+        await userEvent.fill(hourInput, '16');
 
-      act(() => {
-        fireEvent.change(minuteInput, { target: { value: '0' } });
-      });
+        await userEvent.fill(minuteInput, '0');
 
-      act(() => {
-        fireEvent.change(secondInput, { target: { value: '0' } });
+        await userEvent.fill(secondInput, '0');
       });
 
       expect(onChange).toHaveBeenCalled();
@@ -632,16 +628,12 @@ describe('TimeRangePicker', () => {
       const minuteInput = customInputs[1] as HTMLInputElement;
       const secondInput = customInputs[2] as HTMLInputElement;
 
-      act(() => {
-        fireEvent.change(hourInput, { target: { value: '16' } });
-      });
+      await act(async () => {
+        await userEvent.fill(hourInput, '16');
 
-      act(() => {
-        fireEvent.change(minuteInput, { target: { value: '0' } });
-      });
+        await userEvent.fill(minuteInput, '0');
 
-      act(() => {
-        fireEvent.change(secondInput, { target: { value: '0' } });
+        await userEvent.fill(secondInput, '0');
       });
 
       expect(onChange).toHaveBeenCalled();
@@ -665,16 +657,12 @@ describe('TimeRangePicker', () => {
       const minuteInput = customInputs[1] as HTMLInputElement;
       const secondInput = customInputs[2] as HTMLInputElement;
 
-      act(() => {
-        fireEvent.change(hourInput, { target: { value: '13' } });
-      });
+      await act(async () => {
+        await userEvent.fill(hourInput, '13');
 
-      act(() => {
-        fireEvent.change(minuteInput, { target: { value: '0' } });
-      });
+        await userEvent.fill(minuteInput, '0');
 
-      act(() => {
-        fireEvent.change(secondInput, { target: { value: '0' } });
+        await userEvent.fill(secondInput, '0');
       });
 
       expect(onChange).toHaveBeenCalled();
@@ -697,16 +685,12 @@ describe('TimeRangePicker', () => {
       const minuteInput = customInputs[4] as HTMLInputElement;
       const secondInput = customInputs[5] as HTMLInputElement;
 
-      act(() => {
-        fireEvent.change(hourInput, { target: { value: '16' } });
-      });
+      await act(async () => {
+        await userEvent.fill(hourInput, '16');
 
-      act(() => {
-        fireEvent.change(minuteInput, { target: { value: '0' } });
-      });
+        await userEvent.fill(minuteInput, '0');
 
-      act(() => {
-        fireEvent.change(secondInput, { target: { value: '0' } });
+        await userEvent.fill(secondInput, '0');
       });
 
       expect(onChange).toHaveBeenCalled();
@@ -728,16 +712,12 @@ describe('TimeRangePicker', () => {
       const minuteInput = customInputs[4] as HTMLInputElement;
       const secondInput = customInputs[5] as HTMLInputElement;
 
-      act(() => {
-        fireEvent.change(hourInput, { target: { value: '16' } });
-      });
+      await act(async () => {
+        await userEvent.fill(hourInput, '16');
 
-      act(() => {
-        fireEvent.change(minuteInput, { target: { value: '0' } });
-      });
+        await userEvent.fill(minuteInput, '0');
 
-      act(() => {
-        fireEvent.change(secondInput, { target: { value: '0' } });
+        await userEvent.fill(secondInput, '0');
       });
 
       expect(onChange).toHaveBeenCalled();
@@ -761,16 +741,16 @@ describe('TimeRangePicker', () => {
       const minuteInput = customInputs[4] as HTMLInputElement;
       const secondInput = customInputs[5] as HTMLInputElement;
 
-      act(() => {
-        fireEvent.change(hourInput, { target: { value: '13' } });
+      await act(async () => {
+        await userEvent.fill(hourInput, '13');
       });
 
-      act(() => {
-        fireEvent.change(minuteInput, { target: { value: '0' } });
+      await act(async () => {
+        await userEvent.fill(minuteInput, '0');
       });
 
-      act(() => {
-        fireEvent.change(secondInput, { target: { value: '0' } });
+      await act(async () => {
+        await userEvent.fill(secondInput, '0');
       });
 
       expect(onChange).toHaveBeenCalled();
