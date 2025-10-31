@@ -491,10 +491,14 @@ describe('TimeRangePicker', () => {
     );
   });
 
+  function triggerTouchStart(element: HTMLElement) {
+    element.dispatchEvent(new TouchEvent('touchstart', { bubbles: true, cancelable: true }));
+  }
+
   it('closes Clock component when tapped outside', async () => {
     const { container } = await render(<TimeRangePicker isOpen />);
 
-    fireEvent.touchStart(document.body);
+    triggerTouchStart(document.body);
 
     await waitForElementToBeRemovedOrHidden(() =>
       container.querySelector('.react-timerange-picker__clock'),
@@ -770,7 +774,8 @@ describe('TimeRangePicker', () => {
     const { container } = await render(<TimeRangePicker onTouchStart={onTouchStart} />);
 
     const wrapper = container.firstElementChild as HTMLDivElement;
-    fireEvent.touchStart(wrapper);
+
+    triggerTouchStart(wrapper);
 
     expect(onTouchStart).toHaveBeenCalled();
   });
