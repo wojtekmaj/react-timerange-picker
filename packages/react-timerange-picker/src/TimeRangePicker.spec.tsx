@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { page, userEvent } from 'vitest/browser';
 import { render } from 'vitest-browser-react';
-import { act } from 'react-dom/test-utils';
+import { act } from 'react';
 
 import TimeRangePicker from './TimeRangePicker.js';
 
@@ -644,7 +644,13 @@ describe('TimeRangePicker', () => {
       const onChange = vi.fn();
 
       await render(
-        <TimeRangePicker {...defaultProps} format="H:m:s" maxDetail="second" onChange={onChange} />,
+        <TimeRangePicker
+          {...defaultProps}
+          format="H:m:s"
+          maxDetail="second"
+          onChange={onChange}
+          openClockOnFocus={false}
+        />,
       );
 
       const nextValueFrom = '16:00:00';
@@ -661,8 +667,7 @@ describe('TimeRangePicker', () => {
         await userEvent.fill(secondInput, '0');
       });
 
-      expect(onChange).toHaveBeenCalled();
-      expect(onChange).toHaveBeenCalledWith([nextValueFrom, null]);
+      await vi.waitFor(() => expect(onChange).toHaveBeenCalledWith([nextValueFrom, null]));
     });
 
     it('calls onChange properly given single initial value', async () => {
@@ -737,7 +742,13 @@ describe('TimeRangePicker', () => {
       const onChange = vi.fn();
 
       await render(
-        <TimeRangePicker {...defaultProps} format="H:m:s" maxDetail="second" onChange={onChange} />,
+        <TimeRangePicker
+          {...defaultProps}
+          format="H:m:s"
+          maxDetail="second"
+          onChange={onChange}
+          openClockOnFocus={false}
+        />,
       );
 
       const nextValueTo = '16:00:00';
@@ -754,8 +765,7 @@ describe('TimeRangePicker', () => {
         await userEvent.fill(secondInput, '0');
       });
 
-      expect(onChange).toHaveBeenCalled();
-      expect(onChange).toHaveBeenCalledWith([null, nextValueTo]);
+      await vi.waitFor(() => expect(onChange).toHaveBeenCalledWith([null, nextValueTo]));
     });
 
     it('calls onChange properly given single initial value', async () => {
@@ -768,6 +778,7 @@ describe('TimeRangePicker', () => {
           format="H:m:s"
           maxDetail="second"
           onChange={onChange}
+          openClockOnFocus={false}
           value={value}
         />,
       );
@@ -786,8 +797,7 @@ describe('TimeRangePicker', () => {
         await userEvent.fill(secondInput, '0');
       });
 
-      expect(onChange).toHaveBeenCalled();
-      expect(onChange).toHaveBeenCalledWith([value, nextValueTo]);
+      await vi.waitFor(() => expect(onChange).toHaveBeenCalledWith([value, nextValueTo]));
     });
 
     it('calls onChange properly given initial value as an array', async () => {
