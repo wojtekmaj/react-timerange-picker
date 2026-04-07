@@ -361,7 +361,7 @@ describe('TimeRangePicker', () => {
 
     expect(clock).not.toBeInTheDocument();
 
-    rerender(<TimeRangePicker {...defaultProps} isOpen />);
+    await rerender(<TimeRangePicker {...defaultProps} isOpen />);
 
     const clock2 = container.querySelector('.react-clock');
 
