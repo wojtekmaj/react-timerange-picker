@@ -482,12 +482,7 @@ export default function TimeRangePicker(props: TimeRangePickerProps): React.Reac
         'composedPath' in event ? event.composedPath()[0] : (event as Event).target
       ) as HTMLElement;
 
-      if (
-        target &&
-        wrapperEl &&
-        !wrapperEl.contains(target) &&
-        (!clockWrapperEl || !clockWrapperEl.contains(target))
-      ) {
+      if (target && wrapperEl && !wrapperEl.contains(target) && !clockWrapperEl?.contains(target)) {
         closeClock({ reason: 'outsideAction' });
       }
     },
