@@ -43,7 +43,7 @@
     "make-event-props": "^2.0.0",
     "react-clock": "^5.0.0",
     "react-fit": "^3.0.0",
-    "react-time-picker": "^8.0.2"
+    "react-time-picker": "^8.1.0"
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.10",
