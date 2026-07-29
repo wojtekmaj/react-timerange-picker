@@ -124,6 +124,12 @@ export type TimeRangePickerProps = {
    */
   closeClock?: boolean;
   /**
+   * `form` attribute for the custom hour, minute, second, and AM/PM inputs.
+   *
+   * @example 'my-form'
+   */
+  customInputsForm?: string;
+  /**
    * `data-testid` attribute for the main React-TimeRange-Picker `<div>` element.
    *
    * @example 'timerange-picker'
@@ -336,6 +342,7 @@ export default function TimeRangePicker(props: TimeRangePickerProps): React.Reac
     clockAriaLabel,
     clockIcon = ClockIcon,
     closeClock: shouldCloseClockOnSelect = true,
+    customInputsForm,
     'data-testid': dataTestid,
     disableClock,
     disabled,
@@ -538,6 +545,7 @@ export default function TimeRangePicker(props: TimeRangePickerProps): React.Reac
       ...ariaLabelProps,
       ...placeholderProps,
       className: `${baseClassName}__inputGroup`,
+      customInputsForm,
       disabled,
       format,
       isClockOpen: isOpen,

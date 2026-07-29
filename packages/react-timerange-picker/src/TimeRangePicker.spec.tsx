@@ -45,6 +45,35 @@ describe('TimeRangePicker', () => {
     expect(nativeInputs[1]).toHaveAttribute('name', `${name}_to`);
   });
 
+  it('passes customInputsForm to custom inputs only', async () => {
+    const { container } = await render(
+      <form>
+        <TimeRangePicker
+          {...defaultProps}
+          customInputsForm=""
+          format="h:mm:ss a"
+          maxDetail="second"
+          name="shift"
+          value={['22:15:30', '23:45:05']}
+        />
+      </form>,
+    );
+
+    const form = container.querySelector('form') as HTMLFormElement;
+    const customInputs = container.querySelectorAll('[data-input="true"]');
+
+    expect(customInputs).toHaveLength(8);
+
+    for (const customInput of customInputs) {
+      expect(customInput).toHaveAttribute('form', '');
+    }
+
+    expect(Array.from(new FormData(form).entries())).toEqual([
+      ['shift_from', '22:15:30'],
+      ['shift_to', '23:45:05'],
+    ]);
+  });
+
   it('passes autoFocus flag to first TimeInput component', async () => {
     await render(<TimeRangePicker {...defaultProps} autoFocus />);
 
