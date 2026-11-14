@@ -375,7 +375,8 @@ export default function TimeRangePicker(props: TimeRangePickerProps): React.Reac
     ...otherProps
   } = props;
 
-  const [isOpen, setIsOpen] = useState(isOpenProps);
+  const [isOpenState, setIsOpen] = useState(isOpenProps);
+  const isOpen = disabled ? null : isOpenState;
   const wrapper = useRef<HTMLDivElement>(null);
   const clockWrapper = useRef<HTMLDivElement>(null);
 
